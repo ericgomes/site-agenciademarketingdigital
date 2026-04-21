@@ -1,0 +1,155 @@
+/* ===================================================
+   COPA DO MUNDO / BRASIL THEME  —  data-visual="copa"
+   Verde, amarelo, azul, festa, seleção brasileira
+   =================================================== */
+
+[data-visual="copa"] {
+  --bg:          #001E3C;
+  --surface:     #002855;
+  --surface-2:   #003C7A;
+  --border:      rgba(255, 223, 0, 0.4);
+  --border-2:    rgba(255, 223, 0, 0.85);
+  --accent:      #009C3B;
+  --accent-hi:   #FFDF00;
+  --accent-glow: rgba(0, 156, 59, 0.4);
+  --text:        #FFFFFF;
+  --muted:       #B8D4F0;
+  --subtle:      #6B9DC2;
+  --card-bg:     rgba(0, 40, 85, 0.95);
+  --nav-bg:      rgba(0, 30, 60, 0.97);
+  --hero-grad:   linear-gradient(135deg, #001E3C 0%, #002776 50%, #001E3C 100%);
+}
+
+[data-visual="copa"] h1 em,
+[data-visual="copa"] .hero h1 em {
+  background: linear-gradient(135deg, #009C3B 0%, #FFDF00 60%, #009C3B 100%) !important;
+  background-size: 200% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: copa-shine 3s ease-in-out infinite !important;
+}
+@keyframes copa-shine {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+[data-visual="copa"] .hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 223, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 156, 59, 0.06) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+[data-visual="copa"] .glow-1 {
+  background: radial-gradient(circle, rgba(0,156,59,0.25) 0%, transparent 65%) !important;
+}
+[data-visual="copa"] .glow-2 {
+  background: radial-gradient(circle, rgba(255,223,0,0.15) 0%, transparent 65%) !important;
+}
+[data-visual="copa"] .glow-3 {
+  background: radial-gradient(circle, rgba(0,39,118,0.3) 0%, transparent 65%) !important;
+}
+
+[data-visual="copa"] .expert-card,
+[data-visual="copa"] .model-card,
+[data-visual="copa"] .service-card,
+[data-visual="copa"] .quote-box,
+[data-visual="copa"] .contact-person {
+  border: 2px solid rgba(255, 223, 0, 0.3) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,223,0,0.1) !important;
+}
+[data-visual="copa"] .expert-card:hover,
+[data-visual="copa"] .model-card:hover,
+[data-visual="copa"] .service-card:hover,
+[data-visual="copa"] .contact-person:hover {
+  border-color: rgba(255, 223, 0, 0.65) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,223,0,0.3) !important;
+}
+
+[data-visual="copa"] .expert-card.eric    { border-left: 4px solid #009C3B !important; }
+[data-visual="copa"] .expert-card.marcelo { border-left: 4px solid #FFDF00 !important; }
+
+[data-visual="copa"] .service-card.seo::before  { background: #009C3B !important; }
+[data-visual="copa"] .service-card.paid::before { background: #FFDF00 !important; }
+
+[data-visual="copa"] .btn-primary {
+  background: linear-gradient(135deg, #009C3B 0%, #00B944 100%) !important;
+  box-shadow: 0 4px 16px rgba(0,156,59,0.45) !important;
+  border: none !important;
+}
+[data-visual="copa"] .btn-primary:hover {
+  background: linear-gradient(135deg, #007A2F 0%, #009C3B 100%) !important;
+  box-shadow: 0 6px 24px rgba(0,156,59,0.55) !important;
+}
+
+[data-visual="copa"] .btn-ghost {
+  color: #FFDF00 !important;
+  border: 1px solid rgba(255,223,0,0.45) !important;
+  background: transparent !important;
+}
+[data-visual="copa"] .btn-ghost:hover { background: rgba(255,223,0,0.08) !important; }
+
+[data-visual="copa"] .btn-wa {
+  background: #009C3B !important;
+  border: 1px solid rgba(0,156,59,0.6) !important;
+  box-shadow: 0 4px 16px rgba(0,156,59,0.35) !important;
+}
+[data-visual="copa"] .btn-wa:hover {
+  background: #00B944 !important;
+  box-shadow: 0 6px 24px rgba(0,156,59,0.5) !important;
+}
+
+[data-visual="copa"] .btn-li {
+  color: #FFDF00 !important;
+  border-color: rgba(255,223,0,0.35) !important;
+}
+
+[data-visual="copa"] nav { border-bottom-color: rgba(255,223,0,0.2) !important; }
+[data-visual="copa"] .linka-wordmark { color: #FFDF00 !important; }
+[data-visual="copa"] .linka-wordmark .l-i::after,
+[data-visual="copa"] .linka-wordmark .l-a::after { color: #009C3B !important; }
+[data-visual="copa"] .nav-link:hover { color: #FFDF00 !important; background: rgba(255,223,0,0.07) !important; }
+
+[data-visual="copa"] .badge-dot {
+  background: #FFDF00 !important;
+  box-shadow: 0 0 8px rgba(255,223,0,0.7) !important;
+}
+
+[data-visual="copa"] .eyebrow,
+[data-visual="copa"] .hero-badge { color: #FFDF00 !important; border-color: rgba(255,223,0,0.4) !important; }
+
+[data-visual="copa"] .expert-link { color: #FFDF00 !important; border-color: rgba(255,223,0,0.4) !important; }
+[data-visual="copa"] .expert-link.wa { color: #7FFF00 !important; border-color: rgba(0,156,59,0.5) !important; }
+[data-visual="copa"] .expert-link:hover { background: rgba(255,223,0,0.07) !important; }
+
+[data-visual="copa"] .tl::before { background: linear-gradient(to bottom, #009C3B, #FFDF00) !important; }
+[data-visual="copa"] .tl li::before {
+  background: #FFDF00 !important;
+  box-shadow: 0 0 10px rgba(255,223,0,0.6) !important;
+}
+[data-visual="copa"] .tl li:last-child::before { background: #009C3B !important; box-shadow: 0 0 10px rgba(0,156,59,0.6) !important; }
+
+[data-visual="copa"] img { filter: saturate(1.15) brightness(0.95) !important; }
+
+[data-visual="copa"] .full-bleed { border-color: rgba(255,223,0,0.25) !important; }
+
+[data-visual="copa"] footer {
+  background: rgba(0,10,25,0.98) !important;
+  border-top: 2px solid rgba(255,223,0,0.2) !important;
+}
+
+/* Stars decoration */
+[data-visual="copa"] .hero-badge::before { content: '★ ★ ★ ★ ★ '; font-size: 0.6em; color: #FFDF00; }
+
+[data-visual="copa"] #themeBtn { display: none !important; }
+[data-visual="copa"] #visual-trigger {
+  background: rgba(0,30,60,0.97) !important;
+  border-color: rgba(255,223,0,0.3) !important;
+}
+[data-visual="copa"] #visual-menu {
+  background: rgba(0,20,50,0.99) !important;
+  border-color: rgba(255,223,0,0.25) !important;
+}
+[data-visual="copa"] .visual-btn { color: #B8D4F0 !important; }
+[data-visual="copa"] .visual-btn.active { color: #FFDF00 !important; }

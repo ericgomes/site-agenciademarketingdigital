@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="dark" data-visual="default">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,37 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pixelart.css">
+  <link rel="stylesheet" href="dos.css">
+  <link rel="stylesheet" href="brutalist.css">
+  <link rel="stylesheet" href="saas.css">
+  <link rel="stylesheet" href="geocities.css">
+  <link rel="stylesheet" href="glass.css">
+  <link rel="stylesheet" href="notion.css">
+  <link rel="stylesheet" href="copa.css">
 </head>
 <body>
+
+  <!-- ===== VISUAL SWITCHER ===== -->
+  <div id="visual-switcher" aria-label="Escolher tema visual">
+    <button type="button" id="visual-trigger" aria-haspopup="listbox" aria-expanded="false">
+      <span id="visual-label">Linka</span>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div id="visual-menu" role="listbox">
+      <button type="button" class="visual-btn active" data-visual="default">Linka</button>
+      <button type="button" class="visual-btn" data-visual="brutalist">Minimalista</button>
+      <button type="button" class="visual-btn" data-visual="saas">SaaS</button>
+      <button type="button" class="visual-btn" data-visual="glass">Indigo</button>
+      <button type="button" class="visual-btn" data-visual="notion">Clean</button>
+      <button type="button" class="visual-btn" data-visual="copa">Brasil 🇧🇷</button>
+      <button type="button" class="visual-btn" data-visual="pixelart">Pixel Art</button>
+      <button type="button" class="visual-btn" data-visual="dos">DOS</button>
+      <button type="button" class="visual-btn" data-visual="geocities">Geocities</button>
+    </div>
+  </div>
 
   <!-- Mouse spotlight overlay -->
   <div id="mouse-spotlight" aria-hidden="true"></div>

@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ===================================================
+   PIXEL ART THEME  —  data-visual="pixelart"
+   =================================================== */
+
+[data-visual="pixelart"] {
+  --bg:          #1D2B53;
+  --surface:     #0F1A36;
+  --surface-2:   #7E2553;
+  --border:      rgba(255, 0, 77, 0.55);
+  --border-2:    rgba(255, 0, 77, 0.9);
+  --accent:      #FF004D;
+  --accent-hi:   #FFEC27;
+  --accent-glow: rgba(255, 0, 77, 0.45);
+  --text:        #FFF1E8;
+  --muted:       #C2C3C7;
+  --subtle:      #83769C;
+  --card-bg:     rgba(15, 26, 54, 0.97);
+  --nav-bg:      rgba(10, 15, 35, 0.97);
+  --hero-grad:   linear-gradient(135deg, #1D2B53 0%, #0F1A36 100%);
+  image-rendering: pixelated;
+}
+[data-visual="pixelart"] * { border-radius: 0 !important; }
+
+[data-visual="pixelart"] h1,
+[data-visual="pixelart"] h2,
+[data-visual="pixelart"] h3,
+[data-visual="pixelart"] h4,
+[data-visual="pixelart"] .btn-primary,
+[data-visual="pixelart"] .btn-ghost,
+[data-visual="pixelart"] .btn-wa,
+[data-visual="pixelart"] .btn-li,
+[data-visual="pixelart"] .expert-link,
+[data-visual="pixelart"] .eyebrow,
+[data-visual="pixelart"] .hero-badge,
+[data-visual="pixelart"] .nav-link,
+[data-visual="pixelart"] .linka-wordmark,
+[data-visual="pixelart"] .visual-btn {
+  font-family: 'Press Start 2P', 'Courier New', monospace !important;
+}
+
+[data-visual="pixelart"] h1 { font-size: clamp(1rem, 2.5vw, 1.8rem) !important; line-height: 2 !important; }
+[data-visual="pixelart"] h2 { font-size: clamp(0.85rem, 2vw, 1.4rem) !important; line-height: 2 !important; }
+[data-visual="pixelart"] h3 { font-size: 0.7rem !important; line-height: 2 !important; }
+[data-visual="pixelart"] h4 { font-size: 0.6rem !important; line-height: 2 !important; }
+[data-visual="pixelart"] .btn-primary,
+[data-visual="pixelart"] .btn-ghost,
+[data-visual="pixelart"] .btn-wa,
+[data-visual="pixelart"] .btn-li { font-size: 0.58rem !important; }
+[data-visual="pixelart"] .nav-link { font-size: 0.48rem !important; }
+
+[data-visual="pixelart"] .hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 0, 77, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 77, 0.18) 1px, transparent 1px) !important;
+  background-size: 8px 8px !important;
+}
+
+[data-visual="pixelart"] .glow { filter: none !important; opacity: 0.08 !important; }
+
+[data-visual="pixelart"] .expert-card,
+[data-visual="pixelart"] .model-card,
+[data-visual="pixelart"] .service-card,
+[data-visual="pixelart"] .quote-box,
+[data-visual="pixelart"] .contact-person {
+  border-width: 3px !important;
+  box-shadow: 5px 5px 0 var(--accent) !important;
+}
+[data-visual="pixelart"] .expert-card.eric    { border-left-width: 5px !important; }
+[data-visual="pixelart"] .expert-card.marcelo { border-left-width: 5px !important; }
+[data-visual="pixelart"] .service-card::before { height: 5px !important; }
+
+[data-visual="pixelart"] .btn-primary,
+[data-visual="pixelart"] .btn-wa {
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.65) !important;
+  transition: transform 0.08s, box-shadow 0.08s !important;
+}
+[data-visual="pixelart"] .btn-primary:hover,
+[data-visual="pixelart"] .btn-wa:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.65) !important;
+}
+[data-visual="pixelart"] .btn-primary:active,
+[data-visual="pixelart"] .btn-wa:active {
+  transform: translate(3px, 3px) !important;
+  box-shadow: none !important;
+}
+
+[data-visual="pixelart"] img {
+  image-rendering: pixelated !important;
+  filter: saturate(1.6) contrast(1.15) !important;
+}
+
+[data-visual="pixelart"] .tl::before { background: var(--accent) !important; width: 3px !important; }
+[data-visual="pixelart"] .tl li::before { box-shadow: 2px 2px 0 rgba(255,0,77,0.5) !important; }
+
+[data-visual="pixelart"] .badge-dot { animation: pixel-blink 0.5s steps(1) infinite !important; }
+@keyframes pixel-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+[data-visual="pixelart"] #mouse-spotlight { opacity: 0 !important; }
+[data-visual="pixelart"] #cursor-dot { background: var(--accent-hi) !important; border-radius: 0 !important; }
+[data-visual="pixelart"] #cursor-ring { border-radius: 0 !important; border-color: rgba(255,236,39,0.5) !important; }
+[data-visual="pixelart"] #themeBtn { display: none !important; }
+
+/* Scanlines */
+[data-visual="pixelart"]::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0px, rgba(0,0,0,0.22) 1px, transparent 1px, transparent 3px);
+  pointer-events: none; z-index: 99997;
+}
+
+[data-visual="pixelart"] #visual-trigger { background: rgba(10,15,35,0.97) !important; border-color: rgba(255,0,77,0.4) !important; }
+[data-visual="pixelart"] #visual-menu { background: rgba(10,15,35,0.99) !important; border-color: rgba(255,0,77,0.35) !important; }

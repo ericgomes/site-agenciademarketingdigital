@@ -18,6 +18,45 @@ btn.addEventListener('click', () => {
   applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });
 
+// ── Visual switcher (dropdown) ───────────────────────────────
+const visualSwitcher = document.getElementById('visual-switcher');
+const visualTrigger  = document.getElementById('visual-trigger');
+const visualLabel    = document.getElementById('visual-label');
+
+function applyVisual(v) {
+  html.setAttribute('data-visual', v);
+  document.querySelectorAll('.visual-btn').forEach(b => {
+    const active = b.dataset.visual === v;
+    b.classList.toggle('active', active);
+    if (active) visualLabel.textContent = b.textContent;
+  });
+  visualTrigger.setAttribute('aria-expanded', 'false');
+  visualSwitcher.classList.remove('open');
+  try { localStorage.setItem('linka-visual', v); } catch(e) {}
+}
+
+visualTrigger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = visualSwitcher.classList.toggle('open');
+  visualTrigger.setAttribute('aria-expanded', String(isOpen));
+});
+
+document.addEventListener('click', () => {
+  visualSwitcher.classList.remove('open');
+  visualTrigger.setAttribute('aria-expanded', 'false');
+});
+
+document.getElementById('visual-menu').addEventListener('click', e => e.stopPropagation());
+
+document.querySelectorAll('.visual-btn').forEach(b => {
+  b.addEventListener('click', () => applyVisual(b.dataset.visual));
+});
+
+try {
+  const savedVisual = localStorage.getItem('linka-visual');
+  if (savedVisual) applyVisual(savedVisual);
+} catch(e) {}
+
 // ── Scroll reveal ────────────────────────────────────────────
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
