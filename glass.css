@@ -137,7 +137,6 @@
   backdrop-filter: blur(12px) !important;
 }
 
-[data-visual="glass"] #themeBtn { display: none !important; }
 [data-visual="glass"] #visual-trigger {
   background: rgba(3,7,17,0.85) !important;
   border-color: rgba(139,92,246,0.3) !important;

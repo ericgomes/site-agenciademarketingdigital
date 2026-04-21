@@ -167,7 +167,6 @@
   overflow: hidden !important;
 }
 
-[data-visual="geocities"] #themeBtn { display: none !important; }
 [data-visual="geocities"] #visual-trigger {
   background: #C0C0C0 !important;
   border-top: 2px solid #fff !important;

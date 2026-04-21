@@ -142,7 +142,6 @@
 /* Stars decoration */
 [data-visual="copa"] .hero-badge::before { content: '★ ★ ★ ★ ★ '; font-size: 0.6em; color: #FFDF00; }
 
-[data-visual="copa"] #themeBtn { display: none !important; }
 [data-visual="copa"] #visual-trigger {
   background: rgba(0,30,60,0.97) !important;
   border-color: rgba(255,223,0,0.3) !important;

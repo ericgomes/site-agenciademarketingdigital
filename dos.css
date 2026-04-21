@@ -216,7 +216,6 @@
   border-color: rgba(0, 255, 65, 0.4) !important;
 }
 
-[data-visual="dos"] #themeBtn { display: none !important; }
 
 [data-visual="dos"] #visual-trigger { background: rgba(0,0,0,0.99) !important; border-color: rgba(0,255,65,0.35) !important; color: var(--accent) !important; }
 [data-visual="dos"] #visual-menu { background: rgba(0,0,0,0.99) !important; border-color: rgba(0,255,65,0.3) !important; }

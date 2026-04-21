@@ -101,7 +101,6 @@
 [data-visual="pixelart"] #mouse-spotlight { opacity: 0 !important; }
 [data-visual="pixelart"] #cursor-dot { background: var(--accent-hi) !important; border-radius: 0 !important; }
 [data-visual="pixelart"] #cursor-ring { border-radius: 0 !important; border-color: rgba(255,236,39,0.5) !important; }
-[data-visual="pixelart"] #themeBtn { display: none !important; }
 
 /* Scanlines */
 [data-visual="pixelart"]::before {

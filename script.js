@@ -1,22 +1,10 @@
 // ── Nav scroll ──────────────────────────────────────────────
 const nav = document.getElementById('navbar');
-
-// ── Theme toggle ─────────────────────────────────────────────
-const btn  = document.getElementById('themeBtn');
 const html = document.documentElement;
 
 function applyTheme(t) {
   html.setAttribute('data-theme', t);
-  try { localStorage.setItem('linka-theme', t); } catch(e) {}
 }
-try {
-  const saved = localStorage.getItem('linka-theme');
-  if (saved) applyTheme(saved);
-  else if (window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
-} catch(e) {}
-btn.addEventListener('click', () => {
-  applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-});
 
 // ── Visual switcher (dropdown) ───────────────────────────────
 const visualSwitcher = document.getElementById('visual-switcher');
@@ -24,12 +12,16 @@ const visualTrigger  = document.getElementById('visual-trigger');
 const visualLabel    = document.getElementById('visual-label');
 
 function applyVisual(v) {
-  html.setAttribute('data-visual', v);
-  document.querySelectorAll('.visual-btn').forEach(b => {
-    const active = b.dataset.visual === v;
-    b.classList.toggle('active', active);
-    if (active) visualLabel.textContent = b.textContent;
-  });
+  if (v === 'linka-dark')  applyTheme('dark');
+  if (v === 'linka-light') applyTheme('light');
+  html.setAttribute('data-visual', (v === 'linka-dark' || v === 'linka-light') ? 'linka' : v);
+
+  document.querySelectorAll('.visual-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.visual === v)
+  );
+  const activeBtn = document.querySelector(`.visual-btn[data-visual="${v}"]`);
+  if (activeBtn) visualLabel.textContent = activeBtn.textContent.trim();
+
   visualTrigger.setAttribute('aria-expanded', 'false');
   visualSwitcher.classList.remove('open');
   try { localStorage.setItem('linka-visual', v); } catch(e) {}
@@ -53,9 +45,9 @@ document.querySelectorAll('.visual-btn').forEach(b => {
 });
 
 try {
-  const savedVisual = localStorage.getItem('linka-visual');
-  if (savedVisual) applyVisual(savedVisual);
-} catch(e) {}
+  const saved = localStorage.getItem('linka-visual');
+  applyVisual(saved === 'default' ? 'linka-light' : (saved || 'linka-light'));
+} catch(e) { applyVisual('linka-light'); }
 
 // ── Scroll reveal ────────────────────────────────────────────
 const io = new IntersectionObserver((entries) => {

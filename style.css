@@ -52,11 +52,6 @@ body {
   transition: background var(--transition), color var(--transition);
 }
 
-/* ===== THEME ICON TOGGLE (CSS-only, no inline styles) ===== */
-[data-theme="dark"] #iconMoon { display: none; }
-[data-theme="dark"] #iconSun  { display: block; }
-[data-theme="light"] #iconMoon { display: block; }
-[data-theme="light"] #iconSun  { display: none; }
 
 /* ===== NAV ===== */
 nav {
@@ -115,17 +110,6 @@ nav.scrolled {
 }
 .nav-link:hover { color: var(--text); background: rgba(147,51,234,0.08); }
 
-.nav-right { display: flex; align-items: center; gap: 0.75rem; }
-
-/* Theme toggle */
-.theme-toggle {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: var(--surface-2); border: 1px solid var(--border);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; transition: background 0.2s, border-color 0.2s, transform 0.2s;
-  color: var(--muted);
-}
-.theme-toggle:hover { background: var(--border-2); transform: rotate(20deg); }
 
 /* ===== HERO ===== */
 .hero {

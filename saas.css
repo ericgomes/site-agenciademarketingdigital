@@ -1,28 +1,28 @@
 /* ===================================================
-   FIGMA / SAAS MODERN THEME  —  data-visual="saas"
-   Clean grid, soft gradients, high conversion feel
+   SAAS / TECH MODERN THEME  —  data-visual="saas"
+   Teal accent, clean white, Vercel/Stripe/Linear feel
    =================================================== */
 
 [data-visual="saas"] {
-  --bg:          #F9FAFB;
+  --bg:          #F8FAFC;
   --surface:     #FFFFFF;
-  --surface-2:   #EEF2FF;
-  --border:      rgba(79, 70, 229, 0.18);
-  --border-2:    rgba(79, 70, 229, 0.45);
-  --accent:      #4F46E5;
-  --accent-hi:   #818CF8;
-  --accent-glow: rgba(79, 70, 229, 0.2);
-  --text:        #111827;
-  --muted:       #374151;
-  --subtle:      #6B7280;
+  --surface-2:   #F0FDFA;
+  --border:      rgba(13, 148, 136, 0.16);
+  --border-2:    rgba(13, 148, 136, 0.4);
+  --accent:      #0D9488;
+  --accent-hi:   #2DD4BF;
+  --accent-glow: rgba(13, 148, 136, 0.18);
+  --text:        #0F172A;
+  --muted:       #334155;
+  --subtle:      #64748B;
   --card-bg:     #FFFFFF;
-  --nav-bg:      rgba(255, 255, 255, 0.9);
-  --hero-grad:   linear-gradient(135deg, #EEF2FF 0%, #F9FAFB 60%, #FFFFFF 100%);
+  --nav-bg:      rgba(255, 255, 255, 0.92);
+  --hero-grad:   linear-gradient(135deg, #F0FDFA 0%, #F8FAFC 60%, #FFFFFF 100%);
 }
 
 [data-visual="saas"] h1 em,
 [data-visual="saas"] .hero h1 em {
-  background: linear-gradient(135deg, #4F46E5 0%, #818CF8 100%) !important;
+  background: linear-gradient(135deg, #0D9488 0%, #2DD4BF 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
@@ -30,19 +30,19 @@
 
 [data-visual="saas"] .hero-grid {
   background-image:
-    linear-gradient(rgba(79, 70, 229, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(79, 70, 229, 0.05) 1px, transparent 1px) !important;
+    linear-gradient(rgba(13, 148, 136, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13, 148, 136, 0.05) 1px, transparent 1px) !important;
   background-size: 32px 32px !important;
 }
 
 [data-visual="saas"] .glow-1 {
-  background: radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 65%) !important;
+  background: radial-gradient(circle, rgba(13,148,136,0.14) 0%, transparent 65%) !important;
 }
 [data-visual="saas"] .glow-2 {
-  background: radial-gradient(circle, rgba(129,140,248,0.1) 0%, transparent 65%) !important;
+  background: radial-gradient(circle, rgba(45,212,191,0.09) 0%, transparent 65%) !important;
 }
 [data-visual="saas"] .glow-3 {
-  background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 65%) !important;
+  background: radial-gradient(circle, rgba(20,184,166,0.07) 0%, transparent 65%) !important;
 }
 
 [data-visual="saas"] .expert-card,
@@ -51,68 +51,91 @@
 [data-visual="saas"] .quote-box,
 [data-visual="saas"] .contact-person {
   background: #FFFFFF !important;
-  border: 1px solid rgba(79, 70, 229, 0.14) !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(79,70,229,0.07) !important;
+  border: 1px solid rgba(13, 148, 136, 0.14) !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(13,148,136,0.06) !important;
 }
 [data-visual="saas"] .expert-card:hover,
 [data-visual="saas"] .model-card:hover,
 [data-visual="saas"] .service-card:hover,
 [data-visual="saas"] .contact-person:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 12px 40px rgba(79,70,229,0.13) !important;
-  border-color: rgba(79, 70, 229, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07), 0 12px 40px rgba(13,148,136,0.12) !important;
+  border-color: rgba(13, 148, 136, 0.28) !important;
 }
 
-[data-visual="saas"] .expert-card.eric    { border-left: 3px solid #4F46E5 !important; }
-[data-visual="saas"] .expert-card.marcelo { border-left: 3px solid #818CF8 !important; }
+[data-visual="saas"] .expert-card.eric    { border-left: 3px solid #0D9488 !important; }
+[data-visual="saas"] .expert-card.marcelo { border-left: 3px solid #2DD4BF !important; }
+
+[data-visual="saas"] .service-card.seo::before  { background: #0D9488 !important; }
+[data-visual="saas"] .service-card.paid::before { background: #2DD4BF !important; }
 
 [data-visual="saas"] .btn-primary {
-  background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%) !important;
-  box-shadow: 0 2px 8px rgba(79,70,229,0.35) !important;
+  background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%) !important;
+  box-shadow: 0 2px 8px rgba(13,148,136,0.3) !important;
 }
 [data-visual="saas"] .btn-primary:hover {
-  background: linear-gradient(135deg, #4338CA 0%, #4F46E5 100%) !important;
-  box-shadow: 0 4px 16px rgba(79,70,229,0.45) !important;
+  background: linear-gradient(135deg, #0F766E 0%, #0D9488 100%) !important;
+  box-shadow: 0 4px 16px rgba(13,148,136,0.4) !important;
 }
+
+[data-visual="saas"] .btn-ghost {
+  color: #0D9488 !important;
+  border-color: rgba(13,148,136,0.35) !important;
+}
+[data-visual="saas"] .btn-ghost:hover { background: rgba(13,148,136,0.06) !important; }
 
 [data-visual="saas"] .btn-wa {
   background: #16a34a !important;
-  box-shadow: 0 2px 8px rgba(22,163,74,0.3) !important;
+  box-shadow: 0 2px 8px rgba(22,163,74,0.28) !important;
+}
+
+[data-visual="saas"] .btn-li {
+  color: #0D9488 !important;
+  border-color: rgba(13,148,136,0.3) !important;
 }
 
 [data-visual="saas"] nav {
-  background: rgba(255,255,255,0.85) !important;
+  background: rgba(255,255,255,0.88) !important;
   backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(79,70,229,0.1) !important;
+  border-bottom: 1px solid rgba(13,148,136,0.1) !important;
 }
 
-[data-visual="saas"] .linka-wordmark { color: #4F46E5 !important; }
-[data-visual="saas"] .nav-link { color: #374151 !important; }
-[data-visual="saas"] .nav-link:hover { color: #4F46E5 !important; background: rgba(79,70,229,0.06) !important; }
+[data-visual="saas"] .linka-wordmark { color: #0D9488 !important; }
+[data-visual="saas"] .linka-wordmark .l-i::after,
+[data-visual="saas"] .linka-wordmark .l-a::after { color: #2DD4BF !important; }
+[data-visual="saas"] .nav-link { color: #334155 !important; }
+[data-visual="saas"] .nav-link:hover { color: #0D9488 !important; background: rgba(13,148,136,0.06) !important; }
 
-[data-visual="saas"] .tl::before { background: linear-gradient(to bottom, #4F46E5, #818CF8) !important; }
+[data-visual="saas"] .badge-dot { background: #2DD4BF !important; box-shadow: 0 0 6px rgba(45,212,191,0.6) !important; }
+
+[data-visual="saas"] .tl::before { background: linear-gradient(to bottom, #0D9488, #2DD4BF) !important; }
 [data-visual="saas"] .tl li::before {
-  background: #4F46E5 !important;
-  box-shadow: 0 0 0 3px rgba(79,70,229,0.2) !important;
+  background: #0D9488 !important;
+  box-shadow: 0 0 0 3px rgba(13,148,136,0.18) !important;
 }
+
+[data-visual="saas"] .eyebrow,
+[data-visual="saas"] .hero-badge { color: #0D9488 !important; border-color: rgba(13,148,136,0.3) !important; }
+
+[data-visual="saas"] .expert-link { color: #0D9488 !important; border-color: rgba(13,148,136,0.3) !important; }
+[data-visual="saas"] .expert-link:hover { background: rgba(13,148,136,0.06) !important; }
 
 [data-visual="saas"] footer {
-  background: #111827 !important;
+  background: #0F172A !important;
   border-top: none !important;
 }
-[data-visual="saas"] footer * { color: #9CA3AF !important; }
+[data-visual="saas"] footer * { color: #94A3B8 !important; }
 [data-visual="saas"] footer strong,
-[data-visual="saas"] footer .linka-wordmark { color: #F9FAFB !important; }
+[data-visual="saas"] footer .linka-wordmark { color: #F8FAFC !important; }
 
-[data-visual="saas"] #themeBtn { display: none !important; }
 [data-visual="saas"] #visual-trigger {
   background: rgba(255,255,255,0.95) !important;
-  border-color: rgba(79,70,229,0.2) !important;
-  color: #374151 !important;
+  border-color: rgba(13,148,136,0.2) !important;
+  color: #334155 !important;
 }
 [data-visual="saas"] #visual-menu {
   background: rgba(255,255,255,0.98) !important;
-  border-color: rgba(79,70,229,0.16) !important;
-  box-shadow: 0 8px 32px rgba(79,70,229,0.12) !important;
+  border-color: rgba(13,148,136,0.16) !important;
+  box-shadow: 0 8px 32px rgba(13,148,136,0.1) !important;
 }
-[data-visual="saas"] .visual-btn { color: #6B7280 !important; }
-[data-visual="saas"] .visual-btn.active { color: #4F46E5 !important; }
+[data-visual="saas"] .visual-btn { color: #64748B !important; }
+[data-visual="saas"] .visual-btn.active { color: #0D9488 !important; }

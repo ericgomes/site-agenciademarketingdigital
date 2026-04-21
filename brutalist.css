@@ -158,7 +158,6 @@
 [data-visual="brutalist"] footer { border-top: 2px solid #000 !important; background: #000 !important; color: #fff !important; }
 [data-visual="brutalist"] footer * { color: #fff !important; }
 
-[data-visual="brutalist"] #themeBtn { display: none !important; }
 [data-visual="brutalist"] #visual-trigger {
   background: #fff !important;
   border: 2px solid #000 !important;
