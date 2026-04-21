@@ -12,61 +12,91 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="pixelart.css">
-  <link rel="stylesheet" href="dos.css">
-  <link rel="stylesheet" href="brutalist.css">
-  <link rel="stylesheet" href="saas.css">
-  <link rel="stylesheet" href="geocities.css">
-  <link rel="stylesheet" href="glass.css">
-  <link rel="stylesheet" href="notion.css">
-  <link rel="stylesheet" href="copa.css">
 </head>
 <body>
 
-  <!-- ===== VISUAL SWITCHER ===== -->
-  <div id="visual-switcher" aria-label="Escolher tema visual">
-    <button type="button" id="visual-trigger" aria-haspopup="listbox" aria-expanded="false">
-      <span id="visual-label">Linka</span>
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <div id="visual-menu" role="listbox">
-      <button type="button" class="visual-btn active" data-visual="linka-light">Linka Claro</button>
-      <button type="button" class="visual-btn" data-visual="linka-dark">Linka Escuro</button>
-      <button type="button" class="visual-btn" data-visual="pixelart">Pixel Art</button>
-      <button type="button" class="visual-btn" data-visual="dos">DOS</button>
-      <button type="button" class="visual-btn" data-visual="geocities">Geocities</button>
-      <button type="button" class="visual-btn" data-visual="copa">Brasil 🇧🇷</button>
-      <button type="button" class="visual-btn" data-visual="brutalist">Minimalista</button>
-      <button type="button" class="visual-btn" data-visual="saas">SaaS</button>
-      <button type="button" class="visual-btn" data-visual="glass">Indigo</button>
-      <button type="button" class="visual-btn" data-visual="notion">Clean</button>
+  <!-- ===== TOP CONTROLS ===== -->
+  <div id="top-controls">
+    <div id="lang-switcher" aria-label="Idioma">
+      <button type="button" class="lang-btn active" data-lang="pt" title="Português">
+        <svg viewBox="0 0 24 16" width="24" height="16" aria-hidden="true" style="display:block">
+          <rect width="24" height="16" fill="#009C3B"/>
+          <polygon points="12,2 22,8 12,14 2,8" fill="#FFDF00"/>
+          <circle cx="12" cy="8" r="3.8" fill="#002776"/>
+        </svg>
+      </button>
+      <button type="button" class="lang-btn" data-lang="en" title="English">
+        <svg viewBox="0 0 24 16" width="24" height="16" aria-hidden="true" style="display:block">
+          <rect width="24" height="16" fill="#B22234"/>
+          <rect y="1.23" width="24" height="1.23" fill="#fff"/>
+          <rect y="3.69" width="24" height="1.23" fill="#fff"/>
+          <rect y="6.15" width="24" height="1.23" fill="#fff"/>
+          <rect y="8.62" width="24" height="1.23" fill="#fff"/>
+          <rect y="11.08" width="24" height="1.23" fill="#fff"/>
+          <rect y="13.54" width="24" height="1.23" fill="#fff"/>
+          <rect width="9.6" height="8.62" fill="#3C3B6E"/>
+        </svg>
+      </button>
+      <button type="button" class="lang-btn" data-lang="es" title="Español">
+        <svg viewBox="0 0 24 16" width="24" height="16" aria-hidden="true" style="display:block">
+          <rect width="24" height="16" fill="#C60B1E"/>
+          <rect y="4" width="24" height="8" fill="#FFC400"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="visual-switcher" aria-label="Escolher tema visual">
+      <button type="button" id="visual-trigger" aria-haspopup="listbox" aria-expanded="false">
+        <span id="visual-label">Linka</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+          <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div id="visual-menu" role="listbox">
+        <button type="button" class="visual-btn active" data-visual="linka-light">Claro</button>
+        <button type="button" class="visual-btn" data-visual="linka-dark">Escuro</button>
+        <button type="button" class="visual-btn" data-visual="pixelart">Pixel Art</button>
+        <button type="button" class="visual-btn" data-visual="dos">MS-DOS</button>
+        <button type="button" class="visual-btn" data-visual="geocities">Geocities</button>
+        <button type="button" class="visual-btn" data-visual="copa">Brasil 🇧🇷</button>
+        <button type="button" class="visual-btn" data-visual="brutalist">Minimalista</button>
+        <button type="button" class="visual-btn" data-visual="saas">SaaS</button>
+        <button type="button" class="visual-btn" data-visual="glass">Indigo</button>
+        <button type="button" class="visual-btn" data-visual="notion">Clean</button>
+      </div>
     </div>
   </div>
 
+  <!-- Scanlines overlay (DOS / Pixel Art themes) -->
+  <div id="scanlines" aria-hidden="true"></div>
   <!-- Mouse spotlight overlay -->
   <div id="mouse-spotlight" aria-hidden="true"></div>
   <!-- Custom cursor -->
   <div id="cursor-dot" aria-hidden="true"></div>
   <div id="cursor-ring" aria-hidden="true"></div>
 
+  <!-- ===== GEOCITIES: marquee bar ===== -->
+  <div class="geo-marquee-bar" aria-hidden="true">
+    <marquee behavior="scroll" direction="left" scrollamount="4">
+      <span class="geo-blink">★ BEM VINDO ★</span>
+      &nbsp;&nbsp;&nbsp; 🔥 MELHOR AGÊNCIA DE MARKETING DIGITAL DO BRASIL 🔥
+      &nbsp;&nbsp;&nbsp; ✨ SEO · TRÁFEGO PAGO · PERFORMANCE ✨
+      &nbsp;&nbsp;&nbsp; <span class="geo-blink">★ ERIC GOMES &amp; MARCELO CARICATI ★</span>
+      &nbsp;&nbsp;&nbsp; 💻 DESDE 2013 — MAIS DE 300 CLIENTES ATENDIDOS 💻
+      &nbsp;&nbsp;&nbsp; 🏆 GOOGLE PREMIER PARTNER 🏆
+      &nbsp;&nbsp;&nbsp;
+    </marquee>
+  </div>
+
   <!-- ===== NAV ===== -->
   <nav id="navbar">
-    <a href="#inicio" class="linka-logo" aria-label="Linka Marketing Digital">
-      <span class="linka-wordmark">
-        L<span class="l-i">i</span>NK<span class="l-a">A</span>
-      </span>
-      <span class="linka-sub">marketing digital</span>
-    </a>
-
     <div class="nav-links" role="navigation" aria-label="Menu principal">
-      <a href="#sobre" class="nav-link">Sobre</a>
-      <a href="#como-trabalhamos" class="nav-link">Como trabalhamos</a>
-      <a href="#especialidades" class="nav-link">Especialidades</a>
+      <a href="#sobre" class="nav-link" data-i18n="navSobre">Sobre</a>
+      <a href="#como-trabalhamos" class="nav-link" data-i18n="navComo">Como trabalhamos</a>
+      <a href="#especialidades" class="nav-link" data-i18n="navEsp">Especialidades</a>
       <a href="#eric" class="nav-link">Eric</a>
       <a href="#marcelo" class="nav-link">Marcelo</a>
-      <a href="#contato" class="nav-link">Contato</a>
+      <a href="#contato" class="nav-link" data-i18n="navContato">Contato</a>
     </div>
 
   </nav>
@@ -91,22 +121,18 @@
     <div class="hero-left">
       <p class="hero-badge">
         <span class="badge-dot" aria-hidden="true"></span>
-        Sócios desde 2013 &nbsp;·&nbsp; SEO &amp; Tráfego Pago
+        <span data-i18n="heroBadge">Sócios desde 2013 · SEO &amp; Tráfego Pago</span>
       </p>
 
-      <h1>
-        Maximizando <em>ROI</em><br>
-        com Marketing Digital
-      </h1>
+      <h1 data-i18n-html="heroH1">Maximizando <em>ROI</em><br>com Marketing Digital</h1>
 
-      <p class="hero-sub">
-        Eric Gomes e Marcelo Caricati atendem — e executam — diretamente. PMEs, médias e grandes empresas, e-commerce e geração de leads. Sem equipes, sem intermediários.
-      </p>
+      <p class="hero-sub" data-i18n="heroSub">Eric Gomes e Marcelo Caricati atendem — e executam — diretamente. PMEs, médias e grandes empresas, e-commerce e geração de leads. Sem equipes, sem intermediários.</p>
 
       <div class="hero-actions">
-        <a href="https://wa.me/5511999503930" class="btn-primary" target="_blank" rel="noopener noreferrer">Falar com Eric &rarr;</a>
-        <a href="https://wa.me/5511982432765" class="btn-primary" target="_blank" rel="noopener noreferrer">Falar com Marcelo</a>
+        <a href="https://wa.me/5511999503930" class="btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="heroBtnEric">Falar com Eric →</a>
+        <a href="https://wa.me/5511982432765" class="btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="heroBtnMarcelo">Falar com Marcelo</a>
       </div>
+
     </div>
 
     <!-- Right: expert cards -->
@@ -120,12 +146,9 @@
           loading="eager"
         >
         <div class="expert-info">
-          <p class="expert-role">Co-fundador · SEO, Tecnologia &amp; Dados</p>
+          <p class="expert-role" data-i18n="ericRole">Co-fundador · SEO, Tecnologia &amp; Dados</p>
           <h3 class="expert-name">Eric Gomes</h3>
-          <p class="expert-bio">
-            Ciência da Computação pela PUC-SP. Atua em SEO técnico, Google Tag Manager, atribuição,
-            automações via Google Apps Script e APIs, RD Station e Looker Studio.
-          </p>
+          <p class="expert-bio" data-i18n="ericBio">Ciência da Computação pela PUC-SP. Atua em SEO técnico, Google Tag Manager, atribuição, automações via Google Apps Script e APIs, RD Station e Looker Studio.</p>
           <nav class="expert-links" aria-label="Links de Eric Gomes">
             <a href="https://www.linkedin.com/in/ericmottagomes/" class="expert-link" target="_blank" rel="noopener noreferrer">
               <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -137,7 +160,7 @@
             </a>
             <a href="https://agenda.ericgomes.me" class="expert-link" target="_blank" rel="noopener noreferrer">
               <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Agendar 30 min
+              <span data-i18n="ericBtnCal">Agendar 30 min</span>
             </a>
           </nav>
         </div>
@@ -151,11 +174,9 @@
           loading="eager"
         >
         <div class="expert-info">
-          <p class="expert-role">Co-fundador · Tráfego Pago &amp; Performance</p>
+          <p class="expert-role" data-i18n="marceloRole">Co-fundador · Tráfego Pago &amp; Performance</p>
           <h3 class="expert-name">Marcelo Caricati</h3>
-          <p class="expert-bio">
-            MBA em Marketing, certificado Google Ads. Especialista em gestão e otimização de campanhas
-            de tráfego pago e dashboards de performance em Looker Studio.
+          <p class="expert-bio" data-i18n="marceloBio">MBA em Marketing, certificado Google Ads. Especialista em gestão e otimização de campanhas de tráfego pago e dashboards de performance em Looker Studio.
           </p>
           <nav class="expert-links" aria-label="Links de Marcelo Caricati">
             <a href="https://www.linkedin.com/in/marcelo-caricati-83ab7018/" class="expert-link" target="_blank" rel="noopener noreferrer">
@@ -176,45 +197,39 @@
   <!-- ===== SOBRE ===== -->
   <section class="full-bleed" id="sobre">
     <div class="section-wrap">
-      <p class="eyebrow">Quem somos</p>
-      <h2 class="section-title">Especialistas, não<br>uma fábrica de clientes</h2>
-      <p class="section-sub">
-        Mais de 300 clientes atendidos desde 2007. PMEs, médias e grandes empresas — em e-commerce e geração de leads.
-      </p>
+      <p class="eyebrow" data-i18n="sobreEye">Quem somos</p>
+      <h2 class="section-title" data-i18n-html="sobreTitle">Especialistas, não<br>uma fábrica de clientes</h2>
+      <p class="section-sub" data-i18n="sobreSub">Mais de 300 clientes atendidos desde 2007. PMEs, médias e grandes empresas — em e-commerce e geração de leads.</p>
 
       <div class="about-grid">
         <div class="about-body reveal">
-          <p>
-            <strong>Clientes conosco há mais de 15 anos</strong> são a prova mais concreta do nosso modelo: parceria real, não relação de fornecedor. Quem entra na nossa carteira recebe dedicação completa — e quem fica, cresce.
-          </p>
-          <p>
-            Não atendemos a todos. Escolhemos onde colocar energia, e entregamos com responsabilidade. Cada cliente é acompanhado diretamente por Eric e Marcelo — sem repassar para equipes.
-          </p>
+          <p data-i18n-html="sobreP1"><strong>Clientes conosco há mais de 15 anos</strong> são a prova mais concreta do nosso modelo: parceria real, não relação de fornecedor. Quem entra na nossa carteira recebe dedicação completa — e quem fica, cresce.</p>
+          <p data-i18n="sobreP2">Não atendemos a todos. Escolhemos onde colocar energia, e entregamos com responsabilidade. Cada cliente é acompanhado diretamente por Eric e Marcelo — sem repassar para equipes.</p>
           <blockquote class="quote-box">
-            <p>"Não somos uma agência de volume. Somos parceiros que escolhem onde colocar energia e entregam com responsabilidade."</p>
+            <p data-i18n="sobreQuote">"Não somos uma agência de volume. Somos parceiros que escolhem onde colocar energia e entregam com responsabilidade."</p>
           </blockquote>
         </div>
 
         <ol class="tl reveal reveal-d1">
           <li>
             <time class="tl-year" datetime="2007">2007</time>
-            <h4>Marcelo abre sua agência</h4>
-            <p>Início da trajetória em marketing digital com foco em tráfego pago e performance.</p>
+            <h4 data-i18n="tl1Title">Marcelo abre sua agência</h4>
+            <p data-i18n="tl1Desc">Início da trajetória em marketing digital com foco em tráfego pago e performance.</p>
           </li>
           <li>
             <time class="tl-year" datetime="2010">2010</time>
-            <h4>Eric abre sua agência</h4>
-            <p>Formado em Ciência da Computação, Eric estrutura sua operação com foco em SEO e tecnologia.</p>
+            <h4 data-i18n="tl2Title">Eric abre sua agência</h4>
+            <p data-i18n="tl2Desc">Formado em Ciência da Computação, Eric estrutura sua operação com foco em SEO e tecnologia.</p>
           </li>
           <li>
             <time class="tl-year" datetime="2013">2013</time>
-            <h4>União e fundação da Linka</h4>
-            <p>As duas trajetórias se unem: SEO e tecnologia de um lado, tráfego pago do outro.</p>
+            <h4 data-i18n="tl3Title">União e fundação da Linka</h4>
+            <p data-i18n="tl3Desc">As duas trajetórias se unem: SEO e tecnologia de um lado, tráfego pago do outro.</p>
           </li>
           <li>
-            <p class="tl-year">Hoje</p>
-            <h4>Carteira exclusiva, resultados de longo prazo</h4>
-            <p>Mais de 300 clientes atendidos. Parceiros de longa data, foco total em resultado mensurável.</p>
+            <p class="tl-year" data-i18n="tl4Year">Hoje</p>
+            <h4 data-i18n="tl4Title">Carteira exclusiva, resultados de longo prazo</h4>
+            <p data-i18n="tl4Desc">Mais de 300 clientes atendidos. Parceiros de longa data, foco total em resultado mensurável.</p>
           </li>
         </ol>
       </div>
@@ -224,26 +239,26 @@
   <!-- ===== COMO TRABALHAMOS ===== -->
   <section id="como-trabalhamos">
     <div class="section-wrap">
-      <p class="eyebrow">Como trabalhamos</p>
-      <h2 class="section-title">Você fala com quem faz.<br>Sem intermediários.</h2>
-      <p class="section-sub">Eric e Marcelo atendem, planejam e executam diretamente. Sem equipes entre você e quem entende do assunto.</p>
+      <p class="eyebrow" data-i18n="comoEye">Como trabalhamos</p>
+      <h2 class="section-title" data-i18n-html="comoTitle">Você fala com quem faz.<br>Sem intermediários.</h2>
+      <p class="section-sub" data-i18n="comoSub">Eric e Marcelo atendem, planejam e executam diretamente. Sem equipes entre você e quem entende do assunto.</p>
 
       <div class="model-grid">
         <article class="model-card reveal">
-          <h4>Execução direta, sem filtros</h4>
-          <p>O planejamento, a execução e o atendimento são feitos por Eric e Marcelo — sem terceirização, sem intermediários, sem perda de contexto entre quem decide e quem faz.</p>
+          <h4 data-i18n="m1Title">Execução direta, sem filtros</h4>
+          <p data-i18n="m1Desc">O planejamento, a execução e o atendimento são feitos por Eric e Marcelo — sem terceirização, sem intermediários, sem perda de contexto entre quem decide e quem faz.</p>
         </article>
         <article class="model-card reveal reveal-d1">
-          <h4>Maturidade de quem tem história</h4>
-          <p>Dois profissionais com mais de 15 anos de especialização cada. Bagagem acumulada em mais de 300 clientes, dos mais variados segmentos e portes.</p>
+          <h4 data-i18n="m2Title">Maturidade de quem tem história</h4>
+          <p data-i18n="m2Desc">Dois profissionais com mais de 15 anos de especialização cada. Bagagem acumulada em mais de 300 clientes, dos mais variados segmentos e portes.</p>
         </article>
         <article class="model-card reveal">
-          <h4>Seleção criteriosa</h4>
-          <p>Trabalhamos com clientes cujos objetivos se alinham ao nosso perfil — e para os quais temos certeza de entregar resultado real.</p>
+          <h4 data-i18n="m3Title">Seleção criteriosa</h4>
+          <p data-i18n="m3Desc">Trabalhamos com clientes cujos objetivos se alinham ao nosso perfil — e para os quais temos certeza de entregar resultado real.</p>
         </article>
         <article class="model-card reveal reveal-d1">
-          <h4>Resultado mensurável</h4>
-          <p>Métricas que importam para o negócio. Dashboards em Looker Studio para todos os clientes, sem exceção.</p>
+          <h4 data-i18n="m4Title">Resultado mensurável</h4>
+          <p data-i18n="m4Desc">Métricas que importam para o negócio. Dashboards em Looker Studio para todos os clientes, sem exceção.</p>
         </article>
       </div>
     </div>
@@ -252,38 +267,48 @@
   <!-- ===== ESPECIALIDADES ===== -->
   <section class="full-bleed" id="especialidades">
     <div class="section-wrap">
-      <p class="eyebrow">Especialidades</p>
-      <h2 class="section-title">O que fazemos</h2>
-      <p class="section-sub">Duas frentes complementares que cobrem toda a jornada do seu cliente digital.</p>
+      <p class="eyebrow" data-i18n="espEye">Especialidades</p>
+      <h2 class="section-title" data-i18n="espTitle">O que fazemos</h2>
+      <p class="section-sub" data-i18n="espSub">Duas frentes complementares que cobrem toda a jornada do seu cliente digital.</p>
 
       <div class="services-grid">
         <article class="service-card seo reveal">
-          <p class="svc-eye seo">SEO · Tecnologia · Dados — Eric Gomes</p>
-          <h3>Crescimento orgânico e inteligência de dados</h3>
-          <p>SEO técnico combinado com automação, rastreamento e atribuição para decisões baseadas em dados reais.</p>
+          <p class="svc-eye seo" data-i18n="seoEye">SEO · Tecnologia · Dados — Eric Gomes</p>
+          <h3 data-i18n="seoTitle">Crescimento orgânico e inteligência de dados</h3>
+          <p data-i18n="seoDesc">SEO técnico combinado com automação, rastreamento e atribuição para decisões baseadas em dados reais.</p>
           <ul class="svc-list">
-            <li>SEO técnico e auditoria de site</li>
-            <li>Google Tag Manager e atribuição</li>
-            <li>Web Analytics e Google Search Console</li>
-            <li>RD Station CRM e automação de marketing</li>
-            <li>Typebot e integrações via API</li>
-            <li>Automações em Google Sheets via Apps Script</li>
-            <li>Dashboards em Looker Studio</li>
+            <li data-i18n="seoLi1">SEO técnico e auditoria de site</li>
+            <li data-i18n="seoLi2">Google Tag Manager e atribuição</li>
+            <li data-i18n="seoLi3">Web Analytics e Google Search Console</li>
+            <li data-i18n="seoLi4">RD Station CRM e automação de marketing</li>
+            <li data-i18n="seoLi5">Typebot e integrações via API</li>
+            <li data-i18n="seoLi6">Automações em Google Sheets via Apps Script</li>
+            <li data-i18n="seoLi7">Dashboards em Looker Studio</li>
           </ul>
         </article>
 
         <article class="service-card paid reveal reveal-d1">
-          <p class="svc-eye paid">Tráfego Pago · Performance — Marcelo Caricati</p>
-          <h3>Campanhas gerenciadas com precisão</h3>
-          <p>Gestão e otimização de campanhas focadas em resultado real — cada real investido com estratégia e controle.</p>
+          <p class="svc-eye paid" data-i18n="paidEye">Tráfego Pago · Performance — Marcelo Caricati</p>
+          <h3 data-i18n="paidTitle">Campanhas gerenciadas com precisão</h3>
+          <p data-i18n="paidDesc">Gestão e otimização de campanhas focadas em resultado real — cada real investido com estratégia e controle.</p>
           <ul class="svc-list">
-            <li>Google Ads Search e Performance Max</li>
-            <li>Meta Ads (Facebook e Instagram)</li>
-            <li>Otimização contínua de campanhas</li>
-            <li>Estratégia de funil e segmentação</li>
-            <li>Dashboards de performance em Looker Studio</li>
+            <li data-i18n="paidLi1">Google Ads Search e Performance Max</li>
+            <li data-i18n="paidLi2">Meta Ads (Facebook e Instagram)</li>
+            <li data-i18n="paidLi3">Otimização contínua de campanhas</li>
+            <li data-i18n="paidLi4">Estratégia de funil e segmentação</li>
+            <li data-i18n="paidLi5">Dashboards de performance em Looker Studio</li>
           </ul>
         </article>
+      </div>
+
+      <div class="gpp-section reveal">
+        <a href="https://www.google.com/partners/agency?id=8434993335" target="_blank" rel="noopener noreferrer" class="gpp-link">
+          <img src="https://www.gstatic.com/partners/badge/images/2026/PremierBadgeClickable.svg" alt="Google Premier Partner" class="gpp-img">
+        </a>
+        <div class="gpp-text">
+          <p class="gpp-headline" data-i18n="gppTitle">Somos Google Premier Partners</p>
+          <p class="gpp-desc" data-i18n="gppDesc">O título Premier é concedido ao seleto grupo de agências no topo do desempenho em Google Ads — menos de 3% das agências parceiras no Brasil.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -291,11 +316,9 @@
   <!-- ===== CONTATO ===== -->
   <section id="contato">
     <div class="cta-inner">
-      <p class="eyebrow">Contato</p>
-      <h2>Vamos conversar?</h2>
-      <p>
-        Se você busca um parceiro sério — não apenas mais um fornecedor — fale diretamente com quem vai trabalhar no seu projeto.
-      </p>
+      <p class="eyebrow" data-i18n="contatoEye">Contato</p>
+      <h2 data-i18n="contatoTitle">Vamos conversar?</h2>
+      <p data-i18n="contatoDesc">Se você busca um parceiro sério — não apenas mais um fornecedor — fale diretamente com quem vai trabalhar no seu projeto.</p>
 
       <div class="contact-duo">
 
@@ -307,7 +330,7 @@
             loading="lazy"
           >
           <p class="contact-person-name">Eric Gomes</p>
-          <p class="contact-person-role">SEO · Tecnologia · Dados</p>
+          <p class="contact-person-role" data-i18n="ericRoleShort">SEO · Tecnologia · Dados</p>
           <div class="contact-links">
             <a href="https://wa.me/5511999503930" class="btn-wa" target="_blank" rel="noopener noreferrer">
               <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -315,7 +338,7 @@
             </a>
             <a href="https://agenda.ericgomes.me" class="btn-li" target="_blank" rel="noopener noreferrer">
               <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Agendar 30 min
+              <span data-i18n="ericBtnCal">Agendar 30 min</span>
             </a>
             <a href="https://www.linkedin.com/in/ericmottagomes/" class="btn-li" target="_blank" rel="noopener noreferrer">
               <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
@@ -332,7 +355,7 @@
             loading="lazy"
           >
           <p class="contact-person-name">Marcelo Caricati</p>
-          <p class="contact-person-role">Tráfego Pago · Performance</p>
+          <p class="contact-person-role" data-i18n="marceloRoleShort">Tráfego Pago · Performance</p>
           <div class="contact-links">
             <a href="https://wa.me/5511982432765" class="btn-wa" target="_blank" rel="noopener noreferrer">
               <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -351,9 +374,23 @@
 
   </main>
 
+  <!-- ===== GEOCITIES: under construction ===== -->
+  <div class="geo-under-construction" aria-hidden="true">
+    <div class="geo-construction-sign">
+      <div class="geo-construction-stripes"></div>
+      <div class="geo-construction-body">
+        <span class="geo-hard-hat">👷</span>
+        <span class="geo-blink">SITE EM CONSTRUÇÃO</span>
+        <span class="geo-hard-hat">👷</span>
+      </div>
+      <div class="geo-construction-stripes"></div>
+    </div>
+    <p class="geo-blink">🚧 VOLTE MAIS TARDE! 🚧</p>
+  </div>
+
   <!-- ===== FOOTER ===== -->
   <footer>
-    <span>© 2026 &nbsp;<a href="https://www.agenciademarketingdigital.com.br">Agência Linka</a> &nbsp;·&nbsp; Eric Gomes &amp; Marcelo Caricati</span>
+    <span>© 2026 &nbsp; Eric Gomes &amp; Marcelo Caricati</span>
     <div class="footer-links">
       <a href="https://www.linkedin.com/in/ericmottagomes/" target="_blank" rel="noopener noreferrer">Eric Gomes</a>
       <a href="https://www.linkedin.com/in/marcelo-caricati-83ab7018/" target="_blank" rel="noopener noreferrer">Marcelo Caricati</a>

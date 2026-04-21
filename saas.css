@@ -1,7 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap');
+
 /* ===================================================
    SAAS / TECH MODERN THEME  —  data-visual="saas"
    Teal accent, clean white, Vercel/Stripe/Linear feel
    =================================================== */
+
+/* ── Typography ── */
+[data-visual="saas"] body { font-family: 'DM Sans', system-ui, sans-serif !important; }
+[data-visual="saas"] h1 {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-size: clamp(2rem, 4.8vw, 3.8rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.08 !important;
+}
+[data-visual="saas"] h2 {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.15 !important;
+}
+[data-visual="saas"] h3 {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+[data-visual="saas"] h4 {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.005em !important;
+}
+[data-visual="saas"] p,
+[data-visual="saas"] li,
+[data-visual="saas"] .section-sub,
+[data-visual="saas"] .hero-sub {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-size: 0.88rem !important;
+  line-height: 1.58 !important;
+  letter-spacing: 0 !important;
+}
+[data-visual="saas"] .eyebrow,
+[data-visual="saas"] .svc-eye {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+[data-visual="saas"] .nav-link,
+[data-visual="saas"] .btn-primary,
+[data-visual="saas"] .btn-ghost,
+[data-visual="saas"] .btn-wa,
+[data-visual="saas"] .btn-li {
+  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+}
 
 [data-visual="saas"] {
   --bg:          #F8FAFC;
@@ -127,13 +185,19 @@
 [data-visual="saas"] footer strong,
 [data-visual="saas"] footer .linka-wordmark { color: #F8FAFC !important; }
 
+[data-visual="saas"] #lang-switcher {
+  background: rgba(255,255,255,0.95) !important;
+  border-color: rgba(13,148,136,0.2) !important;
+  backdrop-filter: none !important;
+}
+[data-visual="saas"] .lang-btn { color: #334155 !important; }
 [data-visual="saas"] #visual-trigger {
   background: rgba(255,255,255,0.95) !important;
   border-color: rgba(13,148,136,0.2) !important;
   color: #334155 !important;
 }
 [data-visual="saas"] #visual-menu {
-  background: rgba(255,255,255,0.98) !important;
+  background: rgb(255,255,255) !important;
   border-color: rgba(13,148,136,0.16) !important;
   box-shadow: 0 8px 32px rgba(13,148,136,0.1) !important;
 }

@@ -193,9 +193,8 @@
 [data-visual="dos"] footer { border-top-color: var(--accent) !important; }
 
 /* Scanlines CRT */
-[data-visual="dos"]::before {
-  content: '';
-  position: fixed; inset: 0;
+[data-visual="dos"] #scanlines {
+  display: block;
   background: repeating-linear-gradient(
     0deg,
     rgba(0, 0, 0, 0.28) 0px,
@@ -203,8 +202,6 @@
     transparent 1px,
     transparent 4px
   );
-  pointer-events: none;
-  z-index: 99997;
 }
 
 [data-visual="dos"] #cursor-dot {
@@ -218,4 +215,5 @@
 
 
 [data-visual="dos"] #visual-trigger { background: rgba(0,0,0,0.99) !important; border-color: rgba(0,255,65,0.35) !important; color: var(--accent) !important; }
-[data-visual="dos"] #visual-menu { background: rgba(0,0,0,0.99) !important; border-color: rgba(0,255,65,0.3) !important; }
+[data-visual="dos"] #visual-menu { background: rgb(0,0,0) !important; border-color: rgba(0,255,65,0.3) !important; }
+[data-visual="dos"] #lang-switcher { background: rgba(0,0,0,0.99) !important; border-color: rgba(0,255,65,0.35) !important; }

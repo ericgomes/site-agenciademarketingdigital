@@ -158,6 +158,13 @@
 [data-visual="brutalist"] footer { border-top: 2px solid #000 !important; background: #000 !important; color: #fff !important; }
 [data-visual="brutalist"] footer * { color: #fff !important; }
 
+[data-visual="brutalist"] #lang-switcher {
+  background: #fff !important;
+  border: 2px solid #000 !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+}
+[data-visual="brutalist"] .lang-btn { color: #000 !important; }
 [data-visual="brutalist"] #visual-trigger {
   background: #fff !important;
   border: 2px solid #000 !important;

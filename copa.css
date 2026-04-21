@@ -142,12 +142,13 @@
 /* Stars decoration */
 [data-visual="copa"] .hero-badge::before { content: '★ ★ ★ ★ ★ '; font-size: 0.6em; color: #FFDF00; }
 
+[data-visual="copa"] #lang-switcher { background: rgba(0,30,60,0.97) !important; border-color: rgba(255,223,0,0.3) !important; }
 [data-visual="copa"] #visual-trigger {
   background: rgba(0,30,60,0.97) !important;
   border-color: rgba(255,223,0,0.3) !important;
 }
 [data-visual="copa"] #visual-menu {
-  background: rgba(0,20,50,0.99) !important;
+  background: rgb(0,20,50) !important;
   border-color: rgba(255,223,0,0.25) !important;
 }
 [data-visual="copa"] .visual-btn { color: #B8D4F0 !important; }

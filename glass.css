@@ -1,7 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
 /* ===================================================
    GLASSMORPHISM / FUTURISTA THEME  —  data-visual="glass"
    Dark base, blur cards, gradient borders, AI vibe
    =================================================== */
+
+/* ── Typography ── */
+[data-visual="glass"] body { font-family: 'Space Grotesk', system-ui, sans-serif !important; }
+[data-visual="glass"] h1 {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-size: clamp(2.8rem, 6vw, 5.2rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  line-height: 1.04 !important;
+}
+[data-visual="glass"] h2 {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-size: clamp(1.9rem, 4vw, 3.2rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.015em !important;
+  line-height: 1.1 !important;
+}
+[data-visual="glass"] h3 {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+}
+[data-visual="glass"] h4 {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.015em !important;
+}
+[data-visual="glass"] p,
+[data-visual="glass"] li,
+[data-visual="glass"] .section-sub,
+[data-visual="glass"] .hero-sub {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.01em !important;
+}
+[data-visual="glass"] .eyebrow,
+[data-visual="glass"] .svc-eye {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+[data-visual="glass"] .nav-link,
+[data-visual="glass"] .btn-primary,
+[data-visual="glass"] .btn-ghost,
+[data-visual="glass"] .btn-wa,
+[data-visual="glass"] .btn-li {
+  font-family: 'Space Grotesk', system-ui, sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+}
 
 [data-visual="glass"] {
   --bg:          #030711;
@@ -137,12 +195,13 @@
   backdrop-filter: blur(12px) !important;
 }
 
+[data-visual="glass"] #lang-switcher { background: rgba(3,7,17,0.85) !important; border-color: rgba(139,92,246,0.3) !important; }
 [data-visual="glass"] #visual-trigger {
   background: rgba(3,7,17,0.85) !important;
   border-color: rgba(139,92,246,0.3) !important;
 }
 [data-visual="glass"] #visual-menu {
-  background: rgba(3,7,17,0.97) !important;
+  background: rgb(3,7,17) !important;
   border-color: rgba(139,92,246,0.25) !important;
 }
 [data-visual="glass"] .visual-btn.active { color: #8B5CF6 !important; }

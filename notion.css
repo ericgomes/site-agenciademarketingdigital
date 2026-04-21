@@ -1,7 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..700&display=swap');
+
 /* ===================================================
    CLEAN / EDITORIAL THEME  —  data-visual="notion"
    Swiss design, strict monochrome, zero decoration
    =================================================== */
+
+/* ── Typography ── */
+[data-visual="notion"] h1,
+[data-visual="notion"] h2,
+[data-visual="notion"] h3,
+[data-visual="notion"] h4 {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+}
+[data-visual="notion"] h1 {
+  font-size: clamp(2.6rem, 5.8vw, 5rem) !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  letter-spacing: -0.015em !important;
+  line-height: 1.08 !important;
+}
+[data-visual="notion"] h1 em {
+  font-style: normal !important;
+}
+[data-visual="notion"] h2 {
+  font-size: clamp(1.8rem, 3.8vw, 3rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.12 !important;
+}
+[data-visual="notion"] h3 {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.005em !important;
+}
+[data-visual="notion"] h4 {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+}
+[data-visual="notion"] p,
+[data-visual="notion"] li,
+[data-visual="notion"] .section-sub,
+[data-visual="notion"] .hero-sub {
+  font-size: 1.05rem !important;
+  line-height: 1.85 !important;
+  letter-spacing: 0.005em !important;
+}
+[data-visual="notion"] .eyebrow,
+[data-visual="notion"] .svc-eye {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+[data-visual="notion"] .nav-link {
+  font-size: 0.875rem !important;
+  letter-spacing: 0.02em !important;
+}
 
 [data-visual="notion"] {
   --bg:          #FFFFFF;
@@ -144,6 +200,13 @@
 [data-visual="notion"] footer strong,
 [data-visual="notion"] footer .linka-wordmark { color: #fff !important; }
 
+[data-visual="notion"] #lang-switcher {
+  background: rgba(255,255,255,0.97) !important;
+  border-color: rgba(0,0,0,0.15) !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+}
+[data-visual="notion"] .lang-btn { color: #111 !important; }
 [data-visual="notion"] #visual-trigger {
   background: rgba(255,255,255,0.97) !important;
   border-color: rgba(0,0,0,0.15) !important;

@@ -103,12 +103,11 @@
 [data-visual="pixelart"] #cursor-ring { border-radius: 0 !important; border-color: rgba(255,236,39,0.5) !important; }
 
 /* Scanlines */
-[data-visual="pixelart"]::before {
-  content: '';
-  position: fixed; inset: 0;
+[data-visual="pixelart"] #scanlines {
+  display: block;
   background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0px, rgba(0,0,0,0.22) 1px, transparent 1px, transparent 3px);
-  pointer-events: none; z-index: 99997;
 }
 
 [data-visual="pixelart"] #visual-trigger { background: rgba(10,15,35,0.97) !important; border-color: rgba(255,0,77,0.4) !important; }
-[data-visual="pixelart"] #visual-menu { background: rgba(10,15,35,0.99) !important; border-color: rgba(255,0,77,0.35) !important; }
+[data-visual="pixelart"] #visual-menu { background: rgb(10,15,35) !important; border-color: rgba(255,0,77,0.35) !important; }
+[data-visual="pixelart"] #lang-switcher { background: rgba(10,15,35,0.97) !important; border-color: rgba(255,0,77,0.4) !important; }
