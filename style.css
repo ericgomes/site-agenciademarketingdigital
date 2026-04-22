@@ -165,6 +165,8 @@ nav#navbar.scrolled {
   background-size: 60px 60px;
   pointer-events: none;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  contain: strict;
 }
 
 /* floating particles */
