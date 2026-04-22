@@ -42,6 +42,17 @@
 /* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
+/* Skip link — visually hidden until focused */
+.skip-link {
+  position: absolute; top: -100%; left: 1rem;
+  background: var(--accent); color: #fff;
+  padding: 0.5rem 1rem; border-radius: 0 0 var(--radius-pill) var(--radius-pill);
+  font-size: 0.85rem; font-weight: 700; text-decoration: none;
+  z-index: 999999;
+  transition: top 0.15s;
+}
+.skip-link:focus { top: 0; }
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
