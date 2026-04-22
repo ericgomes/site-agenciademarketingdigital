@@ -49,6 +49,7 @@ function applyVisual(v) {
   visualTrigger.setAttribute('aria-expanded', 'false');
   visualSwitcher.classList.remove('open');
   try { localStorage.setItem('linka-visual', v); } catch(e) {}
+  try { setUrlTheme(v); } catch(e) {}
 }
 
 visualTrigger.addEventListener('click', (e) => {
@@ -68,11 +69,42 @@ document.querySelectorAll('.visual-btn').forEach(b => {
   b.addEventListener('click', () => applyVisual(b.dataset.visual));
 });
 
+// slug (URL) ↔ internal data-visual value
+const slugToVisual = {
+  'claro':       'linka-light',
+  'escuro':      'linka-dark',
+  'pixel-art':   'pixelart',
+  'ms-dos':      'dos',
+  'geocities':   'geocities',
+  'brasil':      'copa',
+  'minimalista': 'brutalist',
+  'saas':        'saas',
+  'indigo':      'glass',
+  'clean':       'notion',
+};
+const visualToSlug = Object.fromEntries(Object.entries(slugToVisual).map(([s, v]) => [v, s]));
+
+function getUrlTheme() {
+  const slug = new URLSearchParams(location.search).get('tema');
+  return slug ? (slugToVisual[slug] ?? slug) : null;
+}
+
+function setUrlTheme(v) {
+  const url = new URL(location.href);
+  url.searchParams.set('tema', visualToSlug[v] ?? v);
+  history.replaceState(null, '', url);
+}
+
 try {
-  const urlTema  = new URLSearchParams(location.search).get('tema');
-  const saved    = localStorage.getItem('linka-visual');
+  const urlTema = getUrlTheme();
+  const saved   = localStorage.getItem('linka-visual');
   applyVisual(urlTema || (saved === 'default' ? 'linka-light' : (saved || 'linka-light')));
 } catch(e) { applyVisual('linka-light'); }
+
+window.addEventListener('popstate', () => {
+  const t = getUrlTheme();
+  if (t) applyVisual(t);
+});
 
 // ── Translations ─────────────────────────────────────────────
 const translations = {

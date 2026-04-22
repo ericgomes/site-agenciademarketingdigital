@@ -27,8 +27,7 @@
 
   <!-- Logo mark -->
   <rect x="80" y="60" width="72" height="72" rx="16" fill="url(#accent)"/>
-  <text x="116" y="116" font-family="Georgia,serif" font-size="44" font-weight="900" text-anchor="middle" fill="white" letter-spacing="-2">L</text>
-  <text x="136" y="75" font-family="serif" font-size="14" text-anchor="middle" fill="rgba(220,180,255,0.9)">✳</text>
+  <text x="116" y="108" font-family="-apple-system,system-ui,sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="white" letter-spacing="-1">EM</text>
 
   <!-- Brand name -->
   <text x="172" y="93" font-family="-apple-system,system-ui,sans-serif" font-size="18" font-weight="900" fill="#1A0033" letter-spacing="-0.5">Eric Gomes &amp; Marcelo Caricati</text>

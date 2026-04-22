@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Outfit:wght@300..700&display=swap');
 
 /* ===================================================
    SAAS / TECH MODERN THEME  —  data-visual="saas"
@@ -6,48 +6,48 @@
    =================================================== */
 
 /* ── Typography ── */
-[data-visual="saas"] body { font-family: 'DM Sans', system-ui, sans-serif !important; }
+[data-visual="saas"] body { font-family: 'Outfit', system-ui, sans-serif !important; }
 [data-visual="saas"] h1 {
-  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-family: 'Syne', system-ui, sans-serif !important;
   font-size: clamp(2rem, 4.8vw, 3.8rem) !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.03em !important;
-  line-height: 1.08 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.06 !important;
 }
 [data-visual="saas"] h2 {
-  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-family: 'Syne', system-ui, sans-serif !important;
   font-size: clamp(1.5rem, 3.2vw, 2.4rem) !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.025em !important;
-  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
+  line-height: 1.12 !important;
 }
 [data-visual="saas"] h3 {
-  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-family: 'Syne', system-ui, sans-serif !important;
   font-size: 1.1rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   letter-spacing: -0.01em !important;
 }
 [data-visual="saas"] h4 {
-  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-family: 'Syne', system-ui, sans-serif !important;
   font-size: 0.9rem !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.005em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
 }
 [data-visual="saas"] p,
 [data-visual="saas"] li,
 [data-visual="saas"] .section-sub,
 [data-visual="saas"] .hero-sub {
-  font-family: 'DM Sans', system-ui, sans-serif !important;
-  font-size: 0.88rem !important;
-  line-height: 1.58 !important;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
   letter-spacing: 0 !important;
 }
 [data-visual="saas"] .eyebrow,
 [data-visual="saas"] .svc-eye {
-  font-family: 'DM Sans', system-ui, sans-serif !important;
+  font-family: 'Syne', system-ui, sans-serif !important;
   font-size: 0.65rem !important;
   font-weight: 700 !important;
-  letter-spacing: 0.1em !important;
+  letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
 }
 [data-visual="saas"] .nav-link,
@@ -55,10 +55,10 @@
 [data-visual="saas"] .btn-ghost,
 [data-visual="saas"] .btn-wa,
 [data-visual="saas"] .btn-li {
-  font-family: 'DM Sans', system-ui, sans-serif !important;
-  font-size: 0.82rem !important;
+  font-family: 'Outfit', system-ui, sans-serif !important;
+  font-size: 0.88rem !important;
   font-weight: 500 !important;
-  letter-spacing: 0 !important;
+  letter-spacing: 0.01em !important;
 }
 
 [data-visual="saas"] {
