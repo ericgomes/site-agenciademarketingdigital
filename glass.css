@@ -165,7 +165,7 @@
   box-shadow: 0 6px 24px rgba(22,163,74,0.35) !important;
 }
 
-[data-visual="glass"] nav {
+[data-visual="glass"] nav#navbar {
   background: rgba(3,7,17,0.75) !important;
   backdrop-filter: blur(16px) !important;
   border-bottom: 1px solid rgba(139,92,246,0.15) !important;

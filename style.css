@@ -54,14 +54,14 @@ body {
 
 
 /* ===== NAV ===== */
-nav {
+nav#navbar {
   position: fixed; top: 0; width: 100%; z-index: 100;
   padding: 0.9rem 1.25rem;
   display: flex; align-items: center; justify-content: space-between;
   transition: background var(--transition), backdrop-filter var(--transition), border-color var(--transition);
   border-bottom: 1px solid transparent;
 }
-nav.scrolled {
+nav#navbar.scrolled {
   background: var(--nav-bg);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -298,14 +298,20 @@ nav.scrolled {
 
 .expert-name {
   font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em;
-  margin-bottom: 0.5rem; color: var(--text);
+  margin-top: 0.15rem; margin-bottom: 0.4rem; color: var(--text);
 }
-.expert-bio {
-  font-size: 0.82rem; color: var(--muted); line-height: 1.6;
-  margin-bottom: 0.9rem;
+.expert-info {
+  min-width: 0;
 }
 
-.expert-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.expert-bio {
+  font-size: 0.82rem; color: var(--muted); line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.expert-links {
+  display: flex; gap: 0.4rem; flex-wrap: wrap;
+}
 .expert-link {
   display: inline-flex; align-items: center; gap: 0.35rem;
   font-size: 0.72rem; font-weight: 600; text-decoration: none;
@@ -405,7 +411,7 @@ nav.scrolled {
   font-size: 0.68rem; font-weight: 700; color: var(--accent-hi);
   letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.25rem;
 }
-.tl h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+.tl h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
 .tl p { color: var(--muted); font-size: 0.85rem; line-height: 1.65; }
 
 /* ===== MODEL / COMO TRABALHAMOS ===== */
@@ -419,7 +425,7 @@ nav.scrolled {
   transition: border-color 0.3s, transform 0.3s;
 }
 .model-card:hover { border-color: var(--border-2); transform: translateY(-3px); }
-.model-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.65rem; letter-spacing: -0.01em; }
+.model-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.65rem; letter-spacing: -0.01em; }
 .model-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; }
 
 /* ===== SERVICES / ESPECIALIDADES ===== */
@@ -623,7 +629,7 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
 /* ===== RESPONSIVE — mobile-first min-width ===== */
 
 /* Touch targets */
-.expert-link, .btn-primary, .btn-ghost, .btn-wa, .btn-li {
+.btn-primary, .btn-ghost, .btn-wa, .btn-li {
   min-height: 44px;
 }
 
@@ -636,7 +642,7 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
 
 /* ── 640px: small tablet ── */
 @media (min-width: 640px) {
-  nav { padding: 1rem 2rem; }
+  nav#navbar { padding: 1rem 2rem; }
   .linka-sub { display: block; }
   .hero { padding: 6.5rem 2rem 3.5rem; }
   .section-wrap { padding: 4.5rem 2rem; }
@@ -654,7 +660,7 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
 
 /* ── 960px: desktop ── */
 @media (min-width: 960px) {
-  nav { padding: 1rem 2.5rem; }
+  nav#navbar { padding: 1rem 2.5rem; }
   .nav-links { display: flex; }
   .hero {
     grid-template-columns: 1fr 1fr;

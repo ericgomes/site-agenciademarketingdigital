@@ -173,7 +173,7 @@
 }
 [data-visual="dos"] .tl li:last-child::before { background: var(--accent-hi) !important; }
 
-[data-visual="dos"] nav.scrolled {
+[data-visual="dos"] nav#navbar.scrolled {
   background: rgba(0, 0, 0, 0.99) !important;
   border-bottom-color: var(--accent) !important;
 }

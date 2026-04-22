@@ -126,7 +126,7 @@
   color: #FFFF00 !important;
 }
 
-[data-visual="geocities"] nav {
+[data-visual="geocities"] nav#navbar {
   background: #000080 !important;
   border-bottom: 3px ridge #FFFF00 !important;
 }
@@ -186,10 +186,14 @@
 [data-visual="geocities"] .visual-btn.active { color: #FFFF00 !important; }
 
 /* Push nav down so marquee bar doesn't overlap it */
-[data-visual="geocities"] nav { top: 2rem !important; }
+[data-visual="geocities"] nav#navbar { top: 2rem !important; }
 [data-visual="geocities"] #top-controls { top: 2.75rem !important; }
 
 /* Marquee bar */
+@keyframes geo-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 [data-visual="geocities"] .geo-marquee-bar {
   display: block;
   position: fixed;
@@ -202,6 +206,16 @@
   font-weight: bold;
   padding: 0.3rem 0;
   border-bottom: 2px solid #FFFF00;
+  overflow: hidden;
+}
+[data-visual="geocities"] .geo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: geo-scroll 18s linear infinite;
+}
+[data-visual="geocities"] .geo-marquee-content {
+  white-space: nowrap;
+  padding-right: 2rem;
 }
 
 /* Under construction */

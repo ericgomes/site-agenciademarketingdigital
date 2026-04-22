@@ -17,7 +17,7 @@
 
   <!-- ===== TOP CONTROLS ===== -->
   <div id="top-controls">
-    <div id="lang-switcher" aria-label="Idioma">
+    <div id="lang-switcher" role="group" aria-label="Idioma">
       <button type="button" class="lang-btn active" data-lang="pt" title="Português">
         <svg viewBox="0 0 24 16" width="24" height="16" aria-hidden="true" style="display:block">
           <rect width="24" height="16" fill="#009C3B"/>
@@ -45,7 +45,7 @@
       </button>
     </div>
 
-    <div id="visual-switcher" aria-label="Escolher tema visual">
+    <div id="visual-switcher" role="group" aria-label="Escolher tema visual">
       <button type="button" id="visual-trigger" aria-haspopup="listbox" aria-expanded="false">
         <span id="visual-label">Linka</span>
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -77,15 +77,26 @@
 
   <!-- ===== GEOCITIES: marquee bar ===== -->
   <div class="geo-marquee-bar" aria-hidden="true">
-    <marquee behavior="scroll" direction="left" scrollamount="4">
-      <span class="geo-blink">★ BEM VINDO ★</span>
-      &nbsp;&nbsp;&nbsp; 🔥 MELHOR AGÊNCIA DE MARKETING DIGITAL DO BRASIL 🔥
-      &nbsp;&nbsp;&nbsp; ✨ SEO · TRÁFEGO PAGO · PERFORMANCE ✨
-      &nbsp;&nbsp;&nbsp; <span class="geo-blink">★ ERIC GOMES &amp; MARCELO CARICATI ★</span>
-      &nbsp;&nbsp;&nbsp; 💻 DESDE 2013 — MAIS DE 300 CLIENTES ATENDIDOS 💻
-      &nbsp;&nbsp;&nbsp; 🏆 GOOGLE PREMIER PARTNER 🏆
-      &nbsp;&nbsp;&nbsp;
-    </marquee>
+    <div class="geo-marquee-track">
+      <span class="geo-marquee-content">
+        <span class="geo-blink">★ BEM VINDO ★</span>
+        &nbsp;&nbsp;&nbsp; 🔥 MELHOR AGÊNCIA DE MARKETING DIGITAL DO BRASIL 🔥
+        &nbsp;&nbsp;&nbsp; ✨ SEO · TRÁFEGO PAGO · PERFORMANCE ✨
+        &nbsp;&nbsp;&nbsp; <span class="geo-blink">★ ERIC GOMES &amp; MARCELO CARICATI ★</span>
+        &nbsp;&nbsp;&nbsp; 💻 DESDE 2013 — MAIS DE 300 CLIENTES ATENDIDOS 💻
+        &nbsp;&nbsp;&nbsp; 🏆 GOOGLE PREMIER PARTNER 🏆
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+      <span class="geo-marquee-content" aria-hidden="true">
+        <span class="geo-blink">★ BEM VINDO ★</span>
+        &nbsp;&nbsp;&nbsp; 🔥 MELHOR AGÊNCIA DE MARKETING DIGITAL DO BRASIL 🔥
+        &nbsp;&nbsp;&nbsp; ✨ SEO · TRÁFEGO PAGO · PERFORMANCE ✨
+        &nbsp;&nbsp;&nbsp; <span class="geo-blink">★ ERIC GOMES &amp; MARCELO CARICATI ★</span>
+        &nbsp;&nbsp;&nbsp; 💻 DESDE 2013 — MAIS DE 300 CLIENTES ATENDIDOS 💻
+        &nbsp;&nbsp;&nbsp; 🏆 GOOGLE PREMIER PARTNER 🏆
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
   </div>
 
   <!-- ===== NAV ===== -->
@@ -147,7 +158,7 @@
         >
         <div class="expert-info">
           <p class="expert-role" data-i18n="ericRole">Co-fundador · SEO, Tecnologia &amp; Dados</p>
-          <h3 class="expert-name">Eric Gomes</h3>
+          <h2 class="expert-name">Eric Gomes</h2>
           <p class="expert-bio" data-i18n="ericBio">Ciência da Computação pela PUC-SP. Atua em SEO técnico, Google Tag Manager, atribuição, automações via Google Apps Script e APIs, RD Station e Looker Studio.</p>
           <nav class="expert-links" aria-label="Links de Eric Gomes">
             <a href="https://www.linkedin.com/in/ericmottagomes/" class="expert-link" target="_blank" rel="noopener noreferrer">
@@ -175,7 +186,7 @@
         >
         <div class="expert-info">
           <p class="expert-role" data-i18n="marceloRole">Co-fundador · Tráfego Pago &amp; Performance</p>
-          <h3 class="expert-name">Marcelo Caricati</h3>
+          <h2 class="expert-name">Marcelo Caricati</h2>
           <p class="expert-bio" data-i18n="marceloBio">MBA em Marketing, certificado Google Ads. Especialista em gestão e otimização de campanhas de tráfego pago e dashboards de performance em Looker Studio.
           </p>
           <nav class="expert-links" aria-label="Links de Marcelo Caricati">
@@ -213,22 +224,22 @@
         <ol class="tl reveal reveal-d1">
           <li>
             <time class="tl-year" datetime="2007">2007</time>
-            <h4 data-i18n="tl1Title">Marcelo abre sua agência</h4>
+            <h3 data-i18n="tl1Title">Marcelo abre sua agência</h3>
             <p data-i18n="tl1Desc">Início da trajetória em marketing digital com foco em tráfego pago e performance.</p>
           </li>
           <li>
             <time class="tl-year" datetime="2010">2010</time>
-            <h4 data-i18n="tl2Title">Eric abre sua agência</h4>
+            <h3 data-i18n="tl2Title">Eric abre sua agência</h3>
             <p data-i18n="tl2Desc">Formado em Ciência da Computação, Eric estrutura sua operação com foco em SEO e tecnologia.</p>
           </li>
           <li>
             <time class="tl-year" datetime="2013">2013</time>
-            <h4 data-i18n="tl3Title">União e fundação da Linka</h4>
+            <h3 data-i18n="tl3Title">União e fundação da Linka</h3>
             <p data-i18n="tl3Desc">As duas trajetórias se unem: SEO e tecnologia de um lado, tráfego pago do outro.</p>
           </li>
           <li>
             <p class="tl-year" data-i18n="tl4Year">Hoje</p>
-            <h4 data-i18n="tl4Title">Carteira exclusiva, resultados de longo prazo</h4>
+            <h3 data-i18n="tl4Title">Carteira exclusiva, resultados de longo prazo</h3>
             <p data-i18n="tl4Desc">Mais de 300 clientes atendidos. Parceiros de longa data, foco total em resultado mensurável.</p>
           </li>
         </ol>
@@ -245,19 +256,19 @@
 
       <div class="model-grid">
         <article class="model-card reveal">
-          <h4 data-i18n="m1Title">Execução direta, sem filtros</h4>
+          <h3 data-i18n="m1Title">Execução direta, sem filtros</h3>
           <p data-i18n="m1Desc">O planejamento, a execução e o atendimento são feitos por Eric e Marcelo — sem terceirização, sem intermediários, sem perda de contexto entre quem decide e quem faz.</p>
         </article>
         <article class="model-card reveal reveal-d1">
-          <h4 data-i18n="m2Title">Maturidade de quem tem história</h4>
+          <h3 data-i18n="m2Title">Maturidade de quem tem história</h3>
           <p data-i18n="m2Desc">Dois profissionais com mais de 15 anos de especialização cada. Bagagem acumulada em mais de 300 clientes, dos mais variados segmentos e portes.</p>
         </article>
         <article class="model-card reveal">
-          <h4 data-i18n="m3Title">Seleção criteriosa</h4>
+          <h3 data-i18n="m3Title">Seleção criteriosa</h3>
           <p data-i18n="m3Desc">Trabalhamos com clientes cujos objetivos se alinham ao nosso perfil — e para os quais temos certeza de entregar resultado real.</p>
         </article>
         <article class="model-card reveal reveal-d1">
-          <h4 data-i18n="m4Title">Resultado mensurável</h4>
+          <h3 data-i18n="m4Title">Resultado mensurável</h3>
           <p data-i18n="m4Desc">Métricas que importam para o negócio. Dashboards em Looker Studio para todos os clientes, sem exceção.</p>
         </article>
       </div>

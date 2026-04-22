@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.agenciademarketingdigital.com.br)"
+      "WebFetch(domain:www.agenciademarketingdigital.com.br)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
