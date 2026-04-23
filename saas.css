@@ -127,12 +127,12 @@
 [data-visual="saas"] .service-card.paid::before { background: #2DD4BF !important; }
 
 [data-visual="saas"] .btn-primary {
-  background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%) !important;
-  box-shadow: 0 2px 8px rgba(13,148,136,0.3) !important;
+  background: linear-gradient(135deg, #0B7A71 0%, #096B63 100%) !important;
+  box-shadow: 0 2px 8px rgba(11,122,113,0.3) !important;
 }
 [data-visual="saas"] .btn-primary:hover {
-  background: linear-gradient(135deg, #0F766E 0%, #0D9488 100%) !important;
-  box-shadow: 0 4px 16px rgba(13,148,136,0.4) !important;
+  background: linear-gradient(135deg, #096B63 0%, #0B7A71 100%) !important;
+  box-shadow: 0 4px 16px rgba(11,122,113,0.4) !important;
 }
 
 [data-visual="saas"] .btn-ghost {
@@ -142,8 +142,8 @@
 [data-visual="saas"] .btn-ghost:hover { background: rgba(13,148,136,0.06) !important; }
 
 [data-visual="saas"] .btn-wa {
-  background: #16a34a !important;
-  box-shadow: 0 2px 8px rgba(22,163,74,0.28) !important;
+  background: #15803d !important;
+  box-shadow: 0 2px 8px rgba(21,128,61,0.3) !important;
 }
 
 [data-visual="saas"] .btn-li {

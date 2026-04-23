@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ===================================================
+   MILITAR / TÁTICO THEME  —  data-visual="militar"
+   Olive dark base, radar green accent, stencil vibe
+   =================================================== */
+
+/* ── Typography ── */
+[data-visual="militar"] body {
+  font-family: 'Share Tech Mono', monospace !important;
+}
+[data-visual="militar"] h1 {
+  font-family: 'Oswald', condensed, sans-serif !important;
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.0 !important;
+  text-transform: uppercase !important;
+}
+[data-visual="militar"] h2 {
+  font-family: 'Oswald', condensed, sans-serif !important;
+  font-size: clamp(1.8rem, 3.8vw, 3rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  line-height: 1.08 !important;
+  text-transform: uppercase !important;
+}
+[data-visual="militar"] h3 {
+  font-family: 'Oswald', condensed, sans-serif !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+[data-visual="militar"] h4 {
+  font-family: 'Oswald', condensed, sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+[data-visual="militar"] p,
+[data-visual="militar"] li,
+[data-visual="militar"] .section-sub,
+[data-visual="militar"] .hero-sub {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.82rem !important;
+  line-height: 1.75 !important;
+  letter-spacing: 0.02em !important;
+}
+[data-visual="militar"] .eyebrow,
+[data-visual="militar"] .svc-eye {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.65rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+}
+[data-visual="militar"] .nav-link,
+[data-visual="militar"] .btn-primary,
+[data-visual="militar"] .btn-ghost,
+[data-visual="militar"] .btn-wa,
+[data-visual="militar"] .btn-li {
+  font-family: 'Share Tech Mono', monospace !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── Color tokens ── */
+[data-visual="militar"] {
+  --bg:          #0A1208;
+  --surface:     #111D0E;
+  --surface-2:   #192B13;
+  --border:      rgba(57, 255, 20, 0.18);
+  --border-2:    rgba(57, 255, 20, 0.55);
+  --accent:      #39FF14;
+  --accent-hi:   #7FFF00;
+  --accent-glow: rgba(57, 255, 20, 0.28);
+  --text:        #C8D8A8;
+  --muted:       #8A9E6A;
+  --subtle:      #4A5A3A;
+  --card-bg:     rgba(17, 29, 14, 0.85);
+  --nav-bg:      rgba(10, 18, 8, 0.95);
+  --hero-grad:   linear-gradient(160deg, #060D04 0%, #0A1208 55%, #0D1A0A 100%);
+}
+
+/* ── h1 em accent ── */
+[data-visual="militar"] h1 em,
+[data-visual="militar"] .hero h1 em {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #39FF14 !important;
+  background-clip: unset !important;
+  text-shadow: 0 0 18px rgba(57,255,20,0.6) !important;
+}
+
+/* ── Topographic grid ── */
+[data-visual="militar"] .hero-grid {
+  background-image:
+    linear-gradient(rgba(57,255,20,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,0.06) 1px, transparent 1px),
+    linear-gradient(rgba(57,255,20,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,255,20,0.03) 1px, transparent 1px) !important;
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px !important;
+}
+
+/* ── Glows ── */
+[data-visual="militar"] .glow-1 {
+  background: radial-gradient(circle, rgba(57,255,20,0.12) 0%, transparent 65%) !important;
+}
+[data-visual="militar"] .glow-2 {
+  background: radial-gradient(circle, rgba(127,255,0,0.08) 0%, transparent 65%) !important;
+}
+[data-visual="militar"] .glow-3 {
+  background: radial-gradient(circle, rgba(57,255,20,0.06) 0%, transparent 65%) !important;
+}
+
+/* ── Cards — dossier / intel file style ── */
+[data-visual="militar"] .expert-card,
+[data-visual="militar"] .model-card,
+[data-visual="militar"] .service-card,
+[data-visual="militar"] .quote-box,
+[data-visual="militar"] .contact-person {
+  background: rgba(17,29,14,0.9) !important;
+  border: 1px solid rgba(57,255,20,0.2) !important;
+  border-top: 2px solid #39FF14 !important;
+  box-shadow: 0 0 20px rgba(57,255,20,0.06), inset 0 0 0 1px rgba(57,255,20,0.04) !important;
+  border-radius: 2px !important;
+}
+[data-visual="militar"] .expert-card:hover,
+[data-visual="militar"] .model-card:hover,
+[data-visual="militar"] .service-card:hover,
+[data-visual="militar"] .contact-person:hover {
+  border-color: rgba(57,255,20,0.5) !important;
+  border-top-color: #39FF14 !important;
+  box-shadow: 0 0 32px rgba(57,255,20,0.15) !important;
+}
+
+[data-visual="militar"] .expert-card.eric    { border-left: 3px solid #39FF14 !important; border-top: 2px solid #39FF14 !important; }
+[data-visual="militar"] .expert-card.marcelo { border-left: 3px solid #7FFF00 !important; border-top: 2px solid #7FFF00 !important; }
+
+[data-visual="militar"] .service-card::before {
+  background: linear-gradient(90deg, #39FF14, #7FFF00) !important;
+  height: 2px !important;
+}
+
+[data-visual="militar"] .quote-box {
+  border: none !important;
+  border-left: 3px solid #39FF14 !important;
+  border-radius: 0 !important;
+  background: rgba(57,255,20,0.05) !important;
+}
+
+/* ── Buttons ── */
+[data-visual="militar"] .btn-primary {
+  background: #39FF14 !important;
+  color: #060D04 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 16px rgba(57,255,20,0.35) !important;
+  border: none !important;
+}
+[data-visual="militar"] .btn-primary:hover {
+  background: #7FFF00 !important;
+  box-shadow: 0 0 28px rgba(57,255,20,0.55) !important;
+  transform: none !important;
+}
+
+[data-visual="militar"] .btn-ghost {
+  background: transparent !important;
+  color: #39FF14 !important;
+  border: 1px dashed rgba(57,255,20,0.5) !important;
+}
+[data-visual="militar"] .btn-ghost:hover {
+  background: rgba(57,255,20,0.08) !important;
+  border-style: solid !important;
+}
+
+[data-visual="militar"] .btn-wa {
+  background: rgba(57,255,20,0.15) !important;
+  color: #39FF14 !important;
+  border: 1px solid rgba(57,255,20,0.4) !important;
+  box-shadow: none !important;
+}
+[data-visual="militar"] .btn-wa:hover {
+  background: rgba(57,255,20,0.25) !important;
+  box-shadow: 0 0 16px rgba(57,255,20,0.2) !important;
+}
+
+[data-visual="militar"] .btn-li {
+  color: #39FF14 !important;
+  border-color: rgba(57,255,20,0.35) !important;
+}
+
+/* ── Nav ── */
+[data-visual="militar"] nav#navbar {
+  background: rgba(6,13,4,0.96) !important;
+  border-bottom: 1px solid rgba(57,255,20,0.2) !important;
+  backdrop-filter: none !important;
+}
+[data-visual="militar"] .nav-link { color: #8A9E6A !important; }
+[data-visual="militar"] .nav-link:hover { color: #39FF14 !important; background: rgba(57,255,20,0.07) !important; }
+
+/* ── Timeline ── */
+[data-visual="militar"] .tl::before { background: #39FF14 !important; width: 2px !important; }
+[data-visual="militar"] .tl li::before {
+  background: #39FF14 !important;
+  box-shadow: 0 0 10px rgba(57,255,20,0.8) !important;
+  border-radius: 0 !important;
+  width: 10px !important; height: 10px !important;
+  transform: rotate(45deg) !important;
+}
+
+/* ── Badge / eyebrow ── */
+[data-visual="militar"] .badge-dot { background: #39FF14 !important; box-shadow: 0 0 8px rgba(57,255,20,0.9) !important; }
+[data-visual="militar"] .eyebrow,
+[data-visual="militar"] .hero-badge { color: #39FF14 !important; border-color: rgba(57,255,20,0.3) !important; background: rgba(57,255,20,0.06) !important; }
+
+/* ── Expert links ── */
+[data-visual="militar"] .expert-link { color: #8A9E6A !important; border-color: rgba(57,255,20,0.2) !important; }
+[data-visual="militar"] .expert-link:hover { color: #39FF14 !important; background: rgba(57,255,20,0.08) !important; border-color: rgba(57,255,20,0.5) !important; }
+[data-visual="militar"] .expert-link.wa { color: #39FF14 !important; border-color: rgba(57,255,20,0.3) !important; }
+
+/* ── Images ── */
+[data-visual="militar"] img { filter: saturate(0.4) brightness(0.85) sepia(0.3) hue-rotate(60deg) !important; }
+
+/* ── Footer ── */
+[data-visual="militar"] footer {
+  background: #060D04 !important;
+  border-top: 1px solid rgba(57,255,20,0.2) !important;
+}
+[data-visual="militar"] footer * { color: #4A5A3A !important; }
+[data-visual="militar"] footer strong { color: #8A9E6A !important; }
+
+/* ── UI controls ── */
+[data-visual="militar"] #visual-trigger {
+  background: rgba(6,13,4,0.95) !important;
+  border-color: rgba(57,255,20,0.3) !important;
+  color: #39FF14 !important;
+  border-radius: 2px !important;
+}
+[data-visual="militar"] #visual-menu {
+  background: #0A1208 !important;
+  border-color: rgba(57,255,20,0.25) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 20px rgba(57,255,20,0.08) !important;
+}
+[data-visual="militar"] .visual-btn { color: #4A5A3A !important; }
+[data-visual="militar"] .visual-btn.active { color: #39FF14 !important; font-weight: 700 !important; }
+[data-visual="militar"] #lang-switcher { background: rgba(6,13,4,0.95) !important; border-color: rgba(57,255,20,0.25) !important; }

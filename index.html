@@ -37,6 +37,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v20/UcCo3FwrK3iLTcviYwY.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -144,6 +145,7 @@
         <button type="button" class="visual-btn" data-visual="saas">SAAS</button>
         <button type="button" class="visual-btn" data-visual="glass">INDIGO</button>
         <button type="button" class="visual-btn" data-visual="notion">CLEAN</button>
+        <button type="button" class="visual-btn" data-visual="militar">MILITAR</button>
       </div>
     </div>
   </div>
@@ -231,13 +233,16 @@
     <div class="hero-right">
 
       <article class="expert-card eric" id="eric">
-        <img
-          src="https://raw.githubusercontent.com/eric-linka/site/refs/heads/main/eric-gomes.jpeg"
-          alt="Foto de Eric Gomes"
-          class="expert-photo"
-          width="60" height="60"
-          loading="eager"
-        >
+        <picture>
+          <source type="image/webp" srcset="img/eric-80.webp 1x, img/eric-160.webp 2x">
+          <img
+            src="img/eric-160.jpg"
+            alt="Foto de Eric Gomes"
+            class="expert-photo"
+            width="60" height="60"
+            loading="eager"
+          >
+        </picture>
         <div class="expert-info">
           <p class="expert-role" data-i18n="ericRole">Co-fundador · SEO, Tecnologia &amp; Dados</p>
           <h2 class="expert-name">Eric Gomes</h2>
@@ -260,13 +265,16 @@
       </article>
 
       <article class="expert-card marcelo" id="marcelo">
-        <img
-          src="https://raw.githubusercontent.com/eric-linka/site/refs/heads/main/marcelo-caricati.jpeg"
-          alt="Foto de Marcelo Caricati"
-          class="expert-photo"
-          width="60" height="60"
-          loading="eager"
-        >
+        <picture>
+          <source type="image/webp" srcset="img/marcelo-80.webp 1x, img/marcelo-160.webp 2x">
+          <img
+            src="img/marcelo-160.jpg"
+            alt="Foto de Marcelo Caricati"
+            class="expert-photo"
+            width="60" height="60"
+            loading="eager"
+          >
+        </picture>
         <div class="expert-info">
           <p class="expert-role" data-i18n="marceloRole">Co-fundador · Tráfego Pago &amp; Performance</p>
           <h2 class="expert-name">Marcelo Caricati</h2>
@@ -397,7 +405,7 @@
 
       <div class="gpp-section reveal">
         <a href="https://www.google.com/partners/agency?id=8434993335" target="_blank" rel="noopener noreferrer" class="gpp-link">
-          <img src="https://www.gstatic.com/partners/badge/images/2026/PremierBadgeClickable.svg" alt="Google Premier Partner" class="gpp-img">
+          <img src="https://www.gstatic.com/partners/badge/images/2026/PremierBadgeClickable.svg" alt="Google Premier Partner" class="gpp-img" width="152" height="146">
         </a>
         <div class="gpp-text">
           <p class="gpp-headline" data-i18n="gppTitle">Somos Google Premier Partners</p>
@@ -417,12 +425,16 @@
       <div class="contact-duo">
 
         <div class="contact-person eric">
-          <img
-            src="https://raw.githubusercontent.com/eric-linka/site/refs/heads/main/eric-gomes.jpeg"
-            alt="Foto de Eric Gomes"
-            class="contact-photo-lg"
-            loading="lazy"
-          >
+          <picture>
+            <source type="image/webp" srcset="img/eric-80.webp 1x, img/eric-160.webp 2x">
+            <img
+              src="img/eric-160.jpg"
+              alt="Foto de Eric Gomes"
+              class="contact-photo-lg"
+              width="80" height="80"
+              loading="lazy"
+            >
+          </picture>
           <p class="contact-person-name">Eric Gomes</p>
           <p class="contact-person-role" data-i18n="ericRoleShort">SEO · Tecnologia · Dados</p>
           <div class="contact-links">
@@ -442,12 +454,16 @@
         </div>
 
         <div class="contact-person marcelo">
-          <img
-            src="https://raw.githubusercontent.com/eric-linka/site/refs/heads/main/marcelo-caricati.jpeg"
-            alt="Foto de Marcelo Caricati"
-            class="contact-photo-lg"
-            loading="lazy"
-          >
+          <picture>
+            <source type="image/webp" srcset="img/marcelo-80.webp 1x, img/marcelo-160.webp 2x">
+            <img
+              src="img/marcelo-160.jpg"
+              alt="Foto de Marcelo Caricati"
+              class="contact-photo-lg"
+              width="80" height="80"
+              loading="lazy"
+            >
+          </picture>
           <p class="contact-person-name">Marcelo Caricati</p>
           <p class="contact-person-role" data-i18n="marceloRoleShort">Tráfego Pago · Performance</p>
           <div class="contact-links">

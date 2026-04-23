@@ -16,6 +16,7 @@ const themeCssMap = {
   saas:     'saas.css',
   glass:    'glass.css',
   notion:   'notion.css',
+  militar:  'militar.css',
 };
 const loadedThemes = new Set();
 
@@ -81,6 +82,7 @@ const slugToVisual = {
   'saas':        'saas',
   'indigo':      'glass',
   'clean':       'notion',
+  'militar':     'militar',
 };
 const visualToSlug = Object.fromEntries(Object.entries(slugToVisual).map(([s, v]) => [v, s]));
 

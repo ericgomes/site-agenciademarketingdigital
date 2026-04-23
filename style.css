@@ -41,18 +41,26 @@
 
 /* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 17px; }
 
 /* Skip link — visually hidden until focused */
 .skip-link {
-  position: absolute; top: -100%; left: 1rem;
-  background: var(--accent); color: #fff;
-  padding: 0.5rem 1rem; border-radius: 0 0 var(--radius-pill) var(--radius-pill);
+  position: absolute;
+  top: 0; left: 1rem;
+  transform: translateY(-110%);
+  background: #1A1A1A;
+  color: #F5F5F5;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0 0 8px 8px;
   font-size: 0.85rem; font-weight: 700; text-decoration: none;
   z-index: 999999;
-  transition: top 0.15s;
+  transition: transform 0.15s ease;
 }
-.skip-link:focus { top: 0; }
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid #F5F5F5;
+  outline-offset: 2px;
+}
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
@@ -536,13 +544,13 @@ nav#navbar.scrolled {
 
 .btn-wa {
   display: inline-flex; align-items: center; gap: 0.5rem;
-  background: #22C55E; color: #fff;
+  background: #15803d; color: #fff;
   padding: 0.85rem 1.85rem; border-radius: var(--radius-pill);
   text-decoration: none; font-weight: 700; font-size: 0.9rem;
   transition: transform 0.2s, box-shadow 0.2s;
   justify-content: center;
 }
-.btn-wa:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,197,94,0.3); }
+.btn-wa:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(21,128,61,0.35); }
 
 .btn-li {
   display: inline-flex; align-items: center; gap: 0.4rem;

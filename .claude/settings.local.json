@@ -7,7 +7,16 @@
       "Bash(magick --version)",
       "Bash(convert --version)",
       "Bash(npm install *)",
-      "Bash(node generate-og.mjs)"
+      "Bash(node generate-og.mjs)",
+      "Bash(curl -L -o \"C:\\\\Users\\\\ericg\\\\Documents\\\\LINKA MOCATI\\\\DEV\\\\site-agenciademarketingdigital\\\\img\\\\eric-gomes.jpg\" \"https://raw.githubusercontent.com/eric-linka/site/refs/heads/main/eric-gomes.jpeg\")",
+      "Bash(curl -L -o \"C:\\\\Users\\\\ericg\\\\Documents\\\\LINKA MOCATI\\\\DEV\\\\site-agenciademarketingdigital\\\\img\\\\marcelo-caricati.jpg\" \"https://raw.githubusercontent.com/eric-linka/site/refs/heads/main/marcelo-caricati.jpeg\")",
+      "WebFetch(domain:www.gstatic.com)",
+      "Bash(identify \"C:\\\\Users\\\\ericg\\\\Documents\\\\LINKA MOCATI\\\\DEV\\\\site-agenciademarketingdigital\\\\img\\\\eric-gomes.jpg\" \"C:\\\\Users\\\\ericg\\\\Documents\\\\LINKA MOCATI\\\\DEV\\\\site-agenciademarketingdigital\\\\img\\\\marcelo-caricati.jpg\")",
+      "Bash(curl -s -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" \"https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap\")",
+      "Bash(identify \"C:\\\\Users\\\\ericg\\\\Documents\\\\LINKA MOCATI\\\\DEV\\\\site-agenciademarketingdigital\\\\img\\\\marcelo-caricati.jpg\")",
+      "Bash(python3 -c ' *)",
+      "Bash(node generate-webp.mjs)",
+      "Bash(node check-contrast.mjs)"
     ]
   }
 }
