@@ -16,7 +16,11 @@
       "Bash(identify \"C:\\\\Users\\\\ericg\\\\Documents\\\\LINKA MOCATI\\\\DEV\\\\site-agenciademarketingdigital\\\\img\\\\marcelo-caricati.jpg\")",
       "Bash(python3 -c ' *)",
       "Bash(node generate-webp.mjs)",
-      "Bash(node check-contrast.mjs)"
+      "Bash(node check-contrast.mjs)",
+      "Bash(curl -s http://localhost:3131/robots.txt)",
+      "Bash(curl -s http://localhost:3131/sitemap.xml)",
+      "Bash(curl -s http://localhost:3131/llms.txt)",
+      "Bash(curl -sI http://localhost:3131/robots.txt)"
     ]
   }
 }

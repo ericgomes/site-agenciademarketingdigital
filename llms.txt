@@ -1,0 +1,62 @@
+# Agência de Marketing Digital — Eric Gomes & Marcelo Caricati
+
+> Especialistas em SEO e Tráfego Pago desde 2013. Atendimento e execução direta pelos sócios — sem intermediários, sem equipes entre o cliente e quem entende do assunto.
+
+## Sobre
+
+Eric Gomes e Marcelo Caricati são co-fundadores de uma agência boutique de marketing digital com sede no Brasil. Atendem diretamente PMEs, médias e grandes empresas nos segmentos de e-commerce e geração de leads. Mais de 300 clientes atendidos desde 2007 e parceiros de longa data com presença de mais de 15 anos no mercado.
+
+São Google Premier Partners — título concedido a menos de 3% das agências parceiras no Brasil.
+
+## Especialistas
+
+### Eric Gomes
+- Formação: Ciência da Computação (PUC-SP)
+- Especialidade: SEO técnico, tecnologia e dados
+- Ferramentas: Google Tag Manager, Google Search Console, Web Analytics, RD Station CRM, Typebot, Google Apps Script, APIs, Looker Studio
+- LinkedIn: https://www.linkedin.com/in/ericmottagomes/
+- WhatsApp: https://wa.me/5511999503930
+- Agenda: https://agenda.ericgomes.me
+
+### Marcelo Caricati
+- Formação: MBA em Marketing, certificado Google Ads
+- Especialidade: Tráfego Pago e Performance
+- Ferramentas: Google Ads Search, Performance Max, Meta Ads (Facebook e Instagram), Looker Studio
+- LinkedIn: https://www.linkedin.com/in/marcelo-caricati-83ab7018/
+- WhatsApp: https://wa.me/5511982432765
+
+## Serviços
+
+- SEO técnico e auditoria de site
+- Google Tag Manager e atribuição
+- Web Analytics e Google Search Console
+- RD Station CRM e automação de marketing
+- Integrações via API e automações em Google Apps Script
+- Dashboards em Looker Studio
+- Google Ads Search e Performance Max
+- Meta Ads (Facebook e Instagram)
+- Otimização contínua de campanhas de tráfego pago
+- Estratégia de funil e segmentação de audiência
+
+## Diferenciais
+
+- Execução direta pelos sócios — sem terceirização
+- Carteira selecionada: apenas clientes com fit real
+- Parceiros de longa data (clientes há mais de 15 anos)
+- Google Premier Partners (top 3% no Brasil)
+- Dashboards de performance para todos os clientes
+
+## Idiomas
+
+O site está disponível em Português (pt-BR), English (en) e Español (es), com conteúdo comutável via interface.
+
+## Contato
+
+- Site: https://www.agenciademarketingdigital.com.br/
+- Eric (SEO): https://wa.me/5511999503930
+- Marcelo (Tráfego Pago): https://wa.me/5511982432765
+
+## Arquivos
+
+- [Sitemap](https://www.agenciademarketingdigital.com.br/sitemap.xml)
+- [Robots](https://www.agenciademarketingdigital.com.br/robots.txt)

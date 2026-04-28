@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.agenciademarketingdigital.com.br/sitemap.xml
+
+# LLMs / AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Block dev artifacts
+Disallow: /generate-og.mjs
+Disallow: /generate-webp.mjs
+Disallow: /check-contrast.mjs
+Disallow: /node_modules/
+Disallow: /.claude/

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://www.agenciademarketingdigital.com.br/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+
+    <!-- hreflang alternates (idioma via JS, mesma URL) -->
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.agenciademarketingdigital.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="en"    href="https://www.agenciademarketingdigital.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="es"    href="https://www.agenciademarketingdigital.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.agenciademarketingdigital.com.br/"/>
+  </url>
+
+</urlset>
