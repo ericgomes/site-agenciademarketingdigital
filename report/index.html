@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P2R23466');</script>
+  <!-- End Google Tag Manager -->
   <title>Relatório da Agência de Marketing Digital</title>
 
   <style>
@@ -27,6 +34,10 @@
   </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2R23466"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <iframe
     id="reportFrame"
@@ -37,15 +48,14 @@
   <script>
     const params = new URLSearchParams(window.location.search);
 
-    const reportId =
-      params.get('id') ||
-      '9563661e-35c8-4dc0-b781-c55a19b09ab0';
-
+    const reportId = params.get('id');
     const title = params.get('t') || 'Relatório da Agência de Marketing Digital';
     document.title = title;
 
-    document.getElementById('reportFrame').src =
-      `https://datastudio.google.com/embed/reporting/${reportId}`;
+    if (reportId) {
+      document.getElementById('reportFrame').src =
+        `https://datastudio.google.com/embed/reporting/${reportId}`;
+    }
   </script>
 
 </body>
