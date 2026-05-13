@@ -32,8 +32,16 @@
   <meta name="twitter:description" content="Especialistas em SEO e Tráfego Pago desde 2013. Poucos clientes, dedicação total e resultados reais.">
   <meta name="twitter:image" content="https://www.agenciademarketingdigital.com.br/og-image.jpg">
 
-  <!-- Favicon -->
+  <!-- Favicon + PWA -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#9333EA" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#7C3AED" media="(prefers-color-scheme: light)">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Agência MKT">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +50,19 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <noscript><style>html { --bg: #0f0a1e; --text: #f1f5f9; }</style></noscript>
+  <noscript><style>
+    /* JS desabilitado — oculta controles interativos e garante tema padrão legível */
+    #top-controls,
+    #scanlines,
+    #mouse-spotlight,
+    #cursor-dot,
+    #cursor-ring,
+    .geo-marquee-bar,
+    .geo-under-construction { display: none !important; }
+    /* Garante que o tema padrão (linka-light, data-theme="light") seja exibido corretamente */
+    body { padding-top: 0 !important; }
+    nav#navbar { position: static !important; }
+  </style></noscript>
 
   <!-- JSON-LD structured data -->
   <script type="application/ld+json">
@@ -514,6 +534,6 @@
     </div>
   </footer>
 
-  <script src="script.js" defer></script>
+  <script src="script.js" type="module"></script>
 </body>
 </html>
