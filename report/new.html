@@ -252,8 +252,8 @@
       }
 
       const id = extractSlidesId(raw);
-      const base = window.location.origin + '/report/slides.html';
-      const params = new URLSearchParams({ id });
+      const base = window.location.origin + '/report/';
+      const params = new URLSearchParams({ id, type: 'slides' });
       if (t) params.set('t', t);
 
       generatedSlidesUrl = base + '?' + params.toString();

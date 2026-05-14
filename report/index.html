@@ -48,13 +48,26 @@
   <script>
     const params = new URLSearchParams(window.location.search);
 
-    const reportId = params.get('id');
+    const id    = params.get('id');
+    const type  = params.get('type') || 'looker';
     const title = params.get('t') || 'Relatório da Agência de Marketing Digital';
+
     document.title = title;
 
-    if (reportId) {
-      document.getElementById('reportFrame').src =
-        `https://datastudio.google.com/embed/reporting/${reportId}`;
+    if (id) {
+      let src;
+
+      if (type === 'slides') {
+        // Google Slides: IDs from published embeds start with "2PACX-"
+        src = id.startsWith('2PACX-')
+          ? `https://docs.google.com/presentation/d/e/${id}/pubembed?start=false&loop=false&delayms=3000`
+          : `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false&delayms=3000`;
+      } else {
+        // Looker Studio (default)
+        src = `https://datastudio.google.com/embed/reporting/${id}`;
+      }
+
+      document.getElementById('reportFrame').src = src;
     }
   </script>
 
