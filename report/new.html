@@ -50,19 +50,38 @@
       letter-spacing: 0.05em;
     }
 
-    input {
+    input, textarea {
       display: block;
       width: 100%;
       padding: 0.65rem 0.85rem;
       border: 1px solid #ddd;
       border-radius: 8px;
       font-size: 0.95rem;
+      font-family: inherit;
       color: #111;
       outline: none;
       transition: border-color 0.15s;
       margin-bottom: 1.1rem;
+      resize: vertical;
     }
-    input:focus { border-color: #7C3AED; }
+    input:focus, textarea:focus { border-color: #7C3AED; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .badge.looker { background: #EDE9FE; color: #5B21B6; }
+    .badge.slides { background: #DCFCE7; color: #15803d; }
+    .badge.visible { opacity: 1; }
 
     button {
       width: 100%;
@@ -123,12 +142,6 @@
       font-weight: 600;
     }
     .open-btn:hover { text-decoration: underline; }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #e5e5e5;
-      margin: 1.75rem 0;
-    }
   </style>
 </head>
 <body>
@@ -140,8 +153,12 @@
   <div class="card">
     <h1>Novo Relatório</h1>
 
-    <label for="inp-id">URL ou ID do Relatório</label>
-    <input id="inp-id" type="text" placeholder="ex: https://datastudio.google.com/reporting/6039134d-…" />
+    <label for="inp-src">
+      URL ou código embed
+      <span class="badge" id="type-badge"></span>
+    </label>
+    <textarea id="inp-src" rows="3"
+      placeholder="Cole aqui a URL do Looker Studio, o link de publicação do Google Slides ou o &lt;iframe&gt; de embed"></textarea>
 
     <label for="inp-t">Título</label>
     <input id="inp-t" type="text" placeholder="ex: Performance Junho 2026" />
@@ -156,53 +173,64 @@
       </div>
       <a class="open-btn" id="open-link" target="_blank">Abrir →</a>
     </div>
-
-    <div class="divider"></div>
-
-    <h1>Nova Apresentação</h1>
-
-    <label for="inp-slides-url">URL do Google Slides</label>
-    <input id="inp-slides-url" type="text" placeholder="ex: https://docs.google.com/presentation/d/…" />
-
-    <label for="inp-slides-t">Título</label>
-    <input id="inp-slides-t" type="text" placeholder="ex: Proposta Comercial Junho 2026" />
-
-    <button onclick="generateSlides()">Gerar link</button>
-
-    <div class="result" id="slides-result">
-      <label>URL gerada</label>
-      <div class="url-box">
-        <div class="url-text" id="slides-url-display"></div>
-        <button class="copy-btn" id="slides-copy-btn" onclick="copySlidesUrl()">Copiar</button>
-      </div>
-      <a class="open-btn" id="slides-open-link" target="_blank">Abrir →</a>
-    </div>
   </div>
 
   <script>
     let generatedUrl = '';
 
-    function extractId(raw) {
-      // Full Looker Studio / Data Studio URL → extract the report UUID
-      const match = raw.match(/\/reporting\/([a-f0-9\-]{36})/i);
-      if (match) return match[1];
-      // Already a plain ID
-      return raw;
+    // Detecta o tipo e extrai o ID a partir de qualquer entrada:
+    // - URL de edição/view do Looker Studio
+    // - URL de edição/view do Google Slides
+    // - URL de embed publicado do Google Slides (/d/e/…)
+    // - <iframe src="…"> com qualquer uma das URLs acima
+    // - ID puro (UUID Looker ou 2PACX-… Slides)
+    function parse(raw) {
+      // Se for código <iframe>, extrai o src primeiro
+      const srcMatch = raw.match(/\bsrc=["']([^"']+)/i);
+      const url = srcMatch ? srcMatch[1] : raw.trim();
+
+      // Google Slides publicado: /d/e/{pubId}/
+      const slidesPub = url.match(/\/presentation\/d\/e\/([A-Za-z0-9_-]+)/i);
+      if (slidesPub) return { id: slidesPub[1], type: 'slides' };
+
+      // Looker Studio / Data Studio: /reporting/{uuid}
+      const looker = url.match(/\/reporting\/([a-f0-9-]{36})/i);
+      if (looker) return { id: looker[1], type: 'looker' };
+
+      // ID puro: começa com 2PACX- → Slides publicado
+      if (url.startsWith('2PACX-')) return { id: url, type: 'slides' };
+
+      // Fallback: UUID → Looker
+      return { id: url, type: 'looker' };
     }
 
+    // Atualiza o badge ao digitar
+    document.getElementById('inp-src').addEventListener('input', function () {
+      const val = this.value.trim();
+      const badge = document.getElementById('type-badge');
+      if (!val) {
+        badge.className = 'badge';
+        badge.textContent = '';
+        return;
+      }
+      const { type } = parse(val);
+      badge.className = `badge ${type} visible`;
+      badge.textContent = type === 'slides' ? 'Google Slides' : 'Looker Studio';
+    });
+
     function generate() {
-      const raw = document.getElementById('inp-id').value.trim();
+      const raw = document.getElementById('inp-src').value.trim();
       const t   = document.getElementById('inp-t').value.trim();
 
       if (!raw) {
-        document.getElementById('inp-id').focus();
+        document.getElementById('inp-src').focus();
         return;
       }
 
-      const id = extractId(raw);
-
+      const { id, type } = parse(raw);
       const base = window.location.origin + '/report/';
       const params = new URLSearchParams({ id });
+      if (type === 'slides') params.set('type', 'slides');
       if (t) params.set('t', t);
 
       generatedUrl = base + '?' + params.toString();
@@ -228,66 +256,13 @@
       });
     }
 
-    // ── Google Slides ─────────────────────────────────────────
-    let generatedSlidesUrl = '';
-
-    function extractSlidesId(raw) {
-      // Published embed: /presentation/d/e/{pubId}/
-      const pub = raw.match(/\/presentation\/d\/e\/([A-Za-z0-9_-]+)/i);
-      if (pub) return pub[1];
-      // Edit / view URL: /presentation/d/{id}/
-      const edit = raw.match(/\/presentation\/d\/([A-Za-z0-9_-]+)/i);
-      if (edit) return edit[1];
-      // Already a plain ID
-      return raw.trim();
-    }
-
-    function generateSlides() {
-      const raw = document.getElementById('inp-slides-url').value.trim();
-      const t   = document.getElementById('inp-slides-t').value.trim();
-
-      if (!raw) {
-        document.getElementById('inp-slides-url').focus();
-        return;
-      }
-
-      const id = extractSlidesId(raw);
-      const base = window.location.origin + '/report/';
-      const params = new URLSearchParams({ id, type: 'slides' });
-      if (t) params.set('t', t);
-
-      generatedSlidesUrl = base + '?' + params.toString();
-
-      document.getElementById('slides-url-display').textContent = generatedSlidesUrl;
-      document.getElementById('slides-open-link').href = generatedSlidesUrl;
-      document.getElementById('slides-result').style.display = 'block';
-
-      const copyBtn = document.getElementById('slides-copy-btn');
-      copyBtn.textContent = 'Copiar';
-      copyBtn.classList.remove('copied');
-    }
-
-    function copySlidesUrl() {
-      navigator.clipboard.writeText(generatedSlidesUrl).then(() => {
-        const btn = document.getElementById('slides-copy-btn');
-        btn.textContent = 'Copiado!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = 'Copiar';
-          btn.classList.remove('copied');
-        }, 2000);
-      });
-    }
-
-    // Gera ao pressionar Enter em qualquer campo
-    document.querySelectorAll('input').forEach(inp =>
-      inp.addEventListener('keydown', e => {
-        if (e.key !== 'Enter') return;
-        const id = inp.id;
-        if (id === 'inp-slides-url' || id === 'inp-slides-t') generateSlides();
-        else generate();
-      })
-    );
+    // Gera com Ctrl/Cmd+Enter no textarea, ou Enter normal no input de título
+    document.getElementById('inp-src').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) generate();
+    });
+    document.getElementById('inp-t').addEventListener('keydown', e => {
+      if (e.key === 'Enter') generate();
+    });
   </script>
 </body>
 </html>
