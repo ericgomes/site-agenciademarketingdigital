@@ -192,7 +192,8 @@
 
       if (url.startsWith('2PACX-')) return { id: url, type: 'slides' };
 
-      return { id: url, type: 'looker' };
+      // Fallback: respeita ?type= explícito da URL, senão assume looker
+      return { id: url, type: params.get('type') || 'looker' };
     }
 
     function buildSrc({ id, type }) {
