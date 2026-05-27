@@ -60,7 +60,10 @@
       if (type === 'slides') {
         src = `https://docs.google.com/presentation/d/e/${id}/pubembed?start=false&loop=false&delayms=3000`;
       } else if (type === 'docs') {
-        src = `https://docs.google.com/document/d/e/${id}/pub?embedded=true`;
+        // IDs publicados começam com "2PACX-"; demais são docs normais
+        src = id.startsWith('2PACX-')
+          ? `https://docs.google.com/document/d/e/${id}/pub?embedded=true`
+          : `https://docs.google.com/document/d/${id}/preview`;
       } else {
         // Looker Studio (default)
         src = `https://datastudio.google.com/embed/reporting/${id}`;

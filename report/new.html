@@ -235,8 +235,12 @@
       if (slidesPub) return { id: slidesPub[1], type: 'slides' };
 
       // Google Docs publicado: /document/d/e/{pubId}/
-      const docs = url.match(/\/document\/d\/e\/([A-Za-z0-9_-]+)/i);
-      if (docs) return { id: docs[1], type: 'docs' };
+      const docsPub = url.match(/\/document\/d\/e\/([A-Za-z0-9_-]+)/i);
+      if (docsPub) return { id: docsPub[1], type: 'docs' };
+
+      // Google Docs edição/view: /document/d/{id}/
+      const docsEdit = url.match(/\/document\/d\/([A-Za-z0-9_-]+)/i);
+      if (docsEdit) return { id: docsEdit[1], type: 'docs' };
 
       // Looker Studio / Data Studio: /reporting/{uuid}
       const looker = url.match(/\/reporting\/([a-f0-9-]{36})/i);
