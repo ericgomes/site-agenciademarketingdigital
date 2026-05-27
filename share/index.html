@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P2R23466');</script>
+  <!-- End Google Tag Manager -->
+  <title>Documento</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    iframe {
+      width: 100vw;
+      height: 100vh;
+      border: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2R23466"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <iframe id="shareFrame" allowfullscreen allow="autoplay"></iframe>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const title  = params.get('t') || 'Documento';
+    document.title = title;
+
+    function parse(raw) {
+      if (!raw) return null;
+      const srcMatch = raw.match(/\bsrc=["']([^"']+)/i);
+      const url = srcMatch ? srcMatch[1] : raw.trim();
+
+      // Google Slides publicado
+      const slidesPub = url.match(/\/presentation\/d\/e\/([A-Za-z0-9_-]+)/i);
+      if (slidesPub) return { id: slidesPub[1], type: 'slides' };
+
+      // Google Docs publicado
+      const docsPub = url.match(/\/document\/d\/e\/([A-Za-z0-9_-]+)/i);
+      if (docsPub) return { id: docsPub[1], type: 'docs-pub' };
+
+      // Google Docs edição/view
+      const docsEdit = url.match(/\/document\/d\/([A-Za-z0-9_-]+)/i);
+      if (docsEdit) return { id: docsEdit[1], type: 'docs' };
+
+      // Looker Studio
+      const looker = url.match(/\/reporting\/([a-f0-9-]{36})/i);
+      if (looker) return { id: looker[1], type: 'looker' };
+
+      // ID puro: 2PACX- → Slides publicado
+      if (url.startsWith('2PACX-')) return { id: url, type: 'slides' };
+
+      return { id: url, type: params.get('type') || 'docs' };
+    }
+
+    const result = parse(params.get('id'));
+
+    if (result) {
+      const { id, type } = result;
+      let src;
+
+      if (type === 'slides') {
+        src = `https://docs.google.com/presentation/d/e/${id}/pubembed?start=false&loop=false&delayms=3000`;
+      } else if (type === 'docs-pub') {
+        src = `https://docs.google.com/document/d/e/${id}/pub?embedded=true`;
+      } else if (type === 'docs') {
+        src = `https://docs.google.com/document/d/${id}/preview`;
+      } else {
+        src = `https://datastudio.google.com/embed/reporting/${id}`;
+      }
+
+      document.getElementById('shareFrame').src = src;
+    }
+  </script>
+</body>
+</html>

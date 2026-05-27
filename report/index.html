@@ -10,27 +10,160 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-P2R23466');</script>
   <!-- End Google Tag Manager -->
-  <title>Relatório da Agência de Marketing Digital</title>
 
+  <title>Gerar Link</title>
   <style>
-    html,
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #fff;
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
 
-    iframe {
-      width: 100vw;
-      height: 100vh;
-      border: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 2rem;
+      width: 100%;
+      max-width: 480px;
     }
+
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #111;
+      outline: none;
+      transition: border-color 0.15s;
+      margin-bottom: 1.1rem;
+      resize: vertical;
+    }
+    input:focus, textarea:focus { border-color: #7C3AED; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .badge.looker   { background: #EDE9FE; color: #5B21B6; }
+    .badge.slides   { background: #DCFCE7; color: #15803d; }
+    .badge.docs     { background: #DBEAFE; color: #1d4ed8; }
+    .badge.visible  { opacity: 1; }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background: #7C3AED;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button:hover { background: #6D28D9; }
+
+    .result {
+      margin-top: 1.25rem;
+      display: none;
+    }
+    .result label { margin-bottom: 0.35rem; }
+
+    .url-box {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .url-text {
+      flex: 1;
+      padding: 0.6rem 0.85rem;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #333;
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    .copy-btn {
+      width: auto;
+      padding: 0.6rem 1rem;
+      font-size: 0.82rem;
+      flex-shrink: 0;
+      background: #111;
+    }
+    .copy-btn:hover  { background: #333; }
+    .copy-btn.copied { background: #16a34a; }
+
+    .open-btn {
+      display: block;
+      margin-top: 0.6rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7C3AED;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .open-btn:hover { text-decoration: underline; }
+
+    .hint {
+      font-size: 0.78rem;
+      color: #888;
+      line-height: 1.5;
+      margin-top: -0.7rem;
+      margin-bottom: 1.1rem;
+    }
+    .hint span { font-weight: 600; color: #555; }
+
+    .hint-sources {
+      list-style: none;
+      font-size: 0.78rem;
+      color: #888;
+      line-height: 1.7;
+      margin-top: -0.5rem;
+      margin-bottom: 1.1rem;
+      padding-left: 0.1rem;
+    }
+    .hint-sources li::before { content: '→ '; color: #ccc; }
+    .hint-sources span { font-weight: 600; color: #555; }
   </style>
 </head>
 <body>
@@ -39,65 +172,118 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <iframe
-    id="reportFrame"
-    allowfullscreen
-    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-  </iframe>
+  <div class="card">
+    <h1>Gerar Link</h1>
+
+    <label for="inp-src">
+      URL ou código embed
+      <span class="badge" id="type-badge"></span>
+    </label>
+    <textarea id="inp-src" rows="3"
+      placeholder="Cole aqui a URL ou o &lt;iframe&gt; de embed"></textarea>
+
+    <p class="hint">
+      Aceita links de publicação e códigos <span>&lt;iframe&gt;</span> de
+      <span>Google Docs</span>, <span>Google Slides</span> e <span>Looker Studio / Data Studio</span>.
+    </p>
+    <ul class="hint-sources">
+      <li><span>Google Docs / Slides</span> → Arquivo → Publicar na web → Incorporar</li>
+      <li><span>Looker Studio</span> → Compartilhar → Incorporar relatório</li>
+    </ul>
+
+    <label for="inp-t">Título</label>
+    <input id="inp-t" type="text" placeholder="ex: Performance Junho 2026" />
+
+    <button onclick="generate()">Gerar link</button>
+
+    <div class="result" id="result">
+      <label>URL gerada</label>
+      <div class="url-box">
+        <div class="url-text" id="url-display"></div>
+        <button class="copy-btn" id="copy-btn" onclick="copyUrl()">Copiar</button>
+      </div>
+      <a class="open-btn" id="open-link" target="_blank">Abrir →</a>
+    </div>
+  </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const title  = params.get('t') || 'Relatório da Agência de Marketing Digital';
-    document.title = title;
+    // Se a página foi aberta com ?id=, redireciona direto para /share/
+    (function () {
+      const p = new URLSearchParams(location.search);
+      if (p.has('id')) location.replace('/share/?' + p.toString());
+    })();
 
-    // Aceita tanto ID puro quanto URL completa ou código <iframe>
+    let generatedUrl = '';
+
     function parse(raw) {
-      if (!raw) return null;
       const srcMatch = raw.match(/\bsrc=["']([^"']+)/i);
       const url = srcMatch ? srcMatch[1] : raw.trim();
 
-      // Google Slides publicado
       const slidesPub = url.match(/\/presentation\/d\/e\/([A-Za-z0-9_-]+)/i);
       if (slidesPub) return { id: slidesPub[1], type: 'slides' };
 
-      // Google Docs publicado
       const docsPub = url.match(/\/document\/d\/e\/([A-Za-z0-9_-]+)/i);
       if (docsPub) return { id: docsPub[1], type: 'docs-pub' };
 
-      // Google Docs edição/view
       const docsEdit = url.match(/\/document\/d\/([A-Za-z0-9_-]+)/i);
       if (docsEdit) return { id: docsEdit[1], type: 'docs' };
 
-      // Looker Studio
       const looker = url.match(/\/reporting\/([a-f0-9-]{36})/i);
       if (looker) return { id: looker[1], type: 'looker' };
 
-      // ID puro: 2PACX- → Slides publicado
       if (url.startsWith('2PACX-')) return { id: url, type: 'slides' };
 
-      // Fallback: trata como ID do Looker (respeita ?type= explícito)
-      return { id: url, type: params.get('type') || 'looker' };
+      return { id: url, type: 'looker' };
     }
 
-    const result = parse(params.get('id'));
+    document.getElementById('inp-src').addEventListener('input', function () {
+      const val = this.value.trim();
+      const badge = document.getElementById('type-badge');
+      if (!val) { badge.className = 'badge'; badge.textContent = ''; return; }
+      const { type } = parse(val);
+      const labels = { slides: 'Google Slides', docs: 'Google Docs', 'docs-pub': 'Google Docs', looker: 'Looker Studio' };
+      const group  = type === 'docs-pub' ? 'docs' : type;
+      badge.className = `badge ${group} visible`;
+      badge.textContent = labels[type] || 'Looker Studio';
+    });
 
-    if (result) {
-      const { id, type } = result;
-      let src;
+    function generate() {
+      const raw = document.getElementById('inp-src').value.trim();
+      const t   = document.getElementById('inp-t').value.trim();
+      if (!raw) { document.getElementById('inp-src').focus(); return; }
 
-      if (type === 'slides') {
-        src = `https://docs.google.com/presentation/d/e/${id}/pubembed?start=false&loop=false&delayms=3000`;
-      } else if (type === 'docs-pub') {
-        src = `https://docs.google.com/document/d/e/${id}/pub?embedded=true`;
-      } else if (type === 'docs') {
-        src = `https://docs.google.com/document/d/${id}/preview`;
-      } else {
-        src = `https://datastudio.google.com/embed/reporting/${id}`;
-      }
+      const { id, type } = parse(raw);
+      // Looker → /report/ ; Docs e Slides → /share/
+      const folder = type === 'looker' ? '/report/' : '/share/';
+      const params = new URLSearchParams({ id });
+      if (type !== 'looker') params.set('type', type);
+      if (t) params.set('t', t);
 
-      document.getElementById('reportFrame').src = src;
+      generatedUrl = location.origin + folder + '?' + params.toString();
+
+      document.getElementById('url-display').textContent = generatedUrl;
+      document.getElementById('open-link').href = generatedUrl;
+      document.getElementById('result').style.display = 'block';
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copiar';
+      btn.classList.remove('copied');
     }
+
+    function copyUrl() {
+      navigator.clipboard.writeText(generatedUrl).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    document.getElementById('inp-src').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) generate();
+    });
+    document.getElementById('inp-t').addEventListener('keydown', e => {
+      if (e.key === 'Enter') generate();
+    });
   </script>
-
 </body>
 </html>
