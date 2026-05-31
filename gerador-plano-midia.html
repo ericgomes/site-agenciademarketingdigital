@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P2R23466');</script>
+  <!-- End Google Tag Manager -->
+  <title>Gerador de Plano de Mídia</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #07000d;
+      --s1:      #110819;
+      --s2:      #160c21;
+      --border:  rgba(255,255,255,0.08);
+      --purple:  #9333EA;
+      --purple2: #c084fc;
+      --muted:   #666;
+      --label:   #999;
+      --text:    #eee;
+      --accent:  #7C3AED;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2.5rem 1rem 5rem;
+    }
+
+    /* ── Header ──────────────────────────────────── */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    header a {
+      font-size: 0.72rem; color: var(--muted);
+      text-decoration: none; letter-spacing: .1em; text-transform: uppercase;
+    }
+    header a:hover { color: var(--purple); }
+    header h1 {
+      font-size: clamp(1.4rem,4vw,2rem); font-weight: 800;
+      letter-spacing: -.02em; margin-top: .4rem;
+      background: linear-gradient(135deg,#c084fc,#818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    header p { margin-top: .4rem; font-size: .82rem; color: var(--label); }
+
+    /* ── Shared ──────────────────────────────────── */
+    .wrapper { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .card {
+      background: var(--s1); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    }
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1.25rem; border-bottom: 1px solid var(--border);
+    }
+    .card-head h2 { font-size: .72rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--label); }
+
+    .btn {
+      font-size: .78rem; font-weight: 700; padding: .35rem .9rem; border-radius: 8px;
+      cursor: pointer; border: none; transition: background .15s, color .15s;
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,.05); color: var(--label); border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); color: var(--text); }
+    .btn-add {
+      background: rgba(147,51,234,.15); color: var(--purple2);
+      border: 1px solid rgba(147,51,234,.3);
+    }
+    .btn-add:hover { background: rgba(147,51,234,.28); }
+    .btn-primary {
+      background: var(--purple); color: #fff; padding: .65rem 1.5rem; font-size: .9rem;
+    }
+    .btn-primary:hover { background: #7C3AED; }
+    .btn-danger {
+      background: transparent; color: #555; border: none;
+      font-size: .95rem; cursor: pointer; padding: 0 .4rem; transition: color .15s;
+    }
+    .btn-danger:hover { color: #f87171; }
+
+    /* ── Config: Dimensions ──────────────────────── */
+    .dims { display: flex; flex-direction: column; gap: .75rem; padding: .85rem 1.25rem 1.25rem; }
+
+    .dim-card {
+      background: var(--s2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .dim-head {
+      display: flex; align-items: center; gap: .5rem; padding: .6rem .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dim-head input.dim-name {
+      flex: 1; background: transparent; border: none; outline: none;
+      font-size: .85rem; font-weight: 700; color: var(--text); caret-color: var(--purple);
+    }
+    .dim-items { display: flex; flex-wrap: wrap; gap: .45rem; padding: .7rem .85rem; align-items: center; }
+
+    /* Grouped items in dependent dimensions */
+    .dim-group { padding: .55rem .85rem; border-top: 1px solid var(--border); }
+    .dim-group:first-child { border-top: none; }
+    .dim-group-label {
+      font-size: .63rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .45rem;
+    }
+    .dim-group-items { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; }
+
+    .item-tag {
+      display: flex; align-items: center; gap: .25rem;
+      background: rgba(147,51,234,.12); border: 1px solid rgba(147,51,234,.25);
+      border-radius: 6px; padding: .28rem .45rem .28rem .72rem;
+      cursor: pointer; user-select: none;
+      transition: opacity .15s, background .15s, border-color .15s;
+    }
+    .item-tag:hover { background: rgba(147,51,234,.22); }
+    .item-tag.off {
+      opacity: .35;
+      background: rgba(255,255,255,.04);
+      border-color: var(--border);
+    }
+    .item-tag.off:hover { opacity: .62; }
+    /* name label inside chip */
+    .item-tag .chip-name {
+      font-size: .8rem; font-weight: 600; color: var(--text);
+      line-height: 1.3;
+    }
+    .item-tag.off .chip-name { color: var(--muted); }
+    /* inline rename input — hidden by default, shown via JS */
+    .item-tag input.chip-edit {
+      display: none; background: transparent; border: none;
+      border-bottom: 1px dashed rgba(147,51,234,.5); outline: none;
+      font-size: .8rem; font-weight: 600; color: var(--purple2);
+      caret-color: var(--purple); width: 110px;
+    }
+    .item-tag.editing input.chip-edit { display: block; }
+    .item-tag.editing .chip-name      { display: none; }
+    /* pencil rename button */
+    .item-edit {
+      background: none; border: none; cursor: pointer;
+      font-size: .65rem; color: transparent; padding: 0 .05rem;
+      transition: color .12s; line-height: 1;
+    }
+    .item-tag:hover .item-edit { color: #555; }
+    .item-tag:hover .item-edit:hover { color: var(--purple2); }
+    html.light .item-tag.off { background: rgba(0,0,0,.04); border-color: var(--border); }
+
+    /* ── Section divider ─────────────────────────── */
+    .section-sep {
+      max-width: 1400px; margin: 2rem auto .25rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-sep span {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--label); white-space: nowrap;
+    }
+    .section-sep hr { flex: 1; border: none; border-top: 1px solid var(--border); }
+
+    /* ── Table section ───────────────────────────── */
+    .table-actions {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .table-actions-left { display: flex; gap: .6rem; align-items: center; }
+
+    /* Inline investment input */
+    .inv-inline-wrap {
+      display: flex; align-items: center; gap: .35rem;
+      background: rgba(147,51,234,.12); border: 1px solid rgba(147,51,234,.3);
+      border-radius: 8px; padding: .3rem .75rem;
+    }
+    .inv-inline-wrap label {
+      font-size: .72rem; font-weight: 700; color: var(--purple2); white-space: nowrap;
+    }
+    .inv-inline {
+      background: transparent; border: none; outline: none;
+      font-size: .88rem; font-weight: 800; color: var(--purple2);
+      caret-color: var(--purple); width: 90px; text-align: right;
+    }
+    .inv-inline:focus { color: var(--text); }
+
+    .pct-warning {
+      font-size: .72rem; color: #fbbf24;
+      background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.3);
+      border-radius: 6px; padding: .3rem .7rem; display: none;
+    }
+
+    /* ── Cell toggle (dis/liga) button ─────────────── */
+    table.plan td.name-cell,
+    table.plan td.pct-cell,
+    table.plan td.val-cell { position: relative; }
+    .cell-tog {
+      position: absolute; top: 2px; right: 2px;
+      background: none; border: none; cursor: pointer;
+      font-size: .65rem; color: transparent;
+      padding: 0 .15rem; line-height: 1; transition: color .12s;
+    }
+    td.name-cell:hover .cell-tog,
+    td.pct-cell:hover  .cell-tog,
+    td.val-cell:hover  .cell-tog        { color: #555; }
+    td.name-cell:hover .cell-tog:hover,
+    td.pct-cell:hover  .cell-tog:hover,
+    td.val-cell:hover  .cell-tog:hover  { color: #facc15; }
+
+    /* Off items: visible but greyed; toggle always shown, hover → green */
+    td.item-off { opacity: .38; }
+    td.item-off .pct-input,
+    td.item-off .val-input,
+    td.item-off .lock-btn { pointer-events: none; }
+    .cell-tog.tog-off { color: #555 !important; }
+    td.item-off:hover .cell-tog.tog-off { color: #888 !important; }
+    td.item-off:hover .cell-tog.tog-off:hover { color: #4ade80 !important; }
+
+    /* ── Plan table ──────────────────────────────── */
+    .table-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+
+    table.plan {
+      border-collapse: collapse; width: 100%; min-width: 500px;
+      font-size: .82rem;
+    }
+
+    table.plan th {
+      background: #1a0b2e; color: var(--purple2);
+      padding: .65rem .85rem; text-align: center;
+      font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      border: 1px solid rgba(147,51,234,.2); white-space: nowrap;
+    }
+
+    table.plan td {
+      padding: .55rem .85rem; border: 1px solid var(--border);
+      text-align: center; vertical-align: middle;
+      background: var(--s1);
+    }
+
+    table.plan td.name-cell { font-weight: 600; color: var(--text); }
+    table.plan td.pct-cell  { min-width: 80px; }
+    table.plan td.val-cell  { color: var(--purple2); font-weight: 700; white-space: nowrap; }
+
+    table.plan td.total-label {
+      text-align: right; font-weight: 700; color: var(--label);
+      background: #1a0b2e; border-color: rgba(147,51,234,.2);
+    }
+    table.plan td.total-val {
+      background: var(--purple); color: #fff; font-weight: 800;
+      font-size: .95rem; border-color: var(--purple);
+    }
+
+    /* Pct cell wrapper + lock button */
+    .pct-wrap { display: flex; align-items: center; justify-content: center; gap: .3rem; }
+    .lock-btn {
+      background: none; border: none; cursor: pointer; padding: 0; line-height: 1;
+      font-size: .72rem; color: transparent; transition: color .12s; flex-shrink: 0;
+    }
+    td.pct-cell:hover .lock-btn          { color: var(--muted); }
+    td.pct-cell:hover .lock-btn:hover    { color: var(--purple2); }
+    .lock-btn.locked                     { color: var(--purple2) !important; }
+    .lock-btn.locked:hover               { color: var(--purple)  !important; }
+
+    /* Inputs inside table */
+    input.pct-input, input.val-input {
+      background: transparent; border: none; border-bottom: 1px dashed rgba(147,51,234,.4);
+      outline: none; font-size: .82rem; font-weight: 700;
+      text-align: center; caret-color: var(--purple); padding: .1rem 0;
+    }
+    input.pct-input { color: var(--text);    width: 62px; }
+    input.val-input { color: var(--purple2); width: 98px; }
+    input.pct-input:focus, input.val-input:focus { border-bottom-color: var(--purple); }
+    input.pct-input:focus { color: var(--purple2); }
+    input.val-input:focus { color: var(--text); }
+
+    /* Alternating merged cell backgrounds */
+    td.merged-even { background: #130820 !important; }
+    td.merged-odd  { background: #0f061a !important; }
+
+    /* ── Light theme ─────────────────────────────── */
+    html.light {
+      --bg:      #f4f0ff;
+      --s1:      #ffffff;
+      --s2:      #ede8ff;
+      --border:  rgba(0,0,0,0.08);
+      --purple:  #7C3AED;
+      --purple2: #6D28D9;
+      --muted:   #aaa;
+      --label:   #777;
+      --text:    #1a0b2e;
+      --accent:  #7C3AED;
+    }
+    html.light table.plan th          { background: #ede8ff; color: #5B21B6; border-color: rgba(124,58,237,.2); }
+    html.light table.plan td.total-label { background: #ede8ff; color: #555; border-color: rgba(124,58,237,.2); }
+    html.light td.merged-even         { background: #f0eaff !important; }
+    html.light td.merged-odd          { background: #e8e0ff !important; }
+    html.light .btn-ghost             { background: rgba(0,0,0,.04); color: var(--label); border-color: var(--border); }
+    html.light .btn-ghost:hover       { background: rgba(0,0,0,.08); color: var(--text); }
+    html.light .btn-add               { background: rgba(124,58,237,.1); color: #5B21B6; border-color: rgba(124,58,237,.25); }
+    html.light .btn-add:hover         { background: rgba(124,58,237,.2); }
+    html.light .item-tag              { background: rgba(124,58,237,.08); border-color: rgba(124,58,237,.2); }
+    html.light input.pct-input        { color: var(--text); border-bottom-color: rgba(124,58,237,.4); }
+    html.light .inv-inline-wrap       { background: rgba(124,58,237,.08); border-color: rgba(124,58,237,.25); }
+    html.light .inv-inline            { color: #5B21B6; }
+
+    /* ── Strategy / Funnel phases ───────────────── */
+    .strategy-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 1.25rem 1.25rem 1.5rem;
+    }
+    /* vertical funnel steps — each narrower than the previous */
+    .sf-step {
+      width: 100%; border-radius: 10px; padding: .8rem 1.1rem .7rem;
+      display: flex; flex-direction: column; align-items: center; gap: .35rem;
+    }
+    .sf-s0 { max-width: 100%; }
+    .sf-s1 { max-width: 78%;  }
+    .sf-s2 { max-width: 58%;  }
+    .sf-s3 { max-width: 42%;  }
+
+    .sf-awareness { background: rgba(0,180,216,.07);  border: 1px solid rgba(0,180,216,.28);  }
+    .sf-consid    { background: rgba(99,102,241,.07); border: 1px solid rgba(99,102,241,.28); }
+    .sf-conv      { background: rgba(147,51,234,.09); border: 1px solid rgba(147,51,234,.35); }
+    .sf-fidel     { background: rgba(236,72,153,.07); border: 1px solid rgba(236,72,153,.28); }
+
+    .sf-conn {
+      display: flex; justify-content: center; align-items: center;
+      height: 1.6rem; color: #444; font-size: .95rem; width: 100%;
+    }
+
+    .sf-badge {
+      font-size: .58rem; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase; white-space: nowrap;
+      padding: .2rem .55rem; border-radius: 20px; flex-shrink: 0;
+    }
+    .sf-awareness .sf-badge { background: rgba(0,180,216,.15);  color: #67e8f9; }
+    .sf-consid    .sf-badge { background: rgba(99,102,241,.18); color: #a5b4fc; }
+    .sf-conv      .sf-badge { background: rgba(147,51,234,.2);  color: #d8b4fe; }
+    .sf-fidel     .sf-badge { background: rgba(236,72,153,.15); color: #f9a8d4; }
+
+    .sf-pct-wrap { display: flex; align-items: center; gap: .25rem; }
+    .sf-pct-input {
+      background: transparent; border: none; outline: none;
+      border-bottom: 1px dashed rgba(255,255,255,.18);
+      font-size: 1.3rem; font-weight: 800; color: var(--text);
+      width: 52px; caret-color: var(--purple); font-family: inherit; padding: 0;
+      text-align: center;
+    }
+    .sf-pct-input:focus { border-bottom-color: var(--purple); color: var(--purple2); }
+    .sf-pct-unit { font-size: .8rem; font-weight: 700; color: var(--muted); }
+    .sf-val { font-size: .78rem; font-weight: 700; color: var(--purple2); white-space: nowrap; }
+
+    /* lock button on strategy phases */
+    .sf-lock-btn {
+      background: none; border: none; cursor: pointer; padding: 0; line-height: 1;
+      font-size: .72rem; color: transparent; transition: color .12s; flex-shrink: 0;
+    }
+    .sf-step:hover .sf-lock-btn          { color: var(--muted); }
+    .sf-step:hover .sf-lock-btn:hover    { color: var(--purple2); }
+    .sf-lock-btn.locked                  { color: var(--purple2) !important; }
+    .sf-lock-btn.locked:hover            { color: var(--purple)  !important; }
+
+    html.light .sf-pct-input    { border-bottom-color: rgba(0,0,0,.15); }
+    html.light .sf-awareness    { background: rgba(0,180,216,.05);  border-color: rgba(0,180,216,.22);  }
+    html.light .sf-consid       { background: rgba(99,102,241,.05); border-color: rgba(99,102,241,.22); }
+    html.light .sf-conv         { background: rgba(147,51,234,.06); border-color: rgba(147,51,234,.28); }
+    html.light .sf-fidel        { background: rgba(236,72,153,.05); border-color: rgba(236,72,153,.22); }
+
+    /* ── Theme button ────────────────────────────── */
+    .theme-btn {
+      position: fixed; top: .9rem; right: 1rem; z-index: 200;
+      font-size: .78rem; font-weight: 700; padding: .35rem .85rem;
+      border-radius: 8px; cursor: pointer; border: 1px solid var(--border);
+      background: var(--s1); color: var(--label);
+      transition: background .15s, color .15s;
+    }
+    .theme-btn:hover { color: var(--text); background: var(--s2); }
+
+    /* ── Bottom bar ──────────────────────────────── */
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--s1); border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: .55rem 1rem; font-size: .72rem; color: var(--muted);
+      z-index: 100;
+    }
+    .bottom-bar a { color: var(--muted); text-decoration: none; }
+    .bottom-bar a:hover { color: var(--purple); }
+    .bottom-bar .heart { color: #e05; }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2R23466"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀ Claro</button>
+
+  <header>
+    <a href="/">agenciademarketingdigital.com.br</a>
+    <h1>Gerador de Plano de Mídia</h1>
+    <p>Defina as dimensões, configure os itens e gere a decupagem com investimentos automaticamente distribuídos.</p>
+  </header>
+
+  <!-- ══════════════ CONFIG VIEW ══════════════ -->
+  <div id="view-config">
+    <div class="wrapper">
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Dimensões do Plano</h2>
+          <button class="btn btn-add" onclick="addDimension()">+ Dimensão</button>
+        </div>
+        <div class="dims" id="cfg-dims"></div>
+      </div>
+
+      <p style="font-size:.72rem;color:var(--muted);padding-top:.25rem">Cada dimensão será cruzada com as demais · alterações refletem imediatamente na planilha abaixo.</p>
+
+      <!-- ── Estratégia ── -->
+      <div class="card">
+        <div class="card-head">
+          <h2>Estratégia · Distribuição por Etapa do Funil</h2>
+        </div>
+        <div class="strategy-wrap" id="strategy-wrap"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ TABLE VIEW ══════════════ -->
+  <div class="section-sep"><hr /><span>Plano de Mídia</span><hr /></div>
+
+  <div id="view-table">
+    <div style="max-width:1400px;margin:0 auto;padding:0 .5rem">
+
+      <div class="table-actions">
+        <div class="table-actions-left">
+          <div class="inv-inline-wrap">
+            <label>R$</label>
+            <input class="inv-inline" id="tbl-inv" type="text" inputmode="decimal"
+              value="100.000" placeholder="0"
+              oninput="generatePlan()"
+              onblur="this.value = fmtI(state.investimento)" />
+          </div>
+          <span class="pct-warning" id="pct-warning">⚠ Percentuais não somam 100%</span>
+        </div>
+        <div style="display:flex;gap:.6rem">
+          <button class="btn btn-ghost" onclick="downloadCSV()">⬇ Exportar CSV</button>
+          <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="plan" id="plan-table"></table>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ── State ────────────────────────────────────────
+    // Items in a dependent dimension carry parentItemId (id of the parent dim's item).
+    // filteredCartesian() skips combinations that violate this constraint.
+    let nextDimId = 1, nextItemId = 100;
+
+    const state = {
+      investimento: 100000,
+      dimensions: [
+        { id: nextDimId++, name: 'Canal', items: [
+          { id: nextItemId++, name: 'Google Ads', pct: 55 },  // 100
+          { id: nextItemId++, name: 'Meta Ads',   pct: 45 },  // 101
+        ]},
+        // parentDimId: 1 → Tipo depends on Canal
+        { id: nextDimId++, name: 'Tipo de Campanha', parentDimId: 1, items: [
+          // Google Ads (parentItemId = 100)
+          { id: nextItemId++, name: 'Search',              parentItemId: 100, pct: 35 }, // 102
+          { id: nextItemId++, name: 'Performance Max',     parentItemId: 100, pct: 20 }, // 103
+          { id: nextItemId++, name: 'Demand Gen',          parentItemId: 100, pct: 15 }, // 104
+          { id: nextItemId++, name: 'Display',             parentItemId: 100, pct: 10 }, // 105
+          { id: nextItemId++, name: 'YouTube',             parentItemId: 100, pct: 10 }, // 106
+          { id: nextItemId++, name: 'Shopping',            parentItemId: 100, pct: 10 }, // 107
+          { id: nextItemId++, name: 'Remarketing Display', parentItemId: 100, pct:  0, active: false }, // 108 — desligado: coberto pelo público Remarketing
+          // Meta Ads (parentItemId = 101)
+          { id: nextItemId++, name: 'Reconhecimento',      parentItemId: 101, pct: 20 }, // 109
+          { id: nextItemId++, name: 'Tráfego',             parentItemId: 101, pct: 25 }, // 110
+          { id: nextItemId++, name: 'Engajamento',         parentItemId: 101, pct: 15 }, // 111
+          { id: nextItemId++, name: 'Leads',               parentItemId: 101, pct: 25 }, // 112
+          { id: nextItemId++, name: 'Vendas',              parentItemId: 101, pct: 15 }, // 113
+        ]},
+        { id: nextDimId++, name: 'Público', items: [
+          // Prospecção — públicos frios e de interesse (maior fatia)
+          { id: nextItemId++, name: 'Frio',                pct: 30 },                   // 114
+          { id: nextItemId++, name: 'Interesses',          pct: 25 },                   // 115
+          { id: nextItemId++, name: 'Similar (Lookalike)', pct: 20 },                   // 116
+          // Retargeting — públicos quentes
+          { id: nextItemId++, name: 'Engajamento',         pct: 15 },                   // 117
+          { id: nextItemId++, name: 'Remarketing',         pct: 10 },                   // 118
+          // Avançados — requerem base de dados / setup específico
+          { id: nextItemId++, name: 'Carrinho Abandonado', pct:  0, active: false },    // 119
+          { id: nextItemId++, name: 'CRM',                 pct:  0, active: false },    // 120
+          { id: nextItemId++, name: 'Clientes',            pct:  0, active: false },    // 121
+        ]},
+        { id: nextDimId++, name: 'Produto / Serviço', items: [
+          { id: nextItemId++, name: 'Produto X', pct: 60 },  // 122
+          { id: nextItemId++, name: 'Serviço Y', pct: 40 },  // 123
+        ]},
+      ]
+    };
+
+    // ── Helpers ──────────────────────────────────────
+    const toNum  = s => parseFloat(String(s).replace(/R\$\s*/g,'').replace(/\./g,'').replace(',','.').replace(/[%x]/g,'')) || 0;
+    const fmtI   = n => isFinite(n) ? Math.round(n).toLocaleString('pt-BR') : '—';
+    const fmtD   = (n,d=2) => isFinite(n) ? n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d}) : '—';
+    const fmtR   = n => isFinite(n) && n>=0 ? 'R$ '+fmtI(n) : '—';
+    const fmtMoney = n => {
+      if (!isFinite(n) || n < 0) return '—';
+      const r = Math.round(n * 100) / 100;
+      return 'R$ ' + (r % 1 === 0
+        ? Math.round(r).toLocaleString('pt-BR')
+        : r.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}));
+    };
+    const fmtPct = n => isFinite(n)
+      ? n.toLocaleString('pt-BR', {minimumFractionDigits:0, maximumFractionDigits:2}) + '%'
+      : '—';
+
+    // ── Config rendering ─────────────────────────────
+    function renderConfig() {
+      const el = document.getElementById('cfg-dims');
+      el.innerHTML = state.dimensions.map(dim => {
+        const parentDim = dim.parentDimId != null
+          ? state.dimensions.find(d => d.id === dim.parentDimId)
+          : null;
+
+        // Build items area
+        let itemsHtml;
+        if (parentDim) {
+          // Show items grouped by parentItemId, one sub-group per parent item
+          itemsHtml = parentDim.items.map(parentItem => {
+            const grp = dim.items.filter(it => it.parentItemId === parentItem.id);
+            return `
+              <div class="dim-group">
+                <div class="dim-group-label">${parentItem.name}</div>
+                <div class="dim-group-items">
+                  ${grp.map(item => {
+                    const off = item.active === false || item.active === 'off';
+                    return `
+                    <div class="item-tag${off ? ' off' : ''}" data-item="${item.id}"
+                      onclick="toggleItem(${dim.id},${item.id})">
+                      <span class="chip-name">${item.name}</span>
+                      <input class="chip-edit" value="${item.name}"
+                        onclick="event.stopPropagation()"
+                        oninput="renameItem(${dim.id},${item.id},this.value)"
+                        onblur="finishRename(this)" style="width:130px" />
+                      <button class="item-edit" title="Renomear"
+                        onclick="event.stopPropagation();startRename(this)">✎</button>
+                      ${grp.length > 1
+                        ? `<button class="btn-danger" style="font-size:.8rem"
+                            onclick="event.stopPropagation();removeItem(${dim.id},${item.id})">×</button>`
+                        : ''}
+                    </div>`;
+                  }).join('')}
+                  <button class="btn btn-add"
+                    style="font-size:.68rem;padding:.2rem .55rem"
+                    onclick="addItemToGroup(${dim.id},${parentItem.id})">+ Item</button>
+                </div>
+              </div>`;
+          }).join('');
+        } else {
+          itemsHtml = `
+            <div class="dim-items">
+              ${dim.items.map(item => {
+                const off = item.active === false || item.active === 'off';
+                return `
+                <div class="item-tag${off ? ' off' : ''}" data-item="${item.id}"
+                  onclick="toggleItem(${dim.id},${item.id})">
+                  <span class="chip-name">${item.name}</span>
+                  <input class="chip-edit" value="${item.name}"
+                    onclick="event.stopPropagation()"
+                    oninput="renameItem(${dim.id},${item.id},this.value)"
+                    onblur="finishRename(this)" />
+                  <button class="item-edit" title="Renomear"
+                    onclick="event.stopPropagation();startRename(this)">✎</button>
+                  ${dim.items.length > 1
+                    ? `<button class="btn-danger" style="font-size:.8rem"
+                        onclick="event.stopPropagation();removeItem(${dim.id},${item.id})">×</button>`
+                    : ''}
+                </div>`;
+              }).join('')}
+            </div>`;
+        }
+
+        return `
+          <div class="dim-card" data-dim="${dim.id}">
+            <div class="dim-head">
+              <input class="dim-name" value="${dim.name}"
+                oninput="renameDim(${dim.id},this.value)"
+                placeholder="Nome da dimensão" />
+              ${!parentDim
+                ? `<button class="btn btn-add"
+                    style="font-size:.7rem;padding:.25rem .65rem"
+                    onclick="addItem(${dim.id})">+ Item</button>`
+                : ''}
+              ${state.dimensions.length > 1
+                ? `<button class="btn-danger" onclick="removeDim(${dim.id})"
+                    title="Remover dimensão">×</button>`
+                : ''}
+            </div>
+            ${itemsHtml}
+          </div>`;
+      }).join('');
+
+      generatePlan();
+    }
+
+    function addDimension() {
+      state.dimensions.push({
+        id: nextDimId++,
+        name: 'Dimensão ' + nextDimId,
+        items: [{ id: nextItemId++, name: 'Item 1' }]
+      });
+      renderConfig();
+    }
+    function removeDim(id) {
+      state.dimensions = state.dimensions.filter(d => d.id !== id);
+      renderConfig();
+    }
+    function renameDim(id, name) {
+      const d = state.dimensions.find(d => d.id === id);
+      if (d) { d.name = name; renderPlanTable(); }
+    }
+    function addItem(dimId) {
+      const d = state.dimensions.find(d => d.id === dimId);
+      if (d) {
+        const n = d.items.length + 1;
+        const share = 100 / n;
+        const scale = (n - 1) / n;
+        d.items.forEach(it => { it.pct = (it.pct ?? (100 / d.items.length)) * scale; });
+        d.items.push({ id: nextItemId++, name: 'Item ' + n, pct: share });
+        renderConfig();
+      }
+    }
+    function addItemToGroup(dimId, parentItemId) {
+      const d = state.dimensions.find(d => d.id === dimId);
+      if (d) {
+        const grp = d.items.filter(it => it.parentItemId === parentItemId);
+        const n = grp.length + 1;
+        const share = 100 / n;
+        const scale = (n - 1) / n;
+        grp.forEach(it => { it.pct = (it.pct ?? (100 / grp.length)) * scale; });
+        d.items.push({ id: nextItemId++, name: 'Novo item', parentItemId, pct: share });
+        renderConfig();
+      }
+    }
+    function removeItem(dimId, itemId) {
+      const d = state.dimensions.find(d => d.id === dimId);
+      if (!d) return;
+      const removed = d.items.find(i => i.id === itemId);
+      if (!removed) return;
+
+      // Sibling redistribution
+      const groupKey   = removed.parentItemId ?? 'root';
+      const removedPct = removed.pct || 0;
+      d.items = d.items.filter(i => i.id !== itemId);
+      const siblings     = d.items.filter(it => (it.parentItemId ?? 'root') === groupKey);
+      const unlockedSibs = siblings.filter(it => !it.locked);
+      const targets      = unlockedSibs.length > 0 ? unlockedSibs : siblings;
+      if (targets.length > 0) {
+        const sibTotal = targets.reduce((s, it) => s + (it.pct || 0), 0);
+        if (sibTotal > 0) {
+          const target = sibTotal + removedPct;
+          targets.forEach(it => { it.pct = (it.pct / sibTotal) * target; });
+        } else {
+          targets.forEach(it => { it.pct = 100 / targets.length; });
+        }
+      }
+
+      // Cascade: remove orphaned items from dependent dimensions
+      state.dimensions.forEach(dep => {
+        if (dep.parentDimId === dimId)
+          dep.items = dep.items.filter(it => it.parentItemId !== itemId);
+      });
+
+      // If dimension is now empty, remove it (and any dimension that depended on it)
+      if (d.items.length === 0)
+        state.dimensions = state.dimensions.filter(dim => dim.id !== dimId && dim.parentDimId !== dimId);
+
+      renderConfig();
+    }
+    function renameItem(dimId, itemId, name) {
+      const d = state.dimensions.find(d => d.id === dimId);
+      const i = d && d.items.find(i => i.id === itemId);
+      if (i) { i.name = name; renderPlanTable(); }
+    }
+
+    // ── Chip rename helpers ──────────────────────────
+    function startRename(pencilBtn) {
+      const tag   = pencilBtn.closest('.item-tag');
+      const input = tag.querySelector('.chip-edit');
+      tag.classList.add('editing');
+      input.focus();
+      input.select();
+    }
+    function finishRename(input) {
+      const tag = input.closest('.item-tag');
+      tag.classList.remove('editing');
+      // Update the visible span
+      const span = tag.querySelector('.chip-name');
+      if (span) span.textContent = input.value;
+    }
+
+    // Helper: is item truly active (not false, not 'off')
+    const isActive = it => it.active !== false && it.active !== 'off';
+
+    // ── Item toggle — config panel chips ─────────────
+    // false ↔ true  (clicking a greyed chip re-enables; clicking active chip hides from table)
+    function toggleItem(dimId, itemId) {
+      const d    = state.dimensions.find(d => d.id === dimId);
+      const item = d && d.items.find(i => i.id === itemId);
+      if (!item) return;
+
+      const groupKey   = item.parentItemId ?? 'root';
+      const groupItems = d.items.filter(it => (it.parentItemId ?? 'root') === groupKey);
+
+      if (isActive(item)) {
+        // ── Turning OFF (completely hidden from table) ──
+        const activeNow = groupItems.filter(isActive);
+        if (activeNow.length <= 1) return;   // can't disable last active
+
+        const savedPct = item.pct || 0;
+        item.active    = false;
+        item.pct       = 0;
+
+        const remaining = groupItems.filter(isActive);
+        const unlocked  = remaining.filter(it => !it.locked);
+        const targets   = unlocked.length > 0 ? unlocked : remaining;
+        if (targets.length > 0) {
+          const sibTotal = targets.reduce((s, it) => s + (it.pct || 0), 0);
+          if (sibTotal > 0) {
+            const total = sibTotal + savedPct;
+            targets.forEach(it => { it.pct = (it.pct / sibTotal) * total; });
+          } else {
+            targets.forEach(it => { it.pct = 100 / targets.length; });
+          }
+        }
+      } else {
+        // ── Turning ON (from false or 'off') ──────────
+        item.active = true;
+        const activeNow = groupItems.filter(isActive); // now includes item
+        const n         = activeNow.length;
+        const share     = 100 / n;
+        const scale     = (n - 1) / n;
+        activeNow.filter(it => it.id !== item.id).forEach(it => {
+          it.pct = (it.pct ?? share) * scale;
+        });
+        item.pct = share;
+      }
+
+      // Cascade: sync child items in dependent dimensions
+      state.dimensions.forEach(dep => {
+        if (dep.parentDimId !== dimId) return;
+        dep.items.forEach(child => {
+          if (child.parentItemId === itemId) child.active = isActive(item);
+        });
+      });
+
+      renderConfig();
+    }
+
+    // ── Item soft-toggle — plan table button ─────────
+    // true ↔ 'off'  (keeps row visible but greyed/zeroed)
+    function toggleItemInTable(dimId, itemId) {
+      const d    = state.dimensions.find(d => d.id === dimId);
+      const item = d && d.items.find(i => i.id === itemId);
+      if (!item) return;
+
+      const groupKey   = item.parentItemId ?? 'root';
+      const groupItems = d.items.filter(it => (it.parentItemId ?? 'root') === groupKey);
+
+      if (isActive(item)) {
+        // ── Soft-disable: grey out but keep in table ──
+        const activeNow = groupItems.filter(isActive);
+        if (activeNow.length <= 1) return;  // can't disable last active
+
+        const savedPct = item.pct || 0;
+        item.active    = 'off';
+        item.pct       = 0;
+
+        const remaining = groupItems.filter(isActive);
+        const unlocked  = remaining.filter(it => !it.locked);
+        const targets   = unlocked.length > 0 ? unlocked : remaining;
+        if (targets.length > 0) {
+          const sibTotal = targets.reduce((s, it) => s + (it.pct || 0), 0);
+          if (sibTotal > 0) {
+            const total = sibTotal + savedPct;
+            targets.forEach(it => { it.pct = (it.pct / sibTotal) * total; });
+          } else {
+            targets.forEach(it => { it.pct = 100 / targets.length; });
+          }
+        }
+      } else if (item.active === 'off') {
+        // ── Re-enable from soft-disabled ──────────────
+        item.active = true;
+        const activeNow = groupItems.filter(isActive); // now includes item
+        const n         = activeNow.length;
+        const share     = 100 / n;
+        const scale     = (n - 1) / n;
+        activeNow.filter(it => it.id !== item.id).forEach(it => {
+          it.pct = (it.pct ?? share) * scale;
+        });
+        item.pct = share;
+      }
+
+      renderPlanTable();
+      renderConfig();
+    }
+
+    // ── Filtered Cartesian product ───────────────────
+    // Skips items that are inactive (item.active === false) or whose
+    // parentItemId doesn't match the chosen parent dimension item.
+    function filteredCartesian(dims) {
+      const results = [];
+      function recurse(di, row) {
+        if (di === dims.length) { results.push([...row]); return; }
+        const dim = dims[di];
+        for (let ii = 0; ii < dim.items.length; ii++) {
+          const item = dim.items[ii];
+          if (item.active === false) continue;          // toggled off
+          if (item.parentItemId != null) {
+            const parentDimIdx = dims.findIndex(d => d.id === dim.parentDimId);
+            if (parentDimIdx >= 0 && parentDimIdx < di) {
+              const chosen = dims[parentDimIdx].items[row[parentDimIdx]];
+              if (!chosen || chosen.id !== item.parentItemId) continue;
+            }
+          }
+          row.push(ii);
+          recurse(di + 1, row);
+          row.pop();
+        }
+      }
+      recurse(0, []);
+      return results;
+    }
+
+    // Compute rowspans from filtered rows.
+    // spans[ri][di] = number of consecutive rows sharing the same [0..di] prefix; 0 if merged.
+    function computeRowspans(rows, numDims) {
+      const spans = rows.map(() => new Array(numDims).fill(0));
+      for (let di = 0; di < numDims; di++) {
+        let ri = 0;
+        while (ri < rows.length) {
+          let span = 1;
+          while (ri + span < rows.length) {
+            let same = true;
+            for (let d = 0; d <= di; d++) {
+              if (rows[ri + span][d] !== rows[ri][d]) { same = false; break; }
+            }
+            if (!same) break;
+            span++;
+          }
+          spans[ri][di] = span;
+          ri += span;
+        }
+      }
+      return spans;
+    }
+
+    function calcBudget(rowIndices, upToDim) {
+      let b = state.investimento;
+      for (let i = 0; i <= upToDim; i++) {
+        const item = state.dimensions[i].items[rowIndices[i]];
+        b *= (item.pct || 0) / 100;
+      }
+      return b;
+    }
+
+    // ── Plan generation ──────────────────────────────
+    function generatePlan() {
+      state.investimento = toNum(document.getElementById('tbl-inv').value) || 2500;
+
+      // Initialize equal % per group (parentItemId-grouped for dependent dims)
+      state.dimensions.forEach(dim => {
+        const groups = {};
+        dim.items.forEach(item => {
+          const key = item.parentItemId != null ? item.parentItemId : 'root';
+          if (!groups[key]) groups[key] = [];
+          groups[key].push(item);
+        });
+        Object.values(groups).forEach(grp => {
+          const eq = 100 / grp.length;
+          grp.forEach(item => { if (item.pct == null) item.pct = eq; });
+        });
+      });
+
+      renderPlanTable();
+      refreshStrategyValues();
+    }
+
+    // ── Render plan table ────────────────────────────
+    function renderPlanTable() {
+      const dims    = state.dimensions;
+      const inv     = state.investimento;
+      const allRows = filteredCartesian(dims);
+      const spans   = computeRowspans(allRows, dims.length);
+
+      let html = '<thead><tr>';
+      dims.forEach(d => {
+        html += `<th>${d.name}</th><th>${d.name} %</th><th>${d.name} R$</th>`;
+      });
+      html += '</tr></thead><tbody>';
+
+      // groupCount[di] increments each time a new cell appears in that column
+      const groupCount = new Array(dims.length).fill(0);
+
+      allRows.forEach((row, ri) => {
+        html += '<tr>';
+        dims.forEach((dim, di) => {
+          const span = spans[ri][di];
+          if (span === 0) return; // merged into a cell above
+
+          const cls  = groupCount[di] % 2 === 0 ? 'merged-even' : 'merged-odd';
+          groupCount[di]++;
+
+          const item   = dim.items[row[di]];
+          const budget = calcBudget(row, di);
+          const pct    = item.pct != null ? item.pct : (100 / dim.items.length);
+
+          // Toggle (des/liga) button — soft-disables row (active ↔ 'off')
+          const groupKey    = item.parentItemId ?? 'root';
+          const groupItems  = dim.items.filter(it => (it.parentItemId ?? 'root') === groupKey);
+          const activeCount = groupItems.filter(isActive).length;
+          const isOff       = item.active === 'off';
+          const canToggle   = isOff || activeCount > 1;
+          const togBtn = canToggle
+            ? `<button class="cell-tog${isOff ? ' tog-off' : ''}"
+                onclick="toggleItemInTable(${dim.id},${item.id})"
+                title="${isOff ? 'Ligar' : 'Desligar'}">⏻</button>`
+            : `<button class="cell-tog" style="cursor:not-allowed;opacity:.15"
+                title="Último ativo — não pode desligar">⏻</button>`;
+
+          const offCls = isOff ? ' item-off' : '';
+          html += `<td class="name-cell ${cls}${offCls}" rowspan="${span}">${item.name}${togBtn}</td>`;
+          const locked  = !!item.locked;
+          const lockBtn = `<button class="lock-btn${locked ? ' locked' : ''}"
+            title="${locked ? 'Desbloquear %' : 'Travar %'}"
+            onclick="toggleLock(${dim.id},${item.id})">
+            ${locked ? '🔒' : '🔓'}</button>`;
+          html += `<td class="pct-cell ${cls}${offCls}" rowspan="${span}">${togBtn}
+            <div class="pct-wrap">
+              <input class="pct-input" id="pi-${di}-${ri}" value="${fmtPct(pct)}"
+                oninput="updatePct(${di},${row[di]},${ri},this.value)"
+                onfocus="this.select()" />
+              ${lockBtn}
+            </div>
+          </td>`;
+          html += `<td class="val-cell ${cls}${offCls}" rowspan="${span}">${togBtn}
+            <input class="val-input" id="vi-${di}-${ri}" value="${fmtMoney(budget)}"
+              onchange="updateVal(${di},${row[di]},${ri},[${row.join(',')}],this.value)"
+              onfocus="this.select()" />
+          </td>`;
+        });
+        html += '</tr>';
+      });
+
+      const colspan = dims.length * 3 - 1;
+      html += `<tr>
+        <td class="total-label" colspan="${colspan}">Total</td>
+        <td class="total-val">${fmtMoney(inv)}</td>
+      </tr></tbody>`;
+      document.getElementById('plan-table').innerHTML = html;
+      checkPctWarning();
+    }
+
+    // ── Refresh inputs without full re-render ────────
+    function _refreshCells() {
+      const dims    = state.dimensions;
+      const allRows = filteredCartesian(dims);
+      const spans   = computeRowspans(allRows, dims.length);
+      allRows.forEach((row, ri) => {
+        dims.forEach((dim, di) => {
+          if (spans[ri][di] === 0) return;
+          const pi = document.getElementById(`pi-${di}-${ri}`);
+          if (pi) {
+            const item = dim.items[row[di]];
+            pi.value = fmtPct(item.pct ?? (100 / dim.items.length));
+          }
+          const vi = document.getElementById(`vi-${di}-${ri}`);
+          if (vi) vi.value = fmtMoney(calcBudget(row, di));
+        });
+      });
+    }
+
+    // ── Lock toggle ──────────────────────────────────────────
+    function toggleLock(dimId, itemId) {
+      const d    = state.dimensions.find(d => d.id === dimId);
+      const item = d && d.items.find(i => i.id === itemId);
+      if (!item) return;
+      item.locked = !item.locked;
+      renderPlanTable();
+    }
+
+    // ── Sibling redistribution within same parentItemId group ──
+    // Locked siblings keep their %; only unlocked siblings absorb the change.
+    function redistributeSiblings(dimIdx, itemIdx) {
+      const items   = state.dimensions[dimIdx].items;
+      const edited  = items[itemIdx];
+      const allSibs = items.filter((it, i) =>
+        i !== itemIdx && it.parentItemId === edited.parentItemId && isActive(it)
+      );
+      if (!allSibs.length) return;
+
+      const lockedSibs   = allSibs.filter(it => it.locked);
+      const unlockedSibs = allSibs.filter(it => !it.locked);
+      const targets      = unlockedSibs.length > 0 ? unlockedSibs : allSibs;
+
+      const lockedTotal = lockedSibs.reduce((s, it) => s + (it.pct || 0), 0);
+      const remaining   = 100 - (edited.pct || 0) - lockedTotal;
+      const sibTotal    = targets.reduce((s, it) => s + (it.pct || 0), 0);
+      if (sibTotal > 0) {
+        targets.forEach(it => { it.pct = (it.pct / sibTotal) * remaining; });
+      } else {
+        targets.forEach(it => { it.pct = remaining / targets.length; });
+      }
+    }
+
+    function updatePct(dimIdx, itemIdx, startRi, value) {
+      state.dimensions[dimIdx].items[itemIdx].pct = toNum(value);
+      redistributeSiblings(dimIdx, itemIdx);
+      _refreshCells();
+      checkPctWarning();
+    }
+
+    function updateVal(dimIdx, itemIdx, startRi, rowIndices, valueStr) {
+      const newVal       = toNum(valueStr);
+      const parentBudget = dimIdx === 0
+        ? state.investimento
+        : calcBudget(rowIndices, dimIdx - 1);
+      if (parentBudget <= 0) return;
+      state.dimensions[dimIdx].items[itemIdx].pct = (newVal / parentBudget) * 100;
+      redistributeSiblings(dimIdx, itemIdx);
+      _refreshCells();
+      checkPctWarning();
+    }
+
+    function checkPctWarning() {
+      const warn = state.dimensions.some(dim => {
+        const groups = {};
+        dim.items.forEach(item => {
+          const key = item.parentItemId != null ? item.parentItemId : 'root';
+          if (!groups[key]) groups[key] = [];
+          groups[key].push(item);
+        });
+        return Object.values(groups).some(grp => {
+          const sum = grp.reduce((s, it) => s + (it.pct || 0), 0);
+          return Math.abs(sum - 100) > 0.5;
+        });
+      });
+      document.getElementById('pct-warning').style.display = warn ? 'block' : 'none';
+    }
+
+    // ── Download CSV ─────────────────────────────────
+    function downloadCSV() {
+      const dims  = state.dimensions;
+      const rows  = filteredCartesian(dims);
+      const header = dims.flatMap(d => [d.name, `${d.name} %`, `${d.name} R$`]).join(';');
+      const lines  = rows.map(row =>
+        dims.flatMap((dim, di) => {
+          const item = dim.items[row[di]];
+          const pct  = item.pct != null ? item.pct : (100 / dim.items.length);
+          return [item.name, fmtD(pct) + '%', fmtR(calcBudget(row, di))];
+        }).join(';')
+      );
+      lines.push(';;'.repeat(dims.length - 1) + ';Total;' + fmtR(state.investimento));
+      const csv  = '﻿' + header + '\n' + lines.join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href = url; a.download = 'plano-de-midia.csv'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // ── Strategy state ───────────────────────────────────
+    const strategy = [
+      { name: 'Awareness',    pct: 25, locked: false },
+      { name: 'Consideração', pct: 30, locked: false },
+      { name: 'Conversão',    pct: 35, locked: false },
+      { name: 'Fidelização',  pct: 10, locked: false },
+    ];
+
+    function renderStrategy() {
+      const inv = state.investimento;
+      const wrap = document.getElementById('strategy-wrap');
+      if (!wrap) return;
+      const colorCls = ['sf-awareness', 'sf-consid', 'sf-conv', 'sf-fidel'];
+      wrap.innerHTML = strategy.map((ph, i) => {
+        const locked  = !!ph.locked;
+        const lockBtn = `<button class="sf-lock-btn${locked ? ' locked' : ''}"
+          title="${locked ? 'Desbloquear %' : 'Travar %'}"
+          onclick="toggleStrategyLock(${i})">
+          ${locked ? '🔒' : '🔓'}</button>`;
+        return `
+          ${i > 0 ? '<div class="sf-conn">▾</div>' : ''}
+          <div class="sf-step sf-s${i} ${colorCls[i]}">
+            <span class="sf-badge">${ph.name}</span>
+            <div class="sf-pct-wrap">
+              <input class="sf-pct-input" id="sp-${i}"
+                value="${fmtD(ph.pct, 0)}"
+                inputmode="decimal"
+                oninput="updatePhasePct(${i}, this.value)"
+                onblur="refreshStrategyInputs()"
+                onfocus="this.select()" />
+              <span class="sf-pct-unit">%</span>
+              ${lockBtn}
+            </div>
+            <span class="sf-val" id="sp-val-${i}">${fmtMoney(inv * ph.pct / 100)}</span>
+          </div>`;
+      }).join('');
+    }
+
+    function toggleStrategyLock(idx) {
+      strategy[idx].locked = !strategy[idx].locked;
+      renderStrategy();
+    }
+
+    function updatePhasePct(idx, raw) {
+      strategy[idx].pct = toNum(raw);
+      const sibs         = strategy.filter((_, i) => i !== idx);
+      const unlockedSibs = sibs.filter(p => !p.locked);
+      const lockedSibs   = sibs.filter(p =>  p.locked);
+      const targets      = unlockedSibs.length > 0 ? unlockedSibs : sibs;
+      const lockedTotal  = lockedSibs.reduce((s, p) => s + p.pct, 0);
+      const remaining    = 100 - strategy[idx].pct - lockedTotal;
+      const sibTotal     = targets.reduce((s, p) => s + p.pct, 0);
+      if (sibTotal > 0) {
+        targets.forEach(p => { p.pct = (p.pct / sibTotal) * remaining; });
+      } else {
+        targets.forEach(p => { p.pct = remaining / targets.length; });
+      }
+      // Update sibling inputs + all R$ values without losing focus
+      const inv = state.investimento;
+      strategy.forEach((ph, i) => {
+        if (i !== idx) {
+          const el = document.getElementById(`sp-${i}`);
+          if (el) el.value = fmtD(ph.pct, 0);
+        }
+        const val = document.getElementById(`sp-val-${i}`);
+        if (val) val.textContent = fmtMoney(inv * ph.pct / 100);
+      });
+    }
+
+    function refreshStrategyInputs() {
+      // Re-format all inputs on blur (normalize display)
+      strategy.forEach((ph, i) => {
+        const el = document.getElementById(`sp-${i}`);
+        if (el && document.activeElement !== el) el.value = fmtD(ph.pct, 0);
+      });
+    }
+
+    function refreshStrategyValues() {
+      const inv = state.investimento;
+      strategy.forEach((ph, i) => {
+        const val = document.getElementById(`sp-val-${i}`);
+        if (val) val.textContent = fmtMoney(inv * ph.pct / 100);
+      });
+    }
+
+    // ── Init ─────────────────────────────────────────
+    renderConfig();
+    generatePlan();
+    renderStrategy();
+
+    // ── Theme ─────────────────────────────────────────
+    function toggleTheme() {
+      const light = document.documentElement.classList.toggle('light');
+      localStorage.setItem('plan-theme', light ? 'light' : 'dark');
+      document.getElementById('theme-btn').textContent = light ? '🌙 Escuro' : '☀ Claro';
+    }
+    if (localStorage.getItem('plan-theme') === 'light') {
+      document.documentElement.classList.add('light');
+      document.getElementById('theme-btn').textContent = '🌙 Escuro';
+    }
+
+    // ── Deploy date ───────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      const el = document.getElementById('deploy-date');
+      if (!el) return;
+      const d = new Date(document.lastModified);
+      const pad = n => String(n).padStart(2, '0');
+      const months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      el.textContent =
+        `${pad(d.getDate())} ${months[d.getMonth()]}. ${d.getFullYear()} às ${pad(d.getHours())}h${pad(d.getMinutes())}`;
+    });
+  </script>
+
+  <div class="bottom-bar">
+    <span>Atualizado em <span id="deploy-date">—</span></span>
+    <span>·</span>
+    <span>Feito com <span class="heart">♥</span></span>
+    <span>·</span>
+    <a href="/">agenciademarketingdigital.com.br</a>
+  </div>
+</body>
+</html>

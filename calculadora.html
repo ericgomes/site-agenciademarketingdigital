@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P2R23466');</script>
+  <!-- End Google Tag Manager -->
+  <title>Calculadora de Marketing Digital</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #07000d;
+      --surface:  #110819;
+      --surface2: #180d24;
+      --border:   rgba(255,255,255,0.07);
+      --purple:   #9333EA;
+      --purple-d: #7C3AED;
+      --muted:    #666;
+      --label:    #888;
+      --text:     #eee;
+      --topo:     #1a3a4a;
+      --meio:     #1a2a4a;
+      --fundo:    #1a1a4a;
+      --ret:      #2a1a4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: .75rem 1rem 3rem;
+    }
+
+    /* ── Header ──────────────────────────────────────────── */
+    header {
+      text-align: center;
+      margin-bottom: .6rem;
+    }
+    header a {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    header a:hover { color: var(--purple); }
+    header h1 {
+      font-size: clamp(1.15rem, 3vw, 1.55rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-top: 0.25rem;
+      background: linear-gradient(135deg, #c084fc 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { display: none; }
+
+    /* ── Single-column layout ────────────────────────────── */
+    .layout {
+      max-width: 700px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+    /* Bottom row: LTV params left, Results right */
+    .bottom-row {
+      display: grid; grid-template-columns: 240px 1fr; gap: .75rem; align-items: start;
+    }
+
+    /* ── Section ─────────────────────────────────────────── */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .section-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem 0.25rem;
+    }
+
+    .section-top h2 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+
+    /* ── Add button ──────────────────────────────────────── */
+    .btn-add {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      background: rgba(147,51,234,0.15);
+      color: #c084fc;
+      border: 1px solid rgba(147,51,234,0.3);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.03em;
+    }
+    .btn-add:hover { background: rgba(147,51,234,0.28); }
+
+    /* ── Channels table ──────────────────────────────────── */
+    .ch-table {
+      width: 100%;
+      overflow-x: auto;
+      padding: 0.5rem 0 0.75rem;
+    }
+
+    .ch-grid {
+      display: grid;
+      grid-template-columns: 160px repeat(6, 1fr) 32px;
+      min-width: 700px;
+      align-items: center;
+    }
+
+    .ch-head > span {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.25rem 0.75rem 0.5rem;
+    }
+
+    .ch-row {
+      display: contents;
+    }
+    .ch-row > * {
+      padding: 0.45rem 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .ch-row input {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--text);
+      width: 100%;
+      caret-color: var(--purple);
+    }
+    .ch-row input:focus { color: #c084fc; }
+
+    .ch-row .calc {
+      font-size: 0.82rem;
+      color: var(--label);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ch-row .ch-remove {
+      background: none;
+      border: none;
+      color: #555;
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 0.45rem 0.5rem;
+      border-top: 1px solid var(--border);
+      transition: color 0.15s;
+    }
+    .ch-row .ch-remove:hover { color: #f87171; }
+
+    .ch-total {
+      display: contents;
+    }
+    .ch-total > span {
+      padding: 0.5rem 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #c084fc;
+    }
+
+    /* ── Funnel ──────────────────────────────────────────── */
+    .funnel-wrap {
+      padding: 0.75rem 1rem 1.25rem;
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .stage {
+      flex: 1;
+      min-width: 190px;
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .stage-topo  { background: rgba(0,180,216,0.07);  border: 1px solid rgba(0,180,216,0.2); }
+    .stage-meio  { background: rgba(99,102,241,0.07); border: 1px solid rgba(99,102,241,0.2); }
+    .stage-fundo { background: rgba(147,51,234,0.08); border: 1px solid rgba(147,51,234,0.25); }
+    .stage-ret   { background: rgba(236,72,153,0.07); border: 1px solid rgba(236,72,153,0.2); }
+
+    .stage-badge {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      display: inline-block;
+      align-self: flex-start;
+    }
+    .stage-topo  .stage-badge { background: rgba(0,180,216,0.15);  color: #67e8f9; }
+    .stage-meio  .stage-badge { background: rgba(99,102,241,0.18); color: #a5b4fc; }
+    .stage-fundo .stage-badge { background: rgba(147,51,234,0.2);  color: #d8b4fe; }
+    .stage-ret   .stage-badge { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+
+    .stage-arrow {
+      display: flex;
+      align-items: center;
+      padding: 0 0.4rem;
+      color: #333;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Metric inside stage ─────────────────────────────── */
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .metric .mlabel {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+
+    .metric input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px dashed rgba(255,255,255,0.15);
+      outline: none;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--text);
+      width: 100%;
+      padding: 0.15rem 0;
+      caret-color: var(--purple);
+    }
+    .metric input:focus { border-bottom-color: var(--purple); color: #c084fc; }
+
+    .metric .mval {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--label);
+    }
+
+    .metric.big .mval,
+    .metric.big input {
+      font-size: 1.25rem;
+    }
+
+    /* ── ROAS hero ───────────────────────────────────────── */
+    .roas-hero {
+      padding: .75rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg,rgba(147,51,234,.14),rgba(99,102,241,.09));
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .roas-label {
+      font-size: .62rem; font-weight: 800; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--purple2); margin-bottom: .1rem;
+    }
+    .roas-sublabel { font-size: .55rem; color: var(--muted); font-weight: 600; }
+    .roas-value {
+      font-size: 1.6rem; font-weight: 800; line-height: 1;
+      background: linear-gradient(135deg,#c084fc,#818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ── Results ─────────────────────────────────────────── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .rc {
+      background: var(--surface2);
+      padding: .7rem .9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .rc-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+
+    .rc-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .rc-value.hl {
+      background: linear-gradient(135deg, #c084fc, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 1.2rem;
+    }
+
+    /* ── KPI top card ────────────────────────────────────── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+    .kpi {
+      background: var(--surface2);
+      padding: .9rem 1.1rem;
+      display: flex; flex-direction: column; gap: .25rem;
+    }
+    .kpi-label {
+      font-size: .6rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--label);
+    }
+    .kpi-value {
+      font-size: 1.15rem; font-weight: 800; color: var(--text);
+    }
+    .kpi-value.hl {
+      background: linear-gradient(135deg,#c084fc,#818cf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ── Period fields ───────────────────────────────────── */
+    .period-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+    }
+    .period-cell {
+      background: var(--surface);
+      padding: .75rem 1rem;
+    }
+    .period-cell .plabel {
+      font-size: .6rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: var(--label); margin-bottom: .3rem;
+    }
+    .period-cell input {
+      background: transparent; border: none; border-bottom: 1px dashed rgba(147,51,234,.4);
+      outline: none; font-size: .95rem; font-weight: 700; color: var(--text);
+      width: 100%; caret-color: var(--purple); padding: .1rem 0;
+      font-family: inherit;
+    }
+    .period-cell input:focus { border-bottom-color: var(--purple); color: #c084fc; }
+    .period-cell .phint {
+      font-size: .6rem; color: var(--muted); margin-top: .2rem;
+    }
+
+    /* ── Light theme ─────────────────────────────────────── */
+    html.light {
+      --bg:       #f4f0ff;
+      --surface:  #ffffff;
+      --surface2: #ede8ff;
+      --border:   rgba(0,0,0,0.08);
+      --muted:    #aaa;
+      --label:    #777;
+      --text:     #1a0b2e;
+    }
+    html.light .section { box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+    html.light .stage-topo  { background: rgba(0,180,216,0.08);  border-color: rgba(0,180,216,0.25); }
+    html.light .stage-meio  { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.25); }
+    html.light .stage-fundo { background: rgba(147,51,234,0.07); border-color: rgba(147,51,234,0.22); }
+    html.light .stage-ret   { background: rgba(236,72,153,0.07); border-color: rgba(236,72,153,0.22); }
+    html.light #ch-total > span { border-top-color: rgba(0,0,0,.1) !important; }
+    html.light .period-cell input { border-bottom-color: rgba(124,58,237,.35); }
+    html.light header h1 { filter: brightness(.85); }
+
+    /* ── Theme toggle ────────────────────────────────────── */
+    .theme-btn {
+      position: fixed; top: .9rem; right: 1rem; z-index: 200;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: .35rem .75rem;
+      font-size: .75rem; font-weight: 600; color: var(--label);
+      cursor: pointer; transition: border-color .15s, color .15s;
+      display: flex; align-items: center; gap: .35rem;
+    }
+    .theme-btn:hover { border-color: var(--purple); color: var(--purple); }
+
+    /* ── Bottom bar ──────────────────────────────────────── */
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: .5rem 1.5rem;
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      font-size: .7rem; color: var(--muted); z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .bottom-bar a { color: var(--label); text-decoration: none; }
+    .bottom-bar a:hover { color: var(--purple); }
+    .bottom-bar .heart { color: #f43f5e; }
+
+    /* ── Stage selector ─────────────────────────────────── */
+    .stage-sel {
+      display: flex; align-items: center;
+      padding: .6rem .75rem;
+      gap: 0;
+    }
+    .stage-chip {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: .25rem;
+      padding: .5rem .3rem; border-radius: 8px; cursor: pointer;
+      border: 1px solid transparent;
+      transition: background .15s, border-color .15s;
+    }
+    .stage-chip:hover { background: rgba(255,255,255,.04); }
+    .stage-chip.active.aw { background: rgba(0,180,216,.08);  border-color: rgba(0,180,216,.3);  }
+    .stage-chip.active.co { background: rgba(99,102,241,.08); border-color: rgba(99,102,241,.3); }
+    .stage-chip.active.cv { background: rgba(147,51,234,.09); border-color: rgba(147,51,234,.3); }
+    .stage-chip.active.fi { background: rgba(236,72,153,.07); border-color: rgba(236,72,153,.3); }
+
+    .stchip-badge {
+      font-size: .58rem; font-weight: 800; letter-spacing: .09em;
+      text-transform: uppercase; padding: .18rem .5rem; border-radius: 20px;
+      white-space: nowrap;
+    }
+    .stchip-badge.aw { background: rgba(0,180,216,.15);  color: #67e8f9; }
+    .stchip-badge.co { background: rgba(99,102,241,.18); color: #a5b4fc; }
+    .stchip-badge.cv { background: rgba(147,51,234,.2);  color: #d8b4fe; }
+    .stchip-badge.fi { background: rgba(236,72,153,.15); color: #f9a8d4; }
+
+    .stchip-hint { font-size: .56rem; color: var(--muted); text-align: center; line-height: 1.3; }
+    .stchip-arrow { color: #2a2a2a; font-size: .85rem; padding: 0 .1rem; flex-shrink: 0; }
+    html.light .stchip-arrow { color: #ccc; }
+
+    /* ── Vertical Funnel ─────────────────────────────────── */
+    .vfunnel {
+      display: flex; flex-direction: column; align-items: center;
+      padding: .65rem .75rem .9rem;
+    }
+
+    .vf-step {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+      padding: .42rem 1.1rem; border-radius: 8px;
+    }
+    .vf-step-left { display: flex; flex-direction: column; gap: .1rem; }
+    .vf-lbl {
+      font-size: .62rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--label); white-space: nowrap;
+    }
+    .vf-val {
+      font-size: 1.05rem; font-weight: 800; color: var(--text);
+      text-align: right; white-space: nowrap;
+    }
+    .vf-val-input {
+      font-size: 1.05rem; font-weight: 800; color: var(--text);
+      background: transparent; border: none; outline: none;
+      border-bottom: 1px dashed rgba(255,255,255,.2);
+      text-align: right; width: 115px; caret-color: var(--purple);
+      font-family: inherit; padding: .03rem 0;
+    }
+    .vf-val-input:focus { border-bottom-color: var(--purple); color: #c084fc; }
+    html.light .vf-val-input { border-bottom-color: rgba(0,0,0,.2); }
+
+    /* Each step narrows as the funnel goes down */
+    .vf-s0 { max-width: 520px; background: rgba(147,51,234,.15); border: 1px solid rgba(147,51,234,.4); }
+    .vf-s1 { max-width: 460px; background: rgba(0,180,216,.08);  border: 1px solid rgba(0,180,216,.3);  }
+    .vf-s2 { max-width: 400px; background: rgba(99,102,241,.08); border: 1px solid rgba(99,102,241,.3); }
+    .vf-s3 { max-width: 340px; background: rgba(139,92,246,.08); border: 1px solid rgba(139,92,246,.3); }
+    .vf-s4 { max-width: 280px; background: rgba(147,51,234,.12); border: 1px solid rgba(147,51,234,.4); }
+    .vf-s5 { max-width: 220px; background: rgba(236,72,153,.08); border: 1px solid rgba(236,72,153,.3); }
+
+    /* Sub-metrics inside Impressões step (Frequência + Alcance) */
+    .vf-submets { display: flex; align-items: center; gap: .3rem; }
+    .vf-sublbl {
+      font-size: .54rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .vf-subinput {
+      background: transparent; border: none;
+      border-bottom: 1px dashed rgba(147,51,234,.4); outline: none;
+      font-size: .76rem; font-weight: 700; color: var(--text);
+      width: 70px; caret-color: var(--purple); padding: 0;
+      font-family: inherit; text-align: center;
+    }
+    .vf-subinput:focus { border-bottom-color: var(--purple); color: #c084fc; }
+    .vf-subval { font-size: .76rem; font-weight: 700; color: var(--label); }
+    .vf-submet-sep { color: var(--muted); font-size: .55rem; }
+
+    .vf-conn {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .vf-line { width: 1px; height: 5px; background: var(--border); }
+    .vf-pill {
+      display: flex; align-items: center; gap: .35rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 20px; padding: .18rem .65rem;
+      font-size: .7rem; color: var(--muted); font-weight: 600; white-space: nowrap;
+    }
+    .vf-pill b { color: var(--label); font-weight: 700; }
+    .vf-pill input {
+      background: transparent; border: none;
+      border-bottom: 1px dashed rgba(147,51,234,.45); outline: none;
+      font-size: .88rem; font-weight: 700; color: var(--text);
+      width: 72px; text-align: center; caret-color: var(--purple);
+      padding: 0; font-family: inherit;
+    }
+    /* CPM input is wider to fit "R$ 00,00" */
+    #f-cpm { width: 82px; }
+    /* Freq input is narrower (single/double digit) */
+    #f-freq-ad { width: 32px; }
+    .vf-pill input:focus { border-bottom-color: var(--purple); color: #c084fc; }
+
+    /* Lock buttons for Imp / Alcance / Freq */
+    .metric-lock {
+      background: none; border: none; cursor: pointer;
+      font-size: .7rem; padding: 0 .08rem; line-height: 1;
+      opacity: .28; transition: opacity .15s; vertical-align: middle; flex-shrink: 0;
+    }
+    .metric-lock:hover { opacity: .75; }
+    .metric-lock.locked { opacity: .95; filter: hue-rotate(260deg) brightness(1.3); }
+    /* Wrap for Impressões value + lock icon */
+    .vf-val-wrap { display: flex; align-items: center; gap: .15rem; flex-shrink: 0; }
+
+    /* Retention inputs row */
+    .ret-row {
+      display: grid; grid-template-columns: 1fr;
+      gap: 1px; background: var(--border);
+    }
+    .ret-cell { background: var(--surface2); padding: .55rem .75rem; }
+    .ret-label {
+      font-size: .56rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--label); margin-bottom: .25rem;
+    }
+    .ret-cell input {
+      background: transparent; border: none;
+      border-bottom: 1px dashed rgba(147,51,234,.4); outline: none;
+      font-size: .88rem; font-weight: 700; color: var(--text);
+      width: 100%; caret-color: var(--purple); padding: .08rem 0; font-family: inherit;
+    }
+    .ret-cell input:focus { border-bottom-color: var(--purple); color: #c084fc; }
+
+    html.light .vf-pill { background: var(--surface); }
+    html.light .ret-cell { background: var(--surface); }
+
+    /* ── Section top compact ─────────────────────────────── */
+    .section-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem .9rem .2rem;
+    }
+    .section-top h2 {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--label);
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 520px) {
+      .bottom-row { grid-template-columns: 1fr; }
+      .ret-row    { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2R23466"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀ Claro</button>
+
+  <header>
+    <a href="/">agenciademarketingdigital.com.br</a>
+    <h1>Calculadora de Marketing Digital</h1>
+    <p>Multi-canal &nbsp;·&nbsp; Funil completo &nbsp;·&nbsp; LTV</p>
+  </header>
+
+  <div class="layout">
+
+    <!-- ══ TOP: Stage selector ═══════════════════════════════ -->
+    <div class="section">
+      <div class="stage-sel">
+        <div class="stage-chip aw" data-stage="aw" onclick="setStage('aw')">
+          <div class="stchip-badge aw">Awareness</div>
+          <div class="stchip-hint">Alcance · Reconhecimento</div>
+        </div>
+        <div class="stchip-arrow">›</div>
+        <div class="stage-chip co" data-stage="co" onclick="setStage('co')">
+          <div class="stchip-badge co">Consideração</div>
+          <div class="stchip-hint">Interesse · Avaliação</div>
+        </div>
+        <div class="stchip-arrow">›</div>
+        <div class="stage-chip cv" data-stage="cv" onclick="setStage('cv')">
+          <div class="stchip-badge cv">Conversão</div>
+          <div class="stchip-hint">Decisão · Compra</div>
+        </div>
+        <div class="stchip-arrow">›</div>
+        <div class="stage-chip fi" data-stage="fi" onclick="setStage('fi')">
+          <div class="stchip-badge fi">Fidelização</div>
+          <div class="stchip-hint">Retenção · LTV</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MIDDLE: Funil vertical ════════════════════════════ -->
+    <div class="section">
+      <div class="section-top">
+        <h2>Funil de Conversão</h2>
+      </div>
+
+      <div class="vfunnel">
+
+        <!-- Investimento -->
+        <div class="vf-step vf-s0">
+          <span class="vf-lbl">Investimento</span>
+          <input class="vf-val-input" id="f-inv" value="100.000"
+            inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+        </div>
+
+        <!-- CPM → Impressões -->
+        <div class="vf-conn">
+          <div class="vf-line"></div>
+          <div class="vf-pill">CPM&nbsp;
+            <input id="f-cpm" value="R$ 20" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" onblur="fmtCpmBlur()" />
+          </div>
+          <div class="vf-line"></div>
+        </div>
+
+        <!-- Impressões + Alcance/Freq -->
+        <div class="vf-step vf-s1">
+          <div class="vf-step-left">
+            <span class="vf-lbl">Impressões</span>
+            <div class="vf-submets">
+              <span class="vf-sublbl">Alcance</span>
+              <input class="vf-subinput" id="f-alcance" value="800.000"
+                inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+              <button class="metric-lock" id="lock-alcance" onclick="toggleLock('alcance')" title="Travar Alcance">🔓</button>
+              <span class="vf-submet-sep">·</span>
+              <span class="vf-sublbl">Freq.</span>
+              <input class="vf-subinput" id="f-freq-ad" value="5"
+                inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+              <button class="metric-lock" id="lock-freq" onclick="toggleLock('freq')" title="Travar Frequência">🔓</button>
+            </div>
+          </div>
+          <div class="vf-val-wrap">
+            <input class="vf-val-input" id="f-imp" value="5.000.000"
+              inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-imp" onclick="toggleLock('imp')" title="Travar Impressões">🔓</button>
+          </div>
+        </div>
+
+        <!-- CTR → Cliques -->
+        <div class="vf-conn">
+          <div class="vf-line"></div>
+          <div class="vf-pill">CTR &nbsp;
+            <input id="f-ctr" value="2%" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+          </div>
+          <div class="vf-line"></div>
+        </div>
+
+        <!-- Cliques -->
+        <div class="vf-step vf-s2">
+          <span class="vf-lbl">Cliques</span>
+          <span class="vf-val" id="f-cl">—</span>
+        </div>
+
+        <!-- Connect Rate → Visitas -->
+        <div class="vf-conn">
+          <div class="vf-line"></div>
+          <div class="vf-pill">Connect Rate &nbsp;
+            <input id="f-connect" value="90%" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+          </div>
+          <div class="vf-line"></div>
+        </div>
+
+        <!-- Visitas -->
+        <div class="vf-step vf-s3">
+          <span class="vf-lbl">Visitas</span>
+          <span class="vf-val" id="f-visitas">—</span>
+        </div>
+
+        <!-- Taxa de Conversão → Conversões -->
+        <div class="vf-conn">
+          <div class="vf-line"></div>
+          <div class="vf-pill">Conversão &nbsp;
+            <input id="f-txconv" value="8%" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+          </div>
+          <div class="vf-line"></div>
+        </div>
+
+        <!-- Conversões -->
+        <div class="vf-step vf-s4">
+          <span class="vf-lbl">Conversões</span>
+          <span class="vf-val" id="f-conv">—</span>
+        </div>
+
+        <!-- Ticket Médio → Receita -->
+        <div class="vf-conn">
+          <div class="vf-line"></div>
+          <div class="vf-pill">Ticket Médio R$&nbsp;
+            <input id="f-ticket" value="100" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+          </div>
+          <div class="vf-line"></div>
+        </div>
+
+        <!-- Receita -->
+        <div class="vf-step vf-s5">
+          <span class="vf-lbl">Receita</span>
+          <span class="vf-val" id="f-rec-val">—</span>
+        </div>
+
+      </div>
+    </div><!-- /funnel section -->
+
+    <!-- ══ BOTTOM: LTV + Resultados ══════════════════════════ -->
+    <div class="bottom-row">
+
+      <!-- Parâmetros LTV -->
+      <div class="section">
+        <div class="section-top"><h2>Parâmetros LTV</h2></div>
+        <div class="ret-row">
+          <div class="ret-cell">
+            <div class="ret-label">Taxa de Retenção</div>
+            <input id="f-txret" value="40%" inputmode="decimal" oninput="calcFunnel()" />
+          </div>
+          <div class="ret-cell">
+            <div class="ret-label">Recompras / ano</div>
+            <input id="f-freq-rec" value="3" inputmode="decimal" oninput="calcFunnel()" />
+          </div>
+          <div class="ret-cell">
+            <div class="ret-label">Período (anos)</div>
+            <input id="f-periodo" value="2" inputmode="decimal" oninput="calcFunnel()" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultados Consolidados -->
+      <div class="section">
+        <div class="section-top"><h2>Resultados</h2></div>
+        <div class="roas-hero">
+          <div>
+            <div class="roas-label">ROAS</div>
+            <div class="roas-sublabel">retorno sobre investimento</div>
+          </div>
+          <div class="roas-value" id="r-roas">—</div>
+        </div>
+        <div class="results-grid">
+          <div class="rc"><div class="rc-label">Investimento</div><div class="rc-value" id="r-inv">—</div></div>
+          <div class="rc"><div class="rc-label">Receita</div><div class="rc-value" id="r-rec1">—</div></div>
+          <div class="rc"><div class="rc-label">CPA</div><div class="rc-value" id="r-cpa">—</div></div>
+          <div class="rc"><div class="rc-label">LTV / cliente</div><div class="rc-value" id="r-ltv">—</div></div>
+          <div class="rc"><div class="rc-label">LTV : CAC</div><div class="rc-value hl" id="r-ltvcac">—</div></div>
+          <div class="rc"><div class="rc-label">ROI (c/ LTV)</div><div class="rc-value hl" id="r-roi">—</div></div>
+          <div class="rc" style="grid-column:1/-1"><div class="rc-label">Receita c/ LTV</div><div class="rc-value" id="r-recltv">—</div></div>
+        </div>
+      </div>
+
+    </div><!-- /bottom-row -->
+
+  </div><!-- /layout -->
+
+  <div class="bottom-bar">
+    <span>Atualizado em <span id="deploy-date">—</span></span>
+    <span>·</span>
+    <span>Feito com <span class="heart">♥</span></span>
+    <span>·</span>
+    <a href="/">agenciademarketingdigital.com.br</a>
+  </div>
+
+  <script>
+    // ── State ──────────────────────────────────────────────
+    const channels = [
+      { id: 1, name: 'Google Ads', budget: 2500000, cpm: 25,   cpc: 1.00 },
+      { id: 2, name: 'Meta Ads',   budget: 2500000, cpm: 15,   cpc: 0.50 },
+    ];
+    let nextId = 3;
+
+    // ── Helpers ────────────────────────────────────────────
+    const toNum = s => parseFloat(String(s).replace(/R\$\s*/g,'').replace(/\./g,'').replace(',','.').replace('%','').replace('x','')) || 0;
+    const fmtI  = n => isFinite(n) ? Math.round(n).toLocaleString('pt-BR') : '—';
+    const fmtD  = (n, d=2) => isFinite(n) ? n.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d}) : '—';
+    // Format currency without zero cents: R$ 20 instead of R$ 20,00
+    const fmtNC = n => {
+      if (!isFinite(n)) return '—';
+      const r = Math.round(n * 100) / 100;
+      return r % 1 === 0
+        ? r.toLocaleString('pt-BR', {minimumFractionDigits:0, maximumFractionDigits:0})
+        : r.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+    };
+    const fmtR  = n => isFinite(n) && n > 0 ? 'R$ ' + fmtI(n) : '—';
+    const fmtP  = n => isFinite(n) ? fmtD(n) + '%' : '—';
+    const fmtX  = n => isFinite(n) && n > 0 ? fmtD(n) + 'x' : '—';
+    const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+    // ── Lock state for Imp / Alcance / Freq ───────────────
+    let impLocked = false, alcanceLocked = false, freqLocked = false;
+
+    function toggleLock(field) {
+      if      (field === 'imp')    impLocked    = !impLocked;
+      else if (field === 'alcance') alcanceLocked = !alcanceLocked;
+      else if (field === 'freq')   freqLocked   = !freqLocked;
+      const locked = field === 'imp' ? impLocked : field === 'alcance' ? alcanceLocked : freqLocked;
+      const btn = document.getElementById('lock-' + field);
+      if (btn) {
+        btn.textContent = locked ? '🔒' : '🔓';
+        btn.classList.toggle('locked', locked);
+      }
+    }
+
+    // ── (channels removed) ────────────────────────────────
+    function renderChannels() {
+      const rowsEl = document.getElementById('ch-rows');
+      rowsEl.innerHTML = channels.map(ch => {
+        const imp = ch.cpm > 0 ? ch.budget / ch.cpm * 1000 : 0;
+        const cl  = ch.cpc > 0 ? ch.budget / ch.cpc        : 0;
+        const ctr = imp > 0    ? cl / imp * 100             : 0;
+        ch._imp = imp; ch._cl = cl;
+        const canRemove = channels.length > 1;
+        return `<div class="ch-row" style="display:contents">
+          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
+            <input value="${ch.name}" oninput="chField(${ch.id},'name',this.value)"
+              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
+          </span>
+          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
+            <input value="${fmtI(ch.budget)}" oninput="chField(${ch.id},'budget',this.value)" inputmode="decimal"
+              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
+          </span>
+          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
+            <input value="${fmtD(ch.cpm)}" oninput="chField(${ch.id},'cpm',this.value)" inputmode="decimal"
+              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
+          </span>
+          <span class="calc" style="padding:.45rem .75rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--label)" id="ci-${ch.id}">${fmtI(imp)}</span>
+          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
+            <input value="${fmtD(ch.cpc)}" oninput="chField(${ch.id},'cpc',this.value)" inputmode="decimal"
+              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
+          </span>
+          <span class="calc" style="padding:.45rem .75rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--label)" id="cc-${ch.id}">${fmtI(cl)}</span>
+          <span class="calc" style="padding:.45rem .75rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--label)" id="ct-${ch.id}">${fmtP(ctr)}</span>
+          <span style="padding:.45rem .5rem;border-top:1px solid var(--border)">
+            ${canRemove ? `<button onclick="removeChannel(${ch.id})" style="background:none;border:none;color:#555;cursor:pointer;font-size:1rem;transition:color .15s" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='#555'">×</button>` : ''}
+          </span>
+        </div>`;
+      }).join('');
+      updateTotals();
+    }
+
+    function updateTotals() {
+      const totB = channels.reduce((s,c) => s + c.budget, 0);
+      const totI = channels.reduce((s,c) => s + (c._imp||0), 0);
+      const totC = channels.reduce((s,c) => s + (c._cl||0), 0);
+      const totCTR = totI > 0 ? totC / totI * 100 : 0;
+      document.getElementById('ch-total').innerHTML =
+        `<span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">Total</span>
+         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtI(totB)}</span>
+         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;color:var(--muted)">—</span>
+         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtI(totI)}</span>
+         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;color:var(--muted)">—</span>
+         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtI(totC)}</span>
+         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtP(totCTR)}</span>
+         <span style="padding:.5rem .5rem;border-top:1px solid rgba(255,255,255,.12)"></span>`;
+    }
+
+    function chField(id, field, value) {
+      const ch = channels.find(c => c.id === id);
+      if (!ch) return;
+      if (field === 'name') { ch.name = value; return; }
+      ch[field] = toNum(value);
+      // Update just this row's calculated cells
+      const imp = ch.cpm > 0 ? ch.budget / ch.cpm * 1000 : 0;
+      const cl  = ch.cpc > 0 ? ch.budget / ch.cpc        : 0;
+      const ctr = imp > 0    ? cl / imp * 100             : 0;
+      ch._imp = imp; ch._cl = cl;
+      setText(`ci-${id}`, fmtI(imp));
+      setText(`cc-${id}`, fmtI(cl));
+      setText(`ct-${id}`, fmtP(ctr));
+      updateTotals();
+      calcFunnel();
+    }
+
+    function addChannel() {
+      channels.push({ id: nextId++, name: 'Novo Canal', budget: 0, cpm: 0, cpc: 0, _imp: 0, _cl: 0 });
+      renderChannels();
+      calcFunnel();
+    }
+
+    function removeChannel(id) {
+      const i = channels.findIndex(c => c.id === id);
+      if (i > -1) channels.splice(i, 1);
+      renderChannels();
+      calcFunnel();
+    }
+
+    // ── Funnel ────────────────────────────────────────────
+    // Relationship: Imp = Alcance × Freq
+    // The active element determines the "driver"; locked fields are protected from auto-update.
+    // CPM also drives Imp (Imp = Inv/CPM×1000) when neither Imp nor Alcance/Freq is the driver.
+    function calcFunnel() {
+      const totB     = toNum(document.getElementById('f-inv').value) || 0;
+      const cpm      = toNum(document.getElementById('f-cpm').value) || 0;
+      const cpmImp   = cpm > 0 ? (totB / cpm) * 1000 : 0;
+
+      const impEl     = document.getElementById('f-imp');
+      const alcanceEl = document.getElementById('f-alcance');
+      const freqEl    = document.getElementById('f-freq-ad');
+      const ae        = document.activeElement;
+
+      let imp     = toNum(impEl    ? impEl.value     : '0');
+      let alcance = toNum(alcanceEl ? alcanceEl.value : '0');
+      let freq    = toNum(freqEl   ? freqEl.value    : '0');
+
+      if (ae === impEl) {
+        // ── User typing Imp directly ─────────────────
+        imp = toNum(impEl.value);
+        if (!alcanceLocked && !freqLocked) {
+          // Keep Freq, update Alcance
+          alcance = freq > 0 ? imp / freq : alcance;
+          if (alcanceEl) alcanceEl.value = fmtI(alcance);
+        } else if (!alcanceLocked) {
+          alcance = freq > 0 ? imp / freq : alcance;
+          if (alcanceEl) alcanceEl.value = fmtI(alcance);
+        } else if (!freqLocked) {
+          freq = alcance > 0 ? imp / alcance : freq;
+          if (freqEl) freqEl.value = fmtD(freq, 1);
+        }
+        // Both locked → nothing auto-updates
+
+      } else if (ae === alcanceEl) {
+        // ── User typing Alcance ───────────────────────
+        alcance = toNum(alcanceEl.value);
+        if (!impLocked) {
+          imp = alcance * freq;
+          if (impEl) impEl.value = fmtI(imp);
+        } else {
+          // Imp locked → adjust Freq instead (if unlocked)
+          imp = toNum(impEl.value);
+          if (!freqLocked) {
+            freq = alcance > 0 ? imp / alcance : freq;
+            if (freqEl) freqEl.value = fmtD(freq, 1);
+          }
+        }
+
+      } else if (ae === freqEl) {
+        // ── User typing Freq ──────────────────────────
+        freq = toNum(freqEl.value);
+        if (!impLocked) {
+          imp = alcance * freq;
+          if (impEl) impEl.value = fmtI(imp);
+        } else {
+          // Imp locked → adjust Alcance instead (if unlocked)
+          imp = toNum(impEl.value);
+          if (!alcanceLocked) {
+            alcance = freq > 0 ? imp / freq : alcance;
+            if (alcanceEl) alcanceEl.value = fmtI(alcance);
+          }
+        }
+
+      } else {
+        // ── CPM / Inv / other field changed ──────────
+        if (!impLocked) {
+          imp = cpmImp;
+          if (impEl) impEl.value = fmtI(imp);
+        } else {
+          imp = toNum(impEl ? impEl.value : '0');
+        }
+        // Derive Alcance/Freq from Imp
+        if (!alcanceLocked && !freqLocked) {
+          freq = alcance > 0 ? imp / alcance : freq;
+          if (freqEl) freqEl.value = freq > 0 ? fmtD(freq, 1) : '';
+        } else if (alcanceLocked && !freqLocked) {
+          freq = alcance > 0 ? imp / alcance : freq;
+          if (freqEl) freqEl.value = freq > 0 ? fmtD(freq, 1) : '';
+        } else if (!alcanceLocked && freqLocked) {
+          alcance = freq > 0 ? imp / freq : alcance;
+          if (alcanceEl) alcanceEl.value = fmtI(alcance);
+        }
+        // Both locked → do nothing with alcance/freq
+      }
+
+      const ctrPct  = toNum(document.getElementById('f-ctr').value)    || 0;
+      const totC    = imp * (ctrPct / 100);
+
+      const connect = toNum(document.getElementById('f-connect').value);
+      const txconv  = toNum(document.getElementById('f-txconv').value);
+      const ticket  = toNum(document.getElementById('f-ticket').value);
+      const txret   = toNum(document.getElementById('f-txret').value);
+      const freqRec = toNum(document.getElementById('f-freq-rec').value);
+      const periodo = toNum(document.getElementById('f-periodo').value);
+
+      const visitas = totC * (connect / 100);
+      const conv    = visitas * (txconv / 100);
+      const receita = conv * ticket;
+      const cpa     = conv > 0  ? totB / conv    : 0;
+      const roas    = totB > 0  ? receita / totB : 0;
+      const ltv     = ticket * freqRec * periodo;
+      const cac     = conv > 0  ? totB / conv    : 0;
+      const ltvCac  = cac > 0   ? ltv / cac      : 0;
+      const recLtv  = conv * ltv;
+      const roi     = totB > 0  ? recLtv / totB  : 0;
+
+      // Funnel display (f-imp is now an input, updated above)
+      setText('f-cl',      fmtI(totC));
+      setText('f-visitas', fmtI(visitas));
+      setText('f-conv',    fmtI(conv));
+      setText('f-rec-val', fmtR(receita));
+
+      // Results
+      setText('r-inv',    fmtR(totB));
+      setText('r-rec1',   fmtR(receita));
+      setText('r-roas',   fmtX(roas));
+      setText('r-cpa',    fmtR(cpa));
+      setText('r-ltv',    fmtR(ltv));
+      setText('r-ltvcac', fmtX(ltvCac));
+      setText('r-recltv', fmtR(recLtv));
+      setText('r-roi',    fmtX(roi));
+    }
+
+    // ── Stage presets ─────────────────────────────────────
+    const stagePresets = {
+      //              CPM        CTR     Alcance      Connect  Conversão  Ticket  Retenção  Recompras  Período
+      aw: { cpm:'R$ 25', ctr:'0,3%', alcance:'800.000',  connect:'90%', txconv:'0,3%',  ticket:'100', txret:'15%', freqRec:'2', periodo:'2' },
+      co: { cpm:'R$ 18', ctr:'1%',   alcance:'500.000',  connect:'93%', txconv:'1%',    ticket:'100', txret:'35%', freqRec:'3', periodo:'2' },
+      cv: { cpm:'R$ 12', ctr:'3%',   alcance:'200.000',  connect:'95%', txconv:'4%',    ticket:'100', txret:'55%', freqRec:'4', periodo:'2' },
+      fi: { cpm:'R$ 8',  ctr:'5%',   alcance:'100.000',  connect:'98%', txconv:'10%',   ticket:'100', txret:'75%', freqRec:'6', periodo:'3' },
+    };
+
+    function fmtCpmBlur() {
+      const el = document.getElementById('f-cpm');
+      if (!el) return;
+      const n = toNum(el.value);
+      if (isFinite(n) && n > 0) el.value = 'R$ ' + fmtNC(n);
+    }
+
+    function setStage(key) {
+      const p = stagePresets[key];
+      if (!p) return;
+      // Reset all locks so preset values take effect
+      impLocked = false; alcanceLocked = false; freqLocked = false;
+      ['imp','alcance','freq'].forEach(f => {
+        const btn = document.getElementById('lock-' + f);
+        if (btn) { btn.textContent = '🔓'; btn.classList.remove('locked'); }
+      });
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+      set('f-cpm',     p.cpm);
+      set('f-ctr',     p.ctr);
+      set('f-alcance', p.alcance);
+      set('f-connect', p.connect);
+      set('f-txconv',  p.txconv);
+      set('f-ticket',  p.ticket);
+      set('f-txret',   p.txret);
+      set('f-freq-rec',p.freqRec);
+      set('f-periodo', p.periodo);
+      document.querySelectorAll('.stage-chip').forEach(el => el.classList.remove('active'));
+      const chip = document.querySelector(`.stage-chip[data-stage="${key}"]`);
+      if (chip) chip.classList.add('active');
+      calcFunnel();
+    }
+
+    // ── Theme ─────────────────────────────────────────────
+    function toggleTheme() {
+      const light = document.documentElement.classList.toggle('light');
+      localStorage.setItem('calc-theme', light ? 'light' : 'dark');
+      document.getElementById('theme-btn').textContent = light ? '🌙 Escuro' : '☀ Claro';
+    }
+    if (localStorage.getItem('calc-theme') === 'light') {
+      document.documentElement.classList.add('light');
+      document.getElementById('theme-btn').textContent = '🌙 Escuro';
+    }
+
+    // ── Deploy date ────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      const el = document.getElementById('deploy-date');
+      if (!el) return;
+      const d = new Date(document.lastModified);
+      const pad = n => String(n).padStart(2, '0');
+      const months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      el.textContent =
+        `${pad(d.getDate())} ${months[d.getMonth()]}. ${d.getFullYear()} às ${pad(d.getHours())}h${pad(d.getMinutes())}`;
+    });
+
+    // ── Init ──────────────────────────────────────────────
+    calcFunnel();
+  </script>
+</body>
+</html>
