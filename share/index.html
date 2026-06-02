@@ -23,6 +23,7 @@
       position: fixed; top: 0; left: 0;
     }
     html.viewer .form-wrapper { display: none; }
+    .form-wrapper { width: 100%; display: flex; justify-content: center; }
 
     /* ── Form mode ─────────────────────────────────────────────── */
     html.form body {
@@ -32,7 +33,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 1rem;
     }
     html.form #shareFrame { display: none; }
 
@@ -41,8 +42,8 @@
       border-radius: 12px;
       box-shadow: 0 2px 16px rgba(0,0,0,0.08);
       padding: 2rem;
-      width: 100%;
-      max-width: 480px;
+      width: min(860px, 100%);
+      box-sizing: border-box;
     }
 
     h1 { font-size: 1.2rem; font-weight: 700; color: #111; margin-bottom: 1.5rem; }
@@ -141,19 +142,14 @@
       <h1>Gerar Link</h1>
 
       <label for="inp-src">
-        URL ou código embed
+        Link
         <span class="badge" id="type-badge"></span>
       </label>
       <textarea id="inp-src" rows="3"
         placeholder="Cole aqui a URL ou o &lt;iframe&gt; de embed"></textarea>
 
-      <p class="hint">
-        Aceita links de publicação e códigos <span>&lt;iframe&gt;</span> de
-        <span>Google Docs</span>, <span>Google Slides</span> e <span>Looker Studio / Data Studio</span>.
-      </p>
-      <ul class="hint-sources">
-        <li><span>Google Docs / Slides</span> → Arquivo → Publicar na web → Incorporar</li>
-        <li><span>Looker Studio</span> → Compartilhar → Incorporar relatório</li>
+      <ul class="hint-sources" id="hint-ds" style="display:none">
+        <li><span>Data Studio</span> → Arquivo → Embed Report → Habilitar Embedding (obrigatório)</li>
       </ul>
 
       <label for="inp-t">Título</label>
@@ -181,14 +177,17 @@
       const slidesPub = url.match(/\/presentation\/d\/e\/([A-Za-z0-9_-]+)/i);
       if (slidesPub) return { id: slidesPub[1], type: 'slides' };
 
+      const slidesEdit = url.match(/\/presentation\/d\/([A-Za-z0-9_-]+)/i);
+      if (slidesEdit) return { id: slidesEdit[1], type: 'slides-edit' };
+
       const docsPub = url.match(/\/document\/d\/e\/([A-Za-z0-9_-]+)/i);
       if (docsPub) return { id: docsPub[1], type: 'docs-pub' };
 
       const docsEdit = url.match(/\/document\/d\/([A-Za-z0-9_-]+)/i);
       if (docsEdit) return { id: docsEdit[1], type: 'docs' };
 
-      const looker = url.match(/\/reporting\/([a-f0-9-]{36})/i);
-      if (looker) return { id: looker[1], type: 'looker' };
+      const looker = url.match(/\/reporting\/([a-f0-9-]{36})(\/page\/[A-Za-z0-9_]+)?/i);
+      if (looker) return { id: looker[1] + (looker[2] || ''), type: 'looker' };
 
       if (url.startsWith('2PACX-')) return { id: url, type: params.get('type') || 'slides' };
 
@@ -197,9 +196,10 @@
     }
 
     function buildSrc({ id, type }) {
-      if (type === 'slides')   return `https://docs.google.com/presentation/d/e/${id}/pubembed?start=false&loop=false&delayms=3000`;
-      if (type === 'docs-pub') return `https://docs.google.com/document/d/e/${id}/pub?embedded=true`;
-      if (type === 'docs')     return `https://docs.google.com/document/d/${id}/preview`;
+      if (type === 'slides')      return `https://docs.google.com/presentation/d/e/${id}/pubembed?start=false&loop=false&delayms=3000`;
+      if (type === 'slides-edit') return `https://docs.google.com/presentation/d/${id}/embed`;
+      if (type === 'docs-pub')    return `https://docs.google.com/document/d/e/${id}/pub?embedded=true`;
+      if (type === 'docs')        return `https://docs.google.com/document/d/${id}/preview`;
       return `https://datastudio.google.com/embed/reporting/${id}`;
     }
 
@@ -209,7 +209,7 @@
     if (params.has('id')) {
       // Viewer mode
       document.documentElement.className = 'viewer';
-      const title = params.get('t') || 'Documento';
+      const title = params.get('t') || 'Agência Linka Marketing Digital';
       document.title = title;
 
       const result = parse(params.get('id'));
@@ -227,10 +227,11 @@
       const badge = document.getElementById('type-badge');
       if (!val) { badge.className = 'badge'; badge.textContent = ''; return; }
       const { type } = parse(val);
-      const labels = { slides: 'Google Slides', docs: 'Google Docs', 'docs-pub': 'Google Docs', looker: 'Looker Studio' };
-      const group  = type === 'docs-pub' ? 'docs' : type;
+      const labels = { slides: 'Google Slides', 'slides-edit': 'Google Slides', docs: 'Google Docs', 'docs-pub': 'Google Docs', looker: 'Data Studio' };
+      const group  = type === 'docs-pub' ? 'docs' : type === 'slides-edit' ? 'slides' : type;
       badge.className = `badge ${group} visible`;
-      badge.textContent = labels[type] || 'Looker Studio';
+      badge.textContent = labels[type] || 'Data Studio';
+      document.getElementById('hint-ds').style.display = type === 'looker' ? '' : 'none';
     });
 
     function generate() {
