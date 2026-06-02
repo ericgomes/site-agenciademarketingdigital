@@ -190,7 +190,7 @@
       const looker = url.match(/\/reporting\/([a-f0-9-]{36})/i);
       if (looker) return { id: looker[1], type: 'looker' };
 
-      if (url.startsWith('2PACX-')) return { id: url, type: 'slides' };
+      if (url.startsWith('2PACX-')) return { id: url, type: params.get('type') || 'slides' };
 
       // Fallback: respeita ?type= explícito da URL, senão assume looker
       return { id: url, type: params.get('type') || 'looker' };
