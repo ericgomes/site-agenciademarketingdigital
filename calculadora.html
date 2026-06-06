@@ -410,6 +410,23 @@
       display: flex; align-items: center; gap: .35rem;
     }
     .theme-btn:hover { border-color: var(--purple); color: var(--purple); }
+    .share-btn { right: 7.8rem; }
+    .share-btn.ok { border-color: #34d399; color: #34d399; }
+
+    /* ── Toast (valor impossível com os cadeados atuais) ── */
+    .toast {
+      position: fixed; left: 50%; bottom: 4.5rem;
+      transform: translateX(-50%) translateY(16px);
+      background: #2a0f1a; border: 1px solid #f87171; color: #fecaca;
+      padding: .7rem 1.1rem; border-radius: 10px;
+      font-size: .8rem; font-weight: 600; line-height: 1.35;
+      box-shadow: 0 10px 34px rgba(0,0,0,.45); z-index: 500;
+      max-width: min(92vw, 420px); text-align: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast .toast-ico { margin-right: .35rem; }
 
     /* ── Bottom bar ──────────────────────────────────────── */
     .bottom-bar {
@@ -590,6 +607,7 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
+  <button class="theme-btn share-btn" id="share-btn" onclick="copyShareLink()" title="Copiar link com seus valores">🔗 Copiar link</button>
   <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀ Claro</button>
 
   <header>
@@ -636,15 +654,19 @@
         <!-- Investimento -->
         <div class="vf-step vf-s0">
           <span class="vf-lbl">Investimento</span>
-          <input class="vf-val-input" id="f-inv" value="100.000"
-            inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+          <div class="vf-val-wrap">
+            <input class="vf-val-input" id="f-inv" value="100.000"
+              inputmode="decimal" oninput="onEdit('inv')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-inv" onclick="toggleLock('inv')" title="Travar Investimento">🔓</button>
+          </div>
         </div>
 
         <!-- CPM → Impressões -->
         <div class="vf-conn">
           <div class="vf-line"></div>
           <div class="vf-pill">CPM&nbsp;
-            <input id="f-cpm" value="R$ 20" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" onblur="fmtCpmBlur()" />
+            <input id="f-cpm" value="R$ 20" inputmode="decimal" oninput="onEdit('cpm')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-cpm" onclick="toggleLock('cpm')" title="Travar CPM">🔓</button>
           </div>
           <div class="vf-line"></div>
         </div>
@@ -656,18 +678,18 @@
             <div class="vf-submets">
               <span class="vf-sublbl">Alcance</span>
               <input class="vf-subinput" id="f-alcance" value="800.000"
-                inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+                inputmode="decimal" oninput="onEdit('alcance')" onblur="renderModel()" onfocus="this.select()" />
               <button class="metric-lock" id="lock-alcance" onclick="toggleLock('alcance')" title="Travar Alcance">🔓</button>
               <span class="vf-submet-sep">·</span>
               <span class="vf-sublbl">Freq.</span>
               <input class="vf-subinput" id="f-freq-ad" value="5"
-                inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+                inputmode="decimal" oninput="onEdit('freq')" onblur="renderModel()" onfocus="this.select()" />
               <button class="metric-lock" id="lock-freq" onclick="toggleLock('freq')" title="Travar Frequência">🔓</button>
             </div>
           </div>
           <div class="vf-val-wrap">
             <input class="vf-val-input" id="f-imp" value="5.000.000"
-              inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+              inputmode="decimal" oninput="onEdit('imp')" onblur="renderModel()" onfocus="this.select()" />
             <button class="metric-lock" id="lock-imp" onclick="toggleLock('imp')" title="Travar Impressões">🔓</button>
           </div>
         </div>
@@ -676,7 +698,8 @@
         <div class="vf-conn">
           <div class="vf-line"></div>
           <div class="vf-pill">CTR &nbsp;
-            <input id="f-ctr" value="2%" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+            <input id="f-ctr" value="2%" inputmode="decimal" oninput="onEdit('ctr')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-ctr" onclick="toggleLock('ctr')" title="Travar CTR">🔓</button>
           </div>
           <div class="vf-line"></div>
         </div>
@@ -684,14 +707,19 @@
         <!-- Cliques -->
         <div class="vf-step vf-s2">
           <span class="vf-lbl">Cliques</span>
-          <span class="vf-val" id="f-cl">—</span>
+          <div class="vf-val-wrap">
+            <input class="vf-val-input" id="f-cl" value="100.000"
+              inputmode="decimal" oninput="onEdit('cl')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-cl" onclick="toggleLock('cl')" title="Travar Cliques">🔓</button>
+          </div>
         </div>
 
         <!-- Connect Rate → Visitas -->
         <div class="vf-conn">
           <div class="vf-line"></div>
           <div class="vf-pill">Connect Rate &nbsp;
-            <input id="f-connect" value="90%" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+            <input id="f-connect" value="90%" inputmode="decimal" oninput="onEdit('connect')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-connect" onclick="toggleLock('connect')" title="Travar Connect Rate">🔓</button>
           </div>
           <div class="vf-line"></div>
         </div>
@@ -699,14 +727,19 @@
         <!-- Visitas -->
         <div class="vf-step vf-s3">
           <span class="vf-lbl">Visitas</span>
-          <span class="vf-val" id="f-visitas">—</span>
+          <div class="vf-val-wrap">
+            <input class="vf-val-input" id="f-visitas" value="90.000"
+              inputmode="decimal" oninput="onEdit('visitas')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-visitas" onclick="toggleLock('visitas')" title="Travar Visitas">🔓</button>
+          </div>
         </div>
 
         <!-- Taxa de Conversão → Conversões -->
         <div class="vf-conn">
           <div class="vf-line"></div>
           <div class="vf-pill">Conversão &nbsp;
-            <input id="f-txconv" value="8%" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+            <input id="f-txconv" value="8%" inputmode="decimal" oninput="onEdit('txconv')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-txconv" onclick="toggleLock('txconv')" title="Travar Taxa de Conversão">🔓</button>
           </div>
           <div class="vf-line"></div>
         </div>
@@ -714,14 +747,19 @@
         <!-- Conversões -->
         <div class="vf-step vf-s4">
           <span class="vf-lbl">Conversões</span>
-          <span class="vf-val" id="f-conv">—</span>
+          <div class="vf-val-wrap">
+            <input class="vf-val-input" id="f-conv" value="7.200"
+              inputmode="decimal" oninput="onEdit('conv')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-conv" onclick="toggleLock('conv')" title="Travar Conversões">🔓</button>
+          </div>
         </div>
 
         <!-- Ticket Médio → Receita -->
         <div class="vf-conn">
           <div class="vf-line"></div>
           <div class="vf-pill">Ticket Médio R$&nbsp;
-            <input id="f-ticket" value="100" inputmode="decimal" oninput="calcFunnel()" onfocus="this.select()" />
+            <input id="f-ticket" value="100" inputmode="decimal" oninput="onEdit('ticket')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-ticket" onclick="toggleLock('ticket')" title="Travar Ticket Médio">🔓</button>
           </div>
           <div class="vf-line"></div>
         </div>
@@ -729,7 +767,11 @@
         <!-- Receita -->
         <div class="vf-step vf-s5">
           <span class="vf-lbl">Receita</span>
-          <span class="vf-val" id="f-rec-val">—</span>
+          <div class="vf-val-wrap">
+            <input class="vf-val-input" id="f-rec-val" value="720.000"
+              inputmode="decimal" oninput="onEdit('rec')" onblur="renderModel()" onfocus="this.select()" />
+            <button class="metric-lock" id="lock-rec" onclick="toggleLock('rec')" title="Travar Receita">🔓</button>
+          </div>
         </div>
 
       </div>
@@ -744,15 +786,15 @@
         <div class="ret-row">
           <div class="ret-cell">
             <div class="ret-label">Taxa de Retenção</div>
-            <input id="f-txret" value="40%" inputmode="decimal" oninput="calcFunnel()" />
+            <input id="f-txret" value="40%" inputmode="decimal" oninput="onParam()" />
           </div>
           <div class="ret-cell">
             <div class="ret-label">Recompras / ano</div>
-            <input id="f-freq-rec" value="3" inputmode="decimal" oninput="calcFunnel()" />
+            <input id="f-freq-rec" value="3" inputmode="decimal" oninput="onParam()" />
           </div>
           <div class="ret-cell">
             <div class="ret-label">Período (anos)</div>
-            <input id="f-periodo" value="2" inputmode="decimal" oninput="calcFunnel()" />
+            <input id="f-periodo" value="2" inputmode="decimal" oninput="onParam()" />
           </div>
         </div>
       </div>
@@ -782,6 +824,8 @@
 
   </div><!-- /layout -->
 
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
   <div class="bottom-bar">
     <span>Atualizado em <span id="deploy-date">—</span></span>
     <span>·</span>
@@ -791,13 +835,6 @@
   </div>
 
   <script>
-    // ── State ──────────────────────────────────────────────
-    const channels = [
-      { id: 1, name: 'Google Ads', budget: 2500000, cpm: 25,   cpc: 1.00 },
-      { id: 2, name: 'Meta Ads',   budget: 2500000, cpm: 15,   cpc: 0.50 },
-    ];
-    let nextId = 3;
-
     // ── Helpers ────────────────────────────────────────────
     const toNum = s => parseFloat(String(s).replace(/R\$\s*/g,'').replace(/\./g,'').replace(',','.').replace('%','').replace('x','')) || 0;
     const fmtI  = n => isFinite(n) ? Math.round(n).toLocaleString('pt-BR') : '—';
@@ -815,218 +852,146 @@
     const fmtX  = n => isFinite(n) && n > 0 ? fmtD(n) + 'x' : '—';
     const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
 
-    // ── Lock state for Imp / Alcance / Freq ───────────────
-    let impLocked = false, alcanceLocked = false, freqLocked = false;
+    // ── Funnel model: os cadeados decidem o recálculo ─────
+    // Cadeia: Investimento ─CPM─ Impressões ─CTR─ Cliques ─Connect─ Visitas ─Conversão─ Conversões ─Ticket─ Receita
+    // Todo campo é editável e tem cadeado. Editar liga o cadeado; os destravados se reajustam.
+    const ID = {
+      inv:'f-inv', cpm:'f-cpm', imp:'f-imp', alcance:'f-alcance', freq:'f-freq-ad',
+      ctr:'f-ctr', cl:'f-cl', connect:'f-connect', visitas:'f-visitas',
+      txconv:'f-txconv', conv:'f-conv', ticket:'f-ticket', rec:'f-rec-val'
+    };
+    const LV = ['inv','imp','cl','visitas','conv','rec'];   // níveis L0..L5
+    const RT = ['cpm','ctr','connect','txconv','ticket'];   // taxas dos elos 0..4
+    const ALL_KEYS = LV.concat(RT, ['alcance','freq']);
 
-    function toggleLock(field) {
-      if      (field === 'imp')    impLocked    = !impLocked;
-      else if (field === 'alcance') alcanceLocked = !alcanceLocked;
-      else if (field === 'freq')   freqLocked   = !freqLocked;
-      const locked = field === 'imp' ? impLocked : field === 'alcance' ? alcanceLocked : freqLocked;
-      const btn = document.getElementById('lock-' + field);
-      if (btn) {
-        btn.textContent = locked ? '🔒' : '🔓';
-        btn.classList.toggle('locked', locked);
+    const locks = {};
+    ALL_KEYS.forEach(k => locks[k] = false);
+
+    const valOf = key => toNum(document.getElementById(ID[key]).value);
+    // taxa exibida ⇄ multiplicador (m = nível de baixo ÷ nível de cima)
+    function rateToM(rk, v) { return rk === 'cpm' ? (v > 0 ? 1000 / v : 0) : (rk === 'ticket' ? v : v / 100); }
+    function mToRate(rk, m) { return rk === 'cpm' ? (m > 0 ? 1000 / m : 0) : (rk === 'ticket' ? m : m * 100); }
+
+    let L = [], M = [], lockL = [], lockR = [], alcanceV = 0, freqV = 0;
+    let conflict = false;       // marcado quando o valor editado não cabe nos cadeados atuais
+    let lastGood = null;        // último estado consistente (p/ reverter edição inválida)
+
+    // diferença relevante (ignora ruído de arredondamento dos campos exibidos)
+    function violated(a, b) { return Math.abs(a - b) > 0.005 * Math.max(1, Math.abs(a), Math.abs(b)); }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      if (!el) return;
+      el.innerHTML = '<span class="toast-ico" aria-hidden="true">🔒</span>' + msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+    }
+
+    function readModel() {
+      L = LV.map(valOf);
+      M = RT.map(rk => rateToM(rk, valOf(rk)));
+      lockL = LV.map(k => locks[k]);
+      lockR = RT.map(k => locks[k]);
+      alcanceV = valOf('alcance');
+      freqV = valOf('freq');
+    }
+
+    // desce a cadeia: mantém as taxas e escala os níveis; nível travado → recalcula a taxa acima e para
+    function rippleDown(k) {
+      for (let c = k; c < 5; c++) {
+        if (lockL[c + 1]) {
+          if (!lockR[c]) { if (L[c] > 0) M[c] = L[c + 1] / L[c]; }
+          else if (violated(L[c] * M[c], L[c + 1])) conflict = true;  // nível e taxa travados → impossível
+          break;
+        }
+        L[c + 1] = L[c] * M[c];
+      }
+    }
+    // sobe a cadeia: padrão mantém o nível de cima e ajusta a taxa (investimento fixo); taxa travada → sobe o nível
+    function rippleUp(k) {
+      for (let c = k; c > 0; c--) {
+        const i = c - 1;
+        if (lockL[c - 1]) {
+          if (!lockR[i]) { if (L[c - 1] > 0) M[i] = L[c] / L[c - 1]; }
+          else if (violated(L[c - 1] * M[i], L[c])) conflict = true;  // nível e taxa travados → impossível
+          break;
+        }
+        if (lockR[i]) { L[c - 1] = M[i] > 0 ? L[c] / M[i] : L[c - 1]; }
+        else { if (L[c - 1] > 0) M[i] = L[c] / L[c - 1]; break; }
       }
     }
 
-    // ── (channels removed) ────────────────────────────────
-    function renderChannels() {
-      const rowsEl = document.getElementById('ch-rows');
-      rowsEl.innerHTML = channels.map(ch => {
-        const imp = ch.cpm > 0 ? ch.budget / ch.cpm * 1000 : 0;
-        const cl  = ch.cpc > 0 ? ch.budget / ch.cpc        : 0;
-        const ctr = imp > 0    ? cl / imp * 100             : 0;
-        ch._imp = imp; ch._cl = cl;
-        const canRemove = channels.length > 1;
-        return `<div class="ch-row" style="display:contents">
-          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
-            <input value="${ch.name}" oninput="chField(${ch.id},'name',this.value)"
-              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
-          </span>
-          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
-            <input value="${fmtI(ch.budget)}" oninput="chField(${ch.id},'budget',this.value)" inputmode="decimal"
-              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
-          </span>
-          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
-            <input value="${fmtD(ch.cpm)}" oninput="chField(${ch.id},'cpm',this.value)" inputmode="decimal"
-              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
-          </span>
-          <span class="calc" style="padding:.45rem .75rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--label)" id="ci-${ch.id}">${fmtI(imp)}</span>
-          <span style="padding:.45rem .75rem;border-top:1px solid var(--border)">
-            <input value="${fmtD(ch.cpc)}" oninput="chField(${ch.id},'cpc',this.value)" inputmode="decimal"
-              style="background:transparent;border:none;outline:none;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);width:100%;caret-color:var(--purple)" />
-          </span>
-          <span class="calc" style="padding:.45rem .75rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--label)" id="cc-${ch.id}">${fmtI(cl)}</span>
-          <span class="calc" style="padding:.45rem .75rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--label)" id="ct-${ch.id}">${fmtP(ctr)}</span>
-          <span style="padding:.45rem .5rem;border-top:1px solid var(--border)">
-            ${canRemove ? `<button onclick="removeChannel(${ch.id})" style="background:none;border:none;color:#555;cursor:pointer;font-size:1rem;transition:color .15s" onmouseover="this.style.color='#f87171'" onmouseout="this.style.color='#555'">×</button>` : ''}
-          </span>
-        </div>`;
-      }).join('');
-      updateTotals();
+    // Impressões = Alcance × Frequência
+    function decomposeImp() {
+      const imp = L[1];
+      if (locks.alcance && !locks.freq) { if (alcanceV > 0) freqV = imp / alcanceV; }
+      else if (locks.freq && !locks.alcance) { if (freqV > 0) alcanceV = imp / freqV; }
+      else if (!locks.alcance && !locks.freq) { if (freqV > 0) alcanceV = imp / freqV; } // mantém Freq
+      else if (violated(alcanceV * freqV, imp)) conflict = true;                          // ambos travados → impossível
     }
 
-    function updateTotals() {
-      const totB = channels.reduce((s,c) => s + c.budget, 0);
-      const totI = channels.reduce((s,c) => s + (c._imp||0), 0);
-      const totC = channels.reduce((s,c) => s + (c._cl||0), 0);
-      const totCTR = totI > 0 ? totC / totI * 100 : 0;
-      document.getElementById('ch-total').innerHTML =
-        `<span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">Total</span>
-         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtI(totB)}</span>
-         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;color:var(--muted)">—</span>
-         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtI(totI)}</span>
-         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;color:var(--muted)">—</span>
-         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtI(totC)}</span>
-         <span style="padding:.5rem .75rem;border-top:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:700;color:#c084fc">${fmtP(totCTR)}</span>
-         <span style="padding:.5rem .5rem;border-top:1px solid rgba(255,255,255,.12)"></span>`;
-    }
-
-    function chField(id, field, value) {
-      const ch = channels.find(c => c.id === id);
-      if (!ch) return;
-      if (field === 'name') { ch.name = value; return; }
-      ch[field] = toNum(value);
-      // Update just this row's calculated cells
-      const imp = ch.cpm > 0 ? ch.budget / ch.cpm * 1000 : 0;
-      const cl  = ch.cpc > 0 ? ch.budget / ch.cpc        : 0;
-      const ctr = imp > 0    ? cl / imp * 100             : 0;
-      ch._imp = imp; ch._cl = cl;
-      setText(`ci-${id}`, fmtI(imp));
-      setText(`cc-${id}`, fmtI(cl));
-      setText(`ct-${id}`, fmtP(ctr));
-      updateTotals();
-      calcFunnel();
-    }
-
-    function addChannel() {
-      channels.push({ id: nextId++, name: 'Novo Canal', budget: 0, cpm: 0, cpc: 0, _imp: 0, _cl: 0 });
-      renderChannels();
-      calcFunnel();
-    }
-
-    function removeChannel(id) {
-      const i = channels.findIndex(c => c.id === id);
-      if (i > -1) channels.splice(i, 1);
-      renderChannels();
-      calcFunnel();
-    }
-
-    // ── Funnel ────────────────────────────────────────────
-    // Relationship: Imp = Alcance × Freq
-    // The active element determines the "driver"; locked fields are protected from auto-update.
-    // CPM also drives Imp (Imp = Inv/CPM×1000) when neither Imp nor Alcance/Freq is the driver.
-    function calcFunnel() {
-      const totB     = toNum(document.getElementById('f-inv').value) || 0;
-      const cpm      = toNum(document.getElementById('f-cpm').value) || 0;
-      const cpmImp   = cpm > 0 ? (totB / cpm) * 1000 : 0;
-
-      const impEl     = document.getElementById('f-imp');
-      const alcanceEl = document.getElementById('f-alcance');
-      const freqEl    = document.getElementById('f-freq-ad');
-      const ae        = document.activeElement;
-
-      let imp     = toNum(impEl    ? impEl.value     : '0');
-      let alcance = toNum(alcanceEl ? alcanceEl.value : '0');
-      let freq    = toNum(freqEl   ? freqEl.value    : '0');
-
-      if (ae === impEl) {
-        // ── User typing Imp directly ─────────────────
-        imp = toNum(impEl.value);
-        if (!alcanceLocked && !freqLocked) {
-          // Keep Freq, update Alcance
-          alcance = freq > 0 ? imp / freq : alcance;
-          if (alcanceEl) alcanceEl.value = fmtI(alcance);
-        } else if (!alcanceLocked) {
-          alcance = freq > 0 ? imp / freq : alcance;
-          if (alcanceEl) alcanceEl.value = fmtI(alcance);
-        } else if (!freqLocked) {
-          freq = alcance > 0 ? imp / alcance : freq;
-          if (freqEl) freqEl.value = fmtD(freq, 1);
-        }
-        // Both locked → nothing auto-updates
-
-      } else if (ae === alcanceEl) {
-        // ── User typing Alcance ───────────────────────
-        alcance = toNum(alcanceEl.value);
-        if (!impLocked) {
-          imp = alcance * freq;
-          if (impEl) impEl.value = fmtI(imp);
-        } else {
-          // Imp locked → adjust Freq instead (if unlocked)
-          imp = toNum(impEl.value);
-          if (!freqLocked) {
-            freq = alcance > 0 ? imp / alcance : freq;
-            if (freqEl) freqEl.value = fmtD(freq, 1);
+    function solve(editKey) {
+      readModel();
+      conflict = false;
+      if (editKey === 'alcance' || editKey === 'freq') {
+        if (locks.imp) {
+          // Impressões travada → ajusta o outro sub; se ambos travados e não bate → impossível
+          if (editKey === 'alcance') {
+            if (!locks.freq) { if (alcanceV > 0) freqV = L[1] / alcanceV; }
+            else if (violated(alcanceV * freqV, L[1])) conflict = true;
+          } else {
+            if (!locks.alcance) { if (freqV > 0) alcanceV = L[1] / freqV; }
+            else if (violated(alcanceV * freqV, L[1])) conflict = true;
           }
-        }
-
-      } else if (ae === freqEl) {
-        // ── User typing Freq ──────────────────────────
-        freq = toNum(freqEl.value);
-        if (!impLocked) {
-          imp = alcance * freq;
-          if (impEl) impEl.value = fmtI(imp);
         } else {
-          // Imp locked → adjust Alcance instead (if unlocked)
-          imp = toNum(impEl.value);
-          if (!alcanceLocked) {
-            alcance = freq > 0 ? imp / freq : alcance;
-            if (alcanceEl) alcanceEl.value = fmtI(alcance);
-          }
+          L[1] = alcanceV * freqV;
+          rippleUp(1); rippleDown(1);
         }
-
-      } else {
-        // ── CPM / Inv / other field changed ──────────
-        if (!impLocked) {
-          imp = cpmImp;
-          if (impEl) impEl.value = fmtI(imp);
-        } else {
-          imp = toNum(impEl ? impEl.value : '0');
-        }
-        // Derive Alcance/Freq from Imp
-        if (!alcanceLocked && !freqLocked) {
-          freq = alcance > 0 ? imp / alcance : freq;
-          if (freqEl) freqEl.value = freq > 0 ? fmtD(freq, 1) : '';
-        } else if (alcanceLocked && !freqLocked) {
-          freq = alcance > 0 ? imp / alcance : freq;
-          if (freqEl) freqEl.value = freq > 0 ? fmtD(freq, 1) : '';
-        } else if (!alcanceLocked && freqLocked) {
-          alcance = freq > 0 ? imp / freq : alcance;
-          if (alcanceEl) alcanceEl.value = fmtI(alcance);
-        }
-        // Both locked → do nothing with alcance/freq
+        return;
       }
+      const li = LV.indexOf(editKey);
+      const ri = RT.indexOf(editKey);
+      if (li >= 0) { rippleDown(li); rippleUp(li); decomposeImp(); }
+      else if (ri >= 0) {
+        const A = ri, B = ri + 1;
+        if (lockL[A] && lockL[B]) { if (violated(L[A] * M[ri], L[B])) conflict = true; } // dois níveis travados
+        else if (lockL[B] && !lockL[A]) { L[A] = M[ri] > 0 ? L[B] / M[ri] : L[A]; rippleUp(A); decomposeImp(); }
+        else { L[B] = L[A] * M[ri]; rippleDown(B); decomposeImp(); }
+      }
+    }
 
-      const ctrPct  = toNum(document.getElementById('f-ctr').value)    || 0;
-      const totC    = imp * (ctrPct / 100);
+    const fmtPct = p => fmtNC(p) + '%';
+    function renderModel() {
+      const active = document.activeElement;
+      const put = (key, str) => { const el = document.getElementById(ID[key]); if (el && el !== active) el.value = str; };
+      put('inv',     fmtI(L[0]));
+      put('cpm',     'R$ ' + fmtNC(mToRate('cpm', M[0])));
+      put('imp',     fmtI(L[1]));
+      put('alcance', fmtI(alcanceV));
+      put('freq',    fmtNC(freqV));
+      put('ctr',     fmtPct(mToRate('ctr', M[1])));
+      put('cl',      fmtI(L[2]));
+      put('connect', fmtPct(mToRate('connect', M[2])));
+      put('visitas', fmtI(L[3]));
+      put('txconv',  fmtPct(mToRate('txconv', M[3])));
+      put('conv',    fmtI(L[4]));
+      put('ticket',  fmtNC(mToRate('ticket', M[4])));
+      put('rec',     fmtI(L[5]));
+    }
 
-      const connect = toNum(document.getElementById('f-connect').value);
-      const txconv  = toNum(document.getElementById('f-txconv').value);
-      const ticket  = toNum(document.getElementById('f-ticket').value);
-      const txret   = toNum(document.getElementById('f-txret').value);
+    function calcResults() {
+      const totB = L[0], conv = L[4], receita = L[5];
+      const ticket  = mToRate('ticket', M[4]);
       const freqRec = toNum(document.getElementById('f-freq-rec').value);
       const periodo = toNum(document.getElementById('f-periodo').value);
-
-      const visitas = totC * (connect / 100);
-      const conv    = visitas * (txconv / 100);
-      const receita = conv * ticket;
-      const cpa     = conv > 0  ? totB / conv    : 0;
-      const roas    = totB > 0  ? receita / totB : 0;
-      const ltv     = ticket * freqRec * periodo;
-      const cac     = conv > 0  ? totB / conv    : 0;
-      const ltvCac  = cac > 0   ? ltv / cac      : 0;
-      const recLtv  = conv * ltv;
-      const roi     = totB > 0  ? recLtv / totB  : 0;
-
-      // Funnel display (f-imp is now an input, updated above)
-      setText('f-cl',      fmtI(totC));
-      setText('f-visitas', fmtI(visitas));
-      setText('f-conv',    fmtI(conv));
-      setText('f-rec-val', fmtR(receita));
-
-      // Results
+      const cpa    = conv > 0 ? totB / conv : 0;
+      const roas   = totB > 0 ? receita / totB : 0;
+      const ltv    = ticket * freqRec * periodo;
+      const ltvCac = cpa > 0 ? ltv / cpa : 0;
+      const recLtv = conv * ltv;
+      const roi    = totB > 0 ? recLtv / totB : 0;
       setText('r-inv',    fmtR(totB));
       setText('r-rec1',   fmtR(receita));
       setText('r-roas',   fmtX(roas));
@@ -1035,6 +1000,57 @@
       setText('r-ltvcac', fmtX(ltvCac));
       setText('r-recltv', fmtR(recLtv));
       setText('r-roi',    fmtX(roi));
+    }
+
+    function updateLockBtn(key) {
+      const btn = document.getElementById('lock-' + key);
+      if (btn) { btn.textContent = locks[key] ? '🔒' : '🔓'; btn.classList.toggle('locked', !!locks[key]); }
+    }
+
+    // guarda o estado consistente e agenda a persistência
+    function commit() {
+      lastGood = serializeState();
+      if (typeof scheduleSave === 'function') scheduleSave();
+    }
+
+    // editar um campo do funil → trava ele e reajusta os destravados
+    function onEdit(key) {
+      const wasLocked = locks[key];
+      if (!wasLocked) { locks[key] = true; updateLockBtn(key); }
+      solve(key);
+      if (conflict) {
+        // valor não cabe nos cadeados atuais → avisa e reverte ao último estado válido
+        showToast('Valor impossível com os cadeados atuais. Destrave algum campo para ajustar.');
+        if (lastGood) { applyState(lastGood); recompute(false); }
+        return;
+      }
+      renderModel();
+      calcResults();
+      commit();
+    }
+
+    // parâmetros de LTV (retenção, recompras, período) → só recalculam os resultados
+    function onParam() {
+      readModel();
+      calcResults();
+      commit();
+    }
+
+    function toggleLock(key) {
+      locks[key] = !locks[key];
+      updateLockBtn(key);
+      commit();
+    }
+
+    // recálculo completo. forward=true → deriva tudo a partir do Investimento
+    function recompute(forward) {
+      readModel();
+      if (forward) {
+        rippleDown(0);
+        if (alcanceV > 0) freqV = L[1] / alcanceV; // mantém Alcance, deriva Freq
+      }
+      renderModel();
+      calcResults();
     }
 
     // ── Stage presets ─────────────────────────────────────
@@ -1046,22 +1062,10 @@
       fi: { cpm:'R$ 8',  ctr:'5%',   alcance:'100.000',  connect:'98%', txconv:'10%',   ticket:'100', txret:'75%', freqRec:'6', periodo:'3' },
     };
 
-    function fmtCpmBlur() {
-      const el = document.getElementById('f-cpm');
-      if (!el) return;
-      const n = toNum(el.value);
-      if (isFinite(n) && n > 0) el.value = 'R$ ' + fmtNC(n);
-    }
-
     function setStage(key) {
       const p = stagePresets[key];
       if (!p) return;
-      // Reset all locks so preset values take effect
-      impLocked = false; alcanceLocked = false; freqLocked = false;
-      ['imp','alcance','freq'].forEach(f => {
-        const btn = document.getElementById('lock-' + f);
-        if (btn) { btn.textContent = '🔓'; btn.classList.remove('locked'); }
-      });
+      ALL_KEYS.forEach(k => { locks[k] = false; updateLockBtn(k); }); // solta todos os cadeados
       const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
       set('f-cpm',     p.cpm);
       set('f-ctr',     p.ctr);
@@ -1072,10 +1076,11 @@
       set('f-txret',   p.txret);
       set('f-freq-rec',p.freqRec);
       set('f-periodo', p.periodo);
+      recompute(true);                       // dirige a cadeia a partir do Investimento
       document.querySelectorAll('.stage-chip').forEach(el => el.classList.remove('active'));
       const chip = document.querySelector(`.stage-chip[data-stage="${key}"]`);
       if (chip) chip.classList.add('active');
-      calcFunnel();
+      commit();
     }
 
     // ── Theme ─────────────────────────────────────────────
@@ -1100,8 +1105,88 @@
         `${pad(d.getDate())} ${months[d.getMonth()]}. ${d.getFullYear()} às ${pad(d.getHours())}h${pad(d.getMinutes())}`;
     });
 
+    // ── Persistência (localStorage + token na URL) ────────
+    const PERSIST_FIELDS = ['f-inv','f-cpm','f-imp','f-alcance','f-freq-ad','f-ctr','f-cl',
+      'f-connect','f-visitas','f-txconv','f-conv','f-ticket','f-rec-val','f-txret','f-freq-rec','f-periodo'];
+    const STORE_KEY = 'calc-state-v1';
+
+    function serializeState() {
+      const fields = {};
+      PERSIST_FIELDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) fields[id] = el.value;
+      });
+      return { v: 2, fields, locks: Object.assign({}, locks) };
+    }
+
+    function applyState(state) {
+      if (!state || !state.fields) return;
+      Object.keys(state.fields).forEach(id => {
+        const el = document.getElementById(id);
+        if (el && typeof state.fields[id] === 'string') el.value = state.fields[id];
+      });
+      const saved = state.locks || {};
+      ALL_KEYS.forEach(k => { locks[k] = !!saved[k]; updateLockBtn(k); });
+    }
+
+    // base64url <-> JSON (seguro p/ UTF-8: R$, acentos)
+    function encodeState(obj) {
+      return btoa(unescape(encodeURIComponent(JSON.stringify(obj))))
+        .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    }
+    function decodeState(str) {
+      str = str.replace(/-/g,'+').replace(/_/g,'/');
+      while (str.length % 4) str += '=';
+      return JSON.parse(decodeURIComponent(escape(atob(str))));
+    }
+
+    let saveTimer = null;
+    function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveState, 300); }
+    function saveState() {
+      try {
+        const state = serializeState();
+        localStorage.setItem(STORE_KEY, JSON.stringify(state));
+        history.replaceState(null, '', location.pathname + location.search + '#s=' + encodeState(state));
+      } catch (e) { /* localStorage indisponível / quota — segue sem persistir */ }
+    }
+
+    function loadInitialState() {
+      let state = null, fromToken = false;
+      const m = (location.hash || '').match(/[#&]s=([^&]+)/);
+      if (m) { try { state = decodeState(m[1]); fromToken = true; } catch (e) { state = null; } }   // token na URL tem prioridade
+      if (!state) {
+        try { const raw = localStorage.getItem(STORE_KEY); if (raw) state = JSON.parse(raw); } catch (e) {}
+      }
+      if (state) {
+        applyState(state);
+        // veio de link compartilhado → semeia o localStorage p/ não perder ao reabrir sem o link
+        if (fromToken) { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
+        return true;
+      }
+      return false;
+    }
+
+    function copyShareLink() {
+      saveState();
+      const link = location.href;
+      const btn = document.getElementById('share-btn');
+      const feedback = ok => {
+        if (!btn) return;
+        btn.textContent = ok ? '✓ Link copiado' : '🔗 Copiar link';
+        btn.classList.toggle('ok', ok);
+        if (ok) setTimeout(() => { btn.textContent = '🔗 Copiar link'; btn.classList.remove('ok'); }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(link).then(() => feedback(true)).catch(() => prompt('Copie o link:', link));
+      } else {
+        prompt('Copie o link:', link);
+      }
+    }
+
     // ── Init ──────────────────────────────────────────────
-    calcFunnel();
+    const _loaded = loadInitialState();
+    recompute(!_loaded);   // sem estado salvo → deriva do Investimento; com estado → só renderiza/calcula
+    lastGood = serializeState();   // estado válido inicial (sem agendar save → mantém URL limpa até a 1ª edição)
   </script>
 </body>
 </html>
