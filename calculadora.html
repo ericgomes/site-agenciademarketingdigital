@@ -1106,27 +1106,47 @@
     });
 
     // ── Persistência (localStorage + token na URL) ────────
-    const PERSIST_FIELDS = ['f-inv','f-cpm','f-imp','f-alcance','f-freq-ad','f-ctr','f-cl',
-      'f-connect','f-visitas','f-txconv','f-conv','f-ticket','f-rec-val','f-txret','f-freq-rec','f-periodo'];
     const STORE_KEY = 'calc-state-v1';
+    // formato compacto: array de números na ordem fixa + cadeados como bitmask
+    const SER_KEYS  = ['inv','cpm','imp','alcance','freq','ctr','cl','connect','visitas','txconv','conv','ticket','rec']; // 13 do funil
+    const LTV_IDS   = ['f-txret','f-freq-rec','f-periodo'];
+    const round2 = x => Math.round(x * 100) / 100;
 
     function serializeState() {
-      const fields = {};
-      PERSIST_FIELDS.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) fields[id] = el.value;
-      });
-      return { v: 2, fields, locks: Object.assign({}, locks) };
+      const n = SER_KEYS.map(k => round2(valOf(k)));
+      LTV_IDS.forEach(id => { const el = document.getElementById(id); n.push(round2(el ? toNum(el.value) : 0)); });
+      let bits = 0;
+      SER_KEYS.forEach((k, i) => { if (locks[k]) bits |= (1 << i); });
+      return { v: 3, n, k: bits };
     }
 
     function applyState(state) {
-      if (!state || !state.fields) return;
-      Object.keys(state.fields).forEach(id => {
-        const el = document.getElementById(id);
-        if (el && typeof state.fields[id] === 'string') el.value = state.fields[id];
-      });
-      const saved = state.locks || {};
-      ALL_KEYS.forEach(k => { locks[k] = !!saved[k]; updateLockBtn(k); });
+      if (!state) return;
+      if (Array.isArray(state.n)) {
+        // formato compacto v3
+        const n = state.n, g = i => (typeof n[i] === 'number' ? n[i] : 0);
+        const bits = state.k || 0;
+        SER_KEYS.forEach((k, i) => { locks[k] = !!(bits & (1 << i)); updateLockBtn(k); });
+        L = [g(0), g(2), g(6), g(8), g(10), g(12)];
+        M = [rateToM('cpm', g(1)), rateToM('ctr', g(5)), rateToM('connect', g(7)), rateToM('txconv', g(9)), rateToM('ticket', g(11))];
+        alcanceV = g(3); freqV = g(4);
+        renderModel();
+        const setEl = (id, v) => { const el = document.getElementById(id); if (el) el.value = v; };
+        setEl('f-txret',    fmtNC(g(13)) + '%');
+        setEl('f-freq-rec', fmtNC(g(14)));
+        setEl('f-periodo',  fmtNC(g(15)));
+        calcResults();
+        return;
+      }
+      // formato antigo (v2: objeto fields/locks) — compatibilidade
+      if (state.fields) {
+        Object.keys(state.fields).forEach(id => {
+          const el = document.getElementById(id);
+          if (el && typeof state.fields[id] === 'string') el.value = state.fields[id];
+        });
+        const saved = state.locks || {};
+        ALL_KEYS.forEach(k => { locks[k] = !!saved[k]; updateLockBtn(k); });
+      }
     }
 
     // base64url <-> JSON (seguro p/ UTF-8: R$, acentos)
