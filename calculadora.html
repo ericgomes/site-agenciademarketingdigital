@@ -966,7 +966,7 @@
     function renderModel() {
       const active = document.activeElement;
       const put = (key, str) => { const el = document.getElementById(ID[key]); if (el && el !== active) el.value = str; };
-      put('inv',     fmtI(L[0]));
+      put('inv',     fmtNC(L[0]));
       put('cpm',     'R$ ' + fmtNC(mToRate('cpm', M[0])));
       put('imp',     fmtI(L[1]));
       put('alcance', fmtI(alcanceV));
@@ -1138,7 +1138,7 @@
         calcResults();
         return;
       }
-      // formato antigo (v2: objeto fields/locks) — compatibilidade
+      // formato antigo (v1/v2: objeto fields/locks) — compatibilidade
       if (state.fields) {
         Object.keys(state.fields).forEach(id => {
           const el = document.getElementById(id);
@@ -1146,6 +1146,14 @@
         });
         const saved = state.locks || {};
         ALL_KEYS.forEach(k => { locks[k] = !!saved[k]; updateLockBtn(k); });
+        // v1 não salvava os níveis (Cliques/Visitas/Conversões/Receita) — deriva a cadeia
+        // a partir das Impressões (mantendo Imp se travada; senão Imp = Inv/CPM×1000)
+        readModel();
+        if (!locks.imp && L[0] > 0) L[1] = L[0] * M[0];
+        rippleDown(1);
+        if (alcanceV > 0) freqV = L[1] / alcanceV;
+        renderModel();
+        calcResults();
       }
     }
 
