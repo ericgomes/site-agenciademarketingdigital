@@ -222,16 +222,52 @@
     // ── Form logic ───────────────────────────────────────────────
     let generatedUrl = '';
 
+    // Autopreenchimento do Título via Apps Script Web App.
+    // URL do deploy (termina em /exec). Vazio = recurso desligado.
+    const TITLE_API = 'https://script.google.com/macros/s/AKfycbwX4bX2fOX-9fyt43O9Y_72ty1ENnp1ElwBey2fjLvS3rOJnVH_z69QUxfNguKIQOOZ/exec';
+
+    const inpT = document.getElementById('inp-t');
+    const T_PLACEHOLDER = inpT.placeholder;
+    let titleEdited = false;   // usuário digitou o título à mão → não sobrescreve
+    let lookupTimer = null, lastLookupKey = '';
+
+    inpT.addEventListener('input', () => { titleEdited = inpT.value.trim() !== ''; });
+
+    function scheduleTitleLookup(raw) {
+      if (!TITLE_API || titleEdited) return;
+      clearTimeout(lookupTimer);
+      lookupTimer = setTimeout(() => lookupTitle(raw), 600);
+    }
+
+    function lookupTitle(raw) {
+      const parsed = parse(raw);
+      if (!parsed || !parsed.id || titleEdited) return;
+      const key = parsed.id + '|' + (parsed.type || '');
+      if (key === lastLookupKey) return;      // já buscou este link
+      lastLookupKey = key;
+
+      inpT.placeholder = 'Buscando nome do relatório…';
+      const qs = new URLSearchParams({ id: parsed.id, type: parsed.type || '' });
+      const ctrl = new AbortController();
+      const to = setTimeout(() => ctrl.abort(), 9000);
+      fetch(TITLE_API + '?' + qs.toString(), { signal: ctrl.signal })
+        .then(r => r.json())
+        .then(d => { if (d && d.title && !titleEdited) inpT.value = d.title; })
+        .catch(() => {})
+        .finally(() => { clearTimeout(to); inpT.placeholder = T_PLACEHOLDER; });
+    }
+
     document.getElementById('inp-src').addEventListener('input', function () {
       const val = this.value.trim();
       const badge = document.getElementById('type-badge');
-      if (!val) { badge.className = 'badge'; badge.textContent = ''; return; }
+      if (!val) { badge.className = 'badge'; badge.textContent = ''; lastLookupKey = ''; return; }
       const { type } = parse(val);
       const labels = { slides: 'Google Slides', 'slides-edit': 'Google Slides', docs: 'Google Docs', 'docs-pub': 'Google Docs', looker: 'Data Studio' };
       const group  = type === 'docs-pub' ? 'docs' : type === 'slides-edit' ? 'slides' : type;
       badge.className = `badge ${group} visible`;
       badge.textContent = labels[type] || 'Data Studio';
       document.getElementById('hint-ds').style.display = type === 'looker' ? '' : 'none';
+      scheduleTitleLookup(val);
     });
 
     function generate() {
