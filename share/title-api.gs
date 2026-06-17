@@ -49,6 +49,7 @@ function publicUrl(id, type) {
   if (type === 'slides-edit') return 'https://docs.google.com/presentation/d/' + id + '/edit';
   if (type === 'docs-pub')    return 'https://docs.google.com/document/d/e/' + id + '/pub';
   if (type === 'docs')        return 'https://docs.google.com/document/d/' + id + '/edit';
+  if (type === 'script')      return 'https://script.google.com/' + id + '/exec'; // Web App: lê o <title> da página
   return '';
 }
 

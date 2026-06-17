@@ -76,6 +76,7 @@
     .badge.looker  { background: #EDE9FE; color: #5B21B6; }
     .badge.slides  { background: #DCFCE7; color: #15803d; }
     .badge.docs    { background: #DBEAFE; color: #1d4ed8; }
+    .badge.script  { background: #FEF3C7; color: #92400E; }
     .badge.visible { opacity: 1; }
 
     button {
@@ -174,6 +175,10 @@
       const srcMatch = raw.match(/\bsrc=["']([^"']+)/i);
       const url = srcMatch ? srcMatch[1] : raw.trim();
 
+      // Apps Script Web App (consumidor ou domínio Workspace): guarda o "ref" entre o host e /exec
+      const script = url.match(/script\.google\.com\/(.+?)\/exec/i);
+      if (script) return { id: script[1], type: 'script' };
+
       const slidesPub = url.match(/\/presentation\/d\/e\/([A-Za-z0-9_-]+)/i);
       if (slidesPub) return { id: slidesPub[1], type: 'slides' };
 
@@ -196,6 +201,7 @@
     }
 
     function buildSrc({ id, type }) {
+      if (type === 'script')      return `https://script.google.com/${id}/exec`;
       if (type === 'slides')      return `https://docs.google.com/presentation/d/e/${id}/pubembed?start=false&loop=false&delayms=3000`;
       if (type === 'slides-edit') return `https://docs.google.com/presentation/d/${id}/embed`;
       if (type === 'docs-pub')    return `https://docs.google.com/document/d/e/${id}/pub?embedded=true`;
@@ -262,7 +268,7 @@
       const badge = document.getElementById('type-badge');
       if (!val) { badge.className = 'badge'; badge.textContent = ''; lastLookupKey = ''; return; }
       const { type } = parse(val);
-      const labels = { slides: 'Google Slides', 'slides-edit': 'Google Slides', docs: 'Google Docs', 'docs-pub': 'Google Docs', looker: 'Data Studio' };
+      const labels = { slides: 'Google Slides', 'slides-edit': 'Google Slides', docs: 'Google Docs', 'docs-pub': 'Google Docs', looker: 'Data Studio', script: 'Apps Script' };
       const group  = type === 'docs-pub' ? 'docs' : type === 'slides-edit' ? 'slides' : type;
       badge.className = `badge ${group} visible`;
       badge.textContent = labels[type] || 'Data Studio';
