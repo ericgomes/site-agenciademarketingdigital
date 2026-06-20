@@ -51,6 +51,16 @@
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="alternate" type="application/rss+xml" title="Blog RSS" href="/feed.xml">
 
+  <!-- Tema: aplica antes do render para evitar flash -->
+  <script>
+    (function(){
+      var p = new URLSearchParams(window.location.search).get('tema');
+      var v = p || localStorage.getItem('linka-visual') || 'linka-light';
+      document.documentElement.setAttribute('data-visual', v);
+      document.documentElement.setAttribute('data-theme', v.includes('dark') || v === 'dos' || v === 'militar' ? 'dark' : 'light');
+    })();
+  </script>
+
   <noscript><style>
     #top-controls, #scanlines, #mouse-spotlight,
     #cursor-dot, #cursor-ring, .geo-marquee-bar,
