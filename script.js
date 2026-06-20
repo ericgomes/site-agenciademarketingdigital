@@ -8,15 +8,15 @@ function applyTheme(t) {
 
 // ── Theme CSS lazy loader ────────────────────────────────────
 const themeCssMap = {
-  pixelart: 'pixelart.css',
-  dos:      'dos.css',
-  geocities:'geocities.css',
-  copa:     'copa.css',
-  brutalist:'brutalist.css',
-  saas:     'saas.css',
-  glass:    'glass.css',
-  notion:   'notion.css',
-  militar:  'militar.css',
+  pixelart: 'assets/themes/pixelart.css',
+  dos:      'assets/themes/dos.css',
+  geocities:'assets/themes/geocities.css',
+  copa:     'assets/themes/copa.css',
+  brutalist:'assets/themes/brutalist.css',
+  saas:     'assets/themes/saas.css',
+  glass:    'assets/themes/glass.css',
+  notion:   'assets/themes/notion.css',
+  militar:  'assets/themes/militar.css',
 };
 const loadedThemes = new Set();
 
