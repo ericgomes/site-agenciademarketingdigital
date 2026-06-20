@@ -115,6 +115,7 @@ const translations = {
     navSobre:   'Sobre',
     navComo:    'Como trabalhamos',
     navEsp:     'Especialidades',
+    navFerramentas: 'Ferramentas',
     navContato: 'Contato',
 
     // Hero
@@ -203,6 +204,7 @@ const translations = {
     navSobre:   'About',
     navComo:    'How we work',
     navEsp:     'Services',
+    navFerramentas: 'Tools',
     navContato: 'Contact',
 
     // Hero
@@ -291,6 +293,7 @@ const translations = {
     navSobre:   'Nosotros',
     navComo:    'Cómo trabajamos',
     navEsp:     'Especialidades',
+    navFerramentas: 'Herramientas',
     navContato: 'Contacto',
 
     // Hero
