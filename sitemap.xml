@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.agenciademarketingdigital.com.br/</loc>
-    <lastmod>2026-04-28</lastmod>
+    <loc>https://agenciademarketingdigital.com.br</loc>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-
-    <!-- hreflang alternates (idioma via JS, mesma URL) -->
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.agenciademarketingdigital.com.br/"/>
-    <xhtml:link rel="alternate" hreflang="en"    href="https://www.agenciademarketingdigital.com.br/"/>
-    <xhtml:link rel="alternate" hreflang="es"    href="https://www.agenciademarketingdigital.com.br/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.agenciademarketingdigital.com.br/"/>
+    <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://agenciademarketingdigital.com.br/blog</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agenciademarketingdigital.com.br/blog/seo-para-crescer-no-google-2025</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
