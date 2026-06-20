@@ -8,11 +8,11 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
 
 const buf = Buffer.from(svg);
 
-await sharp(buf).resize(192, 192).png().toFile('icons/icon-192.png');
-console.log('✓ icons/icon-192.png');
+await sharp(buf).resize(192, 192).png().toFile('assets/icons/icon-192.png');
+console.log('✓ assets/icons/icon-192.png');
 
-await sharp(buf).resize(512, 512).png().toFile('icons/icon-512.png');
-console.log('✓ icons/icon-512.png');
+await sharp(buf).resize(512, 512).png().toFile('assets/icons/icon-512.png');
+console.log('✓ assets/icons/icon-512.png');
 
 // maskable variant — extra padding so content sits in safe zone (80% center)
 const svgMaskable = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
@@ -21,7 +21,7 @@ const svgMaskable = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
   <text x="16" y="21" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="900" text-anchor="middle" fill="#ffffff" letter-spacing="-1">EM</text>
 </svg>`;
 
-await sharp(Buffer.from(svgMaskable)).resize(512, 512).png().toFile('icons/icon-512-maskable.png');
-console.log('✓ icons/icon-512-maskable.png');
+await sharp(Buffer.from(svgMaskable)).resize(512, 512).png().toFile('assets/icons/icon-512-maskable.png');
+console.log('✓ assets/icons/icon-512-maskable.png');
 
 console.log('Icons generated.');
