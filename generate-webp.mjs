@@ -2,8 +2,8 @@ import sharp from 'sharp';
 import { existsSync } from 'fs';
 
 const photos = [
-  { src: 'img/eric-gomes.jpg',       base: 'img/eric' },
-  { src: 'img/marcelo-caricati.jpg', base: 'img/marcelo' },
+  { src: 'assets/img/eric-gomes.jpg',       base: 'assets/img/eric' },
+  { src: 'assets/img/marcelo-caricati.jpg', base: 'assets/img/marcelo' },
 ];
 
 for (const { src, base } of photos) {
