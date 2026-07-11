@@ -65,7 +65,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .wrap { max-width: 920px; margin: 0 auto; }
+    .wrap { max-width: 1140px; margin: 0 auto; }
 
     /* ── Header ─────────────────────────────────────── */
     header { text-align: center; margin-bottom: 2.5rem; }
@@ -121,9 +121,12 @@
     /* ── Grid ───────────────────────────────────────── */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      grid-template-columns: repeat(4, 1fr);   /* 4 por linha no desktop */
       gap: 1rem;
     }
+    @media (max-width: 980px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
 
     .card {
       position: relative;
@@ -188,38 +191,6 @@
       word-break: break-all;
     }
 
-    .badge {
-      position: absolute;
-      top: 1.1rem; right: 1.1rem;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.2rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(129,140,248,0.15);
-      color: var(--indigo);
-      border: 1px solid rgba(129,140,248,0.3);
-    }
-    .badge.soon {
-      background: rgba(255,255,255,0.06);
-      color: var(--muted);
-      border-color: rgba(255,255,255,0.12);
-    }
-
-    /* ── Coming soon (not clickable) ────────────────── */
-    .card.soon {
-      cursor: default;
-      opacity: 0.72;
-    }
-    .card.soon:hover {
-      transform: none;
-      border-color: var(--border);
-      background: var(--surface);
-    }
-    .card.soon:hover::before { opacity: 0; }
-    .card.soon .card-icon { filter: grayscale(0.4); }
-
     /* ── Footer ─────────────────────────────────────── */
     footer {
       text-align: center;
@@ -229,13 +200,52 @@
     }
     footer a { color: var(--purple-l); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+
+    /* ── Toggle + tema claro ────────────────────────── */
+    .theme-btn {
+      position: fixed; top: 1rem; right: 1rem; z-index: 200;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.4rem 0.8rem;
+      font-size: 0.75rem; font-weight: 600; color: var(--muted);
+      cursor: pointer; font-family: inherit;
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .theme-btn:hover { border-color: var(--purple); color: var(--purple); }
+
+    html.light {
+      --bg:       #f6f4fb;
+      --surface:  #ffffff;
+      --surface2: #f1edfa;
+      --border:   rgba(20,10,40,0.10);
+      --border-h: rgba(124,58,237,0.45);
+      --purple:   #7C3AED;
+      --purple-l: #7C3AED;
+      --indigo:   #6366f1;
+      --muted:    #5f5b6b;
+      --text:     #1b1526;
+    }
+    html.light body {
+      background:
+        radial-gradient(800px 500px at 15% -10%, rgba(147,51,234,0.10), transparent 60%),
+        radial-gradient(700px 500px at 100% 0%, rgba(129,140,248,0.08), transparent 55%),
+        var(--bg);
+    }
+    html.light h1 {
+      background: linear-gradient(135deg, #7C3AED 0%, #6366f1 100%);
+      -webkit-background-clip: text; background-clip: text;
+    }
+    html.light .card-url { color: #8a8594; }
   </style>
+  <script>try{if(localStorage.getItem('ferramentas-theme')==='light')document.documentElement.classList.add('light');}catch(e){}</script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2R23466"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Alternar tema claro/escuro">☀ Claro</button>
 
   <div class="wrap">
     <header>
@@ -247,13 +257,6 @@
 
     <div class="grid">
 
-      <a class="card" href="https://artikfy.agenciademarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">
-        <span class="card-icon" aria-hidden="true">✍️</span>
-        <span class="card-title">Artigos <span class="card-arrow" aria-hidden="true">↗</span></span>
-        <span class="card-desc">Geração de textos e artigos com IA para blog, redes sociais e SEO.</span>
-        <span class="card-url">artikfy.agenciademarketingdigital.com.br</span>
-      </a>
-
       <a class="card" href="https://attributrik.agenciademarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">
         <span class="card-icon" aria-hidden="true">📊</span>
         <span class="card-title">Atribuição <span class="card-arrow" aria-hidden="true">↗</span></span>
@@ -261,12 +264,24 @@
         <span class="card-url">attributrik.agenciademarketingdigital.com.br</span>
       </a>
 
-      <a class="card" href="/calculadora">
-        <span class="badge">No site</span>
-        <span class="card-icon" aria-hidden="true">🧮</span>
-        <span class="card-title">Calculadora <span class="card-arrow" aria-hidden="true">→</span></span>
-        <span class="card-desc">Calculadora de marketing digital: CAC, LTV, ROAS e projeções de canais.</span>
-        <span class="card-url">agenciademarketingdigital.com.br/calculadora</span>
+      <div class="card">
+        <span class="card-icon" aria-hidden="true">🤖</span>
+        <span class="card-title">SEO</span>
+        <span class="card-desc">Otimização de conteúdo com IA: gera scores por página, cria e publica melhorias de conteúdo, integrado com GA4 e GSC, e gera FAQ por página.</span>
+      </div>
+
+      <a class="card" href="https://artikfy.agenciademarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">
+        <span class="card-icon" aria-hidden="true">✍️</span>
+        <span class="card-title">Artigos <span class="card-arrow" aria-hidden="true">↗</span></span>
+        <span class="card-desc">Geração de textos e artigos com IA para blog, redes sociais e SEO.</span>
+        <span class="card-url">artikfy.agenciademarketingdigital.com.br</span>
+      </a>
+
+      <a class="card" href="https://lsm.agenciademarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">
+        <span class="card-icon" aria-hidden="true">⚡</span>
+        <span class="card-title">Live Site Monitor <span class="card-arrow" aria-hidden="true">↗</span></span>
+        <span class="card-desc">Monitoramento ao vivo da velocidade do site com usuários reais (RUM via GTM): TTFB, DOM, Load e p95 por página, dispositivo e navegador.</span>
+        <span class="card-url">lsm.agenciademarketingdigital.com.br</span>
       </a>
 
       <a class="card" href="https://pop-traffic.agenciademarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">
@@ -276,12 +291,24 @@
         <span class="card-url">pop-traffic.agenciademarketingdigital.com.br</span>
       </a>
 
-      <a class="card" href="/gerador-plano-midia">
-        <span class="badge">No site</span>
+      <div class="card">
+        <span class="card-icon" aria-hidden="true">🔍</span>
+        <span class="card-title">Reputação</span>
+        <span class="card-desc">Análise de reputação e presença nos resultados de busca.</span>
+      </div>
+
+      <a class="card" href="/gerador-plano-midia" target="_blank" rel="noopener noreferrer">
         <span class="card-icon" aria-hidden="true">📅</span>
-        <span class="card-title">Plano de Mídia <span class="card-arrow" aria-hidden="true">→</span></span>
+        <span class="card-title">Plano de Mídia <span class="card-arrow" aria-hidden="true">↗</span></span>
         <span class="card-desc">Gerador de plano de mídia para distribuir investimento entre canais.</span>
         <span class="card-url">agenciademarketingdigital.com.br/gerador-plano-midia</span>
+      </a>
+
+      <a class="card" href="/calculadora" target="_blank" rel="noopener noreferrer">
+        <span class="card-icon" aria-hidden="true">🧮</span>
+        <span class="card-title">Calculadora <span class="card-arrow" aria-hidden="true">↗</span></span>
+        <span class="card-desc">Calculadora de marketing digital: CAC, LTV, ROAS e projeções de canais.</span>
+        <span class="card-url">agenciademarketingdigital.com.br/calculadora</span>
       </a>
 
       <a class="card" href="https://tfm.agenciademarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">
@@ -291,25 +318,10 @@
         <span class="card-url">tfm.agenciademarketingdigital.com.br</span>
       </a>
 
-      <div class="card soon">
-        <span class="badge soon">Em breve</span>
+      <div class="card">
         <span class="card-icon" aria-hidden="true">🔗</span>
-        <span class="card-title">Meta Ads no Data Studio</span>
-        <span class="card-desc">Conector para levar dados de Meta Ads direto ao Looker Studio (Data Studio).</span>
-      </div>
-
-      <div class="card soon">
-        <span class="badge soon">Em breve</span>
-        <span class="card-icon" aria-hidden="true">🔍</span>
-        <span class="card-title">Reputação</span>
-        <span class="card-desc">Análise de reputação e presença nos resultados de busca.</span>
-      </div>
-
-      <div class="card soon">
-        <span class="badge soon">Em breve</span>
-        <span class="card-icon" aria-hidden="true">🤖</span>
-        <span class="card-title">SEO</span>
-        <span class="card-desc">Otimização de conteúdo com IA para melhorar ranqueamento e relevância.</span>
+        <span class="card-title">Conector Meta Ads para Looker Studio</span>
+        <span class="card-desc">Conector que leva os dados de Meta Ads direto ao Looker Studio.</span>
       </div>
 
     </div>
@@ -318,5 +330,15 @@
       <p>© 2026 · Eric Gomes &amp; Marcelo Caricati · <a href="/">agenciademarketingdigital.com.br</a></p>
     </footer>
   </div>
+
+  <script>
+    function toggleTheme() {
+      const light = document.documentElement.classList.toggle('light');
+      try { localStorage.setItem('ferramentas-theme', light ? 'light' : 'dark'); } catch (e) {}
+      document.getElementById('theme-btn').textContent = light ? '🌙 Escuro' : '☀ Claro';
+    }
+    document.getElementById('theme-btn').textContent =
+      document.documentElement.classList.contains('light') ? '🌙 Escuro' : '☀ Claro';
+  </script>
 </body>
 </html>
