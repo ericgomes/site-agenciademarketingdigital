@@ -2,13 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://agenciademarketingdigital.com.br</loc>
-    <lastmod>2026-08-03T10:48:01-03:00</lastmod>
+    <lastmod>2026-08-03T10:50:10-03:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://agenciademarketingdigital.com.br/blog</loc>
-    <lastmod>2026-08-03T10:48:01-03:00</lastmod>
+    <lastmod>2026-08-03T10:50:10-03:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agenciademarketingdigital.com.br/blog/ia-na-busca-crescimento-google-nao-garante-mais-visitas</loc>
+    <lastmod>2026-08-03T10:50:04-03:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
