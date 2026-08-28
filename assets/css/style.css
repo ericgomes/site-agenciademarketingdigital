@@ -610,39 +610,8 @@ footer a:hover { color: var(--text); }
 }
 body.has-mouse #mouse-spotlight { opacity: 1; }
 
-/* ===== CUSTOM CURSOR ===== */
-@media (pointer: fine) {
-  body { cursor: none; }
-  a, button { cursor: none; }
-}
-#cursor-dot {
-  position: fixed; top: 0; left: 0;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent-hi);
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background 0.2s, opacity 0.3s;
-  mix-blend-mode: screen;
-  opacity: 0;
-}
-#cursor-ring {
-  position: fixed; top: 0; left: 0;
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1.5px solid rgba(192,132,252,0.5);
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s, height 0.25s, border-color 0.25s, opacity 0.3s;
-  opacity: 0;
-}
-body.cursor-hover #cursor-dot { width: 10px; height: 10px; background: #fff; }
-body.cursor-hover #cursor-ring {
-  width: 52px; height: 52px;
-  border-color: rgba(192,132,252,0.8);
-  background: rgba(147,51,234,0.06);
-}
-@media (pointer: coarse) {
-  #cursor-dot, #cursor-ring { display: none; }
-}
+/* ===== CUSTOM CURSOR (desativado — usa o cursor padrão do sistema) ===== */
+#cursor-dot, #cursor-ring { display: none !important; }
 
 /* ===== SCROLL MARGIN (anchor offset for fixed nav) ===== */
 section[id], div[id] { scroll-margin-top: 6.25rem; }
