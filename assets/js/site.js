@@ -416,48 +416,6 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ── Custom cursor ────────────────────────────────────────────
-const cursorDot  = document.getElementById('cursor-dot');
-const cursorRing = document.getElementById('cursor-ring');
-
-let dotX = 0, dotY = 0;
-let ringX = 0, ringY = 0;
-let mouseX = 0, mouseY = 0;
-let cursorVisible = false;
-
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX; mouseY = e.clientY;
-  if (!cursorVisible) {
-    cursorVisible = true;
-    cursorDot.style.opacity  = '1';
-    cursorRing.style.opacity = '1';
-  }
-});
-
-document.addEventListener('mouseleave', () => {
-  cursorVisible = false;
-  cursorDot.style.opacity  = '0';
-  cursorRing.style.opacity = '0';
-});
-
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
-
-function animateCursor() {
-  dotX = mouseX; dotY = mouseY;
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-
-  cursorDot.style.left  = dotX  + 'px';
-  cursorDot.style.top   = dotY  + 'px';
-  cursorRing.style.left = ringX + 'px';
-  cursorRing.style.top  = ringY + 'px';
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
 // ── Mouse spotlight ───────────────────────────────────────────
 const spotlight = document.getElementById('mouse-spotlight');
 let spX = window.innerWidth / 2, spY = window.innerHeight / 2;
@@ -502,6 +460,8 @@ let rawMX = 0, rawMY = 0;
 let curMX = 0, curMY = 0;
 
 const heroEl = document.querySelector('.hero');
+let heroH = heroEl ? heroEl.offsetHeight : 0;
+window.addEventListener('resize', () => { if (heroEl) heroH = heroEl.offsetHeight; }, { passive: true });
 let ticking = false;
 
 window.addEventListener('scroll', () => {
@@ -522,7 +482,7 @@ document.addEventListener('mousemove', (e) => {
 function masterFrame() {
   ticking = false;
   if (prefersReduced) return;
-  if (scrollY > heroEl.offsetHeight * 1.3) return;
+  if (scrollY > heroH * 1.3) return;
 
   scrollLayers.forEach(({ el, s }) => {
     if (el) el.style.transform = `translate3d(0, ${scrollY * s}px, 0)`;
