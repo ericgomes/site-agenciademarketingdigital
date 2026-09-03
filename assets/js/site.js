@@ -17,6 +17,7 @@ const themeCssMap = {
   glass:    'assets/themes/glass.css',
   notion:   'assets/themes/notion.css',
   militar:  'assets/themes/militar.css',
+  premium:  'assets/themes/premium.css',
 };
 const loadedThemes = new Set();
 
@@ -83,6 +84,7 @@ const slugToVisual = {
   'indigo':      'glass',
   'clean':       'notion',
   'militar':     'militar',
+  'premium':     'premium',
 };
 const visualToSlug = Object.fromEntries(Object.entries(slugToVisual).map(([s, v]) => [v, s]));
 

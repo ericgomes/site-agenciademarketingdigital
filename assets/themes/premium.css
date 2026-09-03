@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+
+/* ===================================================
+   PREMIUM THEME  —  data-visual="premium"
+   Preto + dourado champanhe. Serifa nos títulos, sóbrio e elegante.
+   =================================================== */
+
+[data-visual="premium"] {
+  --bg:          #0a0a08;
+  --surface:     #141109;
+  --surface-2:   #1a160d;
+  --border:      rgba(200,164,92,0.18);
+  --border-2:    rgba(200,164,92,0.42);
+  --accent:      #c8a45c;
+  --accent-hi:   #e7ce8f;
+  --accent-glow: rgba(200,164,92,0.30);
+  --text:        #f1ece3;
+  --muted:       #b8ae9c;
+  --subtle:      #7a715f;
+  --card-bg:     rgba(20,18,12,0.72);
+  --nav-bg:      rgba(10,10,8,0.85);
+  --hero-grad:   linear-gradient(135deg, #16110a 0%, #0a0a08 62%);
+}
+
+/* ── Serifa nos títulos = ar de luxo ── */
+[data-visual="premium"] h1,
+[data-visual="premium"] h2,
+[data-visual="premium"] h3,
+[data-visual="premium"] .section-title,
+[data-visual="premium"] .expert-name,
+[data-visual="premium"] .contact-person-name {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+[data-visual="premium"] h1 { line-height: 1.06 !important; }
+
+[data-visual="premium"] .eyebrow,
+[data-visual="premium"] .svc-eye {
+  letter-spacing: 0.2em !important;
+  color: var(--accent) !important;
+}
+
+/* Destaque dourado no <em> do H1 */
+[data-visual="premium"] h1 em {
+  background: linear-gradient(135deg, #e7ce8f 0%, #c8a45c 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  font-style: italic !important;
+}
+
+/* ── Glows dourados ── */
+[data-visual="premium"] .glow-1 { background: radial-gradient(circle, rgba(200,164,92,0.20) 0%, transparent 65%) !important; }
+[data-visual="premium"] .glow-2 { background: radial-gradient(circle, rgba(231,206,143,0.12) 0%, transparent 65%) !important; }
+[data-visual="premium"] .glow-3 { background: radial-gradient(circle, rgba(200,164,92,0.10) 0%, transparent 65%) !important; }
+
+[data-visual="premium"] .hero-grid {
+  background-image:
+    linear-gradient(rgba(200,164,92,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,164,92,0.05) 1px, transparent 1px) !important;
+  background-size: 44px 44px !important;
+}
+
+/* ── Cards ── */
+[data-visual="premium"] .expert-card,
+[data-visual="premium"] .model-card,
+[data-visual="premium"] .service-card,
+[data-visual="premium"] .quote-box,
+[data-visual="premium"] .contact-person {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.45) !important;
+}
+[data-visual="premium"] .expert-card:hover,
+[data-visual="premium"] .model-card:hover,
+[data-visual="premium"] .service-card:hover,
+[data-visual="premium"] .contact-person:hover {
+  border-color: var(--border-2) !important;
+  box-shadow: 0 14px 44px rgba(200,164,92,0.12) !important;
+}
+[data-visual="premium"] .expert-card.eric    { border-left: 2px solid #c8a45c !important; }
+[data-visual="premium"] .expert-card.marcelo { border-left: 2px solid #e7ce8f !important; }
+[data-visual="premium"] .service-card::before { background: linear-gradient(90deg, #c8a45c, #e7ce8f) !important; height: 2px !important; }
+
+/* ── Botões ── */
+[data-visual="premium"] .btn-primary {
+  background: linear-gradient(180deg, #e7ce8f 0%, #c8a45c 100%) !important;
+  color: #211a0c !important;
+  border: 1px solid #e7ce8f !important;
+  box-shadow: 0 6px 22px rgba(200,164,92,0.28) !important;
+}
+[data-visual="premium"] .btn-primary:hover { box-shadow: 0 10px 32px rgba(200,164,92,0.42) !important; }
+[data-visual="premium"] .btn-ghost {
+  background: rgba(200,164,92,0.08) !important;
+  border: 1px solid var(--border-2) !important;
+  color: var(--accent-hi) !important;
+}
+[data-visual="premium"] .btn-ghost:hover { background: rgba(200,164,92,0.16) !important; }
+
+/* ── Nav / wordmark / footer ── */
+[data-visual="premium"] nav#navbar.scrolled {
+  background: var(--nav-bg) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+[data-visual="premium"] .linka-wordmark { color: var(--accent) !important; }
+[data-visual="premium"] .nav-link:hover { color: var(--accent-hi) !important; background: rgba(200,164,92,0.08) !important; }
+
+/* ── Timeline / detalhes ── */
+[data-visual="premium"] .tl::before { background: linear-gradient(to bottom, #c8a45c, #e7ce8f) !important; }
+[data-visual="premium"] .tl li::before { background: #c8a45c !important; box-shadow: 0 0 12px rgba(200,164,92,0.6) !important; }
+[data-visual="premium"] .tl-year { color: var(--accent) !important; }
+[data-visual="premium"] .badge-dot { background: #c8a45c !important; box-shadow: 0 0 8px rgba(200,164,92,0.8) !important; }
+
+[data-visual="premium"] footer {
+  background: #080806 !important;
+  border-top: 1px solid var(--border) !important;
+}
+
+/* Fotos com leve tom sépia p/ coesão */
+[data-visual="premium"] .expert-photo,
+[data-visual="premium"] .contact-photo-lg {
+  filter: grayscale(0.2) sepia(0.12) contrast(1.02) !important;
+}
+
+/* ── Switcher ── */
+[data-visual="premium"] #lang-switcher,
+[data-visual="premium"] #visual-trigger {
+  background: rgba(10,10,8,0.85) !important;
+  border-color: var(--border-2) !important;
+}
+[data-visual="premium"] #visual-menu {
+  background: #0f0d08 !important;
+  border-color: var(--border) !important;
+}
+[data-visual="premium"] .visual-btn.active { color: var(--accent) !important; }
