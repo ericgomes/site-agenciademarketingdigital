@@ -38,6 +38,20 @@ São Google Premier Partners — título concedido a menos de 3% das agências p
 - Otimização contínua de campanhas de tráfego pago
 - Estratégia de funil e segmentação de audiência
 
+## Ferramentas (Linka Intelligence)
+
+Suíte de ferramentas próprias de marketing digital: https://www.agenciademarketingdigital.com.br/ferramentas.html
+
+- [Artigos](https://artikfy.agenciademarketingdigital.com.br/) — geração de textos e artigos com IA para blog, redes sociais e SEO
+- [Atribuição](https://attributrik.agenciademarketingdigital.com.br/) — análise de atribuição para entender quais canais geram resultado
+- [Cidades](https://pop-traffic.agenciademarketingdigital.com.br/) — online market share of voice score por cidade, com base em dados demográficos do IBGE
+- [Live Site Monitor](https://lsm.agenciademarketingdigital.com.br/) — monitoramento ao vivo (RUM) da velocidade de carregamento com usuários reais, via GTM
+- [Tarefas](https://tfm.agenciademarketingdigital.com.br/) — gestão de tarefas, projetos, prazos e entregas
+- [Calculadora de Marketing Digital](https://www.agenciademarketingdigital.com.br/calculadora) — CAC, LTV, ROAS e projeções de canais
+- [Gerador de Plano de Mídia](https://www.agenciademarketingdigital.com.br/gerador-plano-midia) — distribuição de investimento entre canais
+
+Em desenvolvimento: SEO (otimização de conteúdo com IA), Reputação (análise de SERP), Orçamento (otimização de orçamento de Google Ads) e conectores de Meta Ads e LinkedIn Ads para Google Data Studio.
+
 ## Diferenciais
 
 - Execução direta pelos sócios — sem terceirização
@@ -45,6 +59,10 @@ São Google Premier Partners — título concedido a menos de 3% das agências p
 - Parceiros de longa data (clientes há mais de 15 anos)
 - Google Premier Partners (top 3% no Brasil)
 - Dashboards de performance para todos os clientes
+
+## Blog
+
+Artigos sobre SEO, tráfego pago e marketing digital: https://www.agenciademarketingdigital.com.br/blog
 
 ## Idiomas
 
@@ -58,5 +76,8 @@ O site está disponível em Português (pt-BR), English (en) e Español (es), co
 
 ## Arquivos
 
+- [Ferramentas](https://www.agenciademarketingdigital.com.br/ferramentas.html)
+- [Blog](https://www.agenciademarketingdigital.com.br/blog)
 - [Sitemap](https://www.agenciademarketingdigital.com.br/sitemap.xml)
+- [Feed do blog (RSS)](https://www.agenciademarketingdigital.com.br/feed.xml)
 - [Robots](https://www.agenciademarketingdigital.com.br/robots.txt)
