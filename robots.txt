@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.agenciademarketingdigital.com.br/sitemap.xml
+Sitemap: https://linka.agenciademarketingdigital.com.br/sitemap.xml
 
 # LLMs / AI crawlers
 User-agent: GPTBot

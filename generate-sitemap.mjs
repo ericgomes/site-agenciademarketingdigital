@@ -7,7 +7,7 @@
  */
 import { readFileSync, writeFileSync } from 'fs';
 
-const BASE = 'https://agenciademarketingdigital.com.br';
+const BASE = 'https://linka.agenciademarketingdigital.com.br';
 const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 
 // Páginas fixas do site (premium é noindex e fica fora; share é utilitário)
