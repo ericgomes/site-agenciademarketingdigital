@@ -418,6 +418,11 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+// Efeitos pesados (spotlight + parallax) só em desktop com mouse — poupa CPU no mobile
+const heavyFX = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  && window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  && window.innerWidth > 768;
+
 // ── Mouse spotlight ───────────────────────────────────────────
 const spotlight = document.getElementById('mouse-spotlight');
 let spX = window.innerWidth / 2, spY = window.innerHeight / 2;
@@ -439,7 +444,7 @@ function animateSpotlight() {
     `radial-gradient(650px circle at ${spCX}px ${spCY}px, ${clr} 0%, transparent 70%)`;
   requestAnimationFrame(animateSpotlight);
 }
-animateSpotlight();
+if (heavyFX) animateSpotlight();
 
 // ── Parallax + Mouse micro-parallax (unified loop) ───────────
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -469,11 +474,10 @@ let ticking = false;
 window.addEventListener('scroll', () => {
   scrollY = window.scrollY;
   nav.classList.toggle('scrolled', scrollY > 40);
-  if (!ticking && !prefersReduced) {
+  if (!ticking && heavyFX) {
     requestAnimationFrame(masterFrame);
     ticking = true;
   }
-  if (prefersReduced) nav.classList.toggle('scrolled', scrollY > 40);
 }, { passive: true });
 
 document.addEventListener('mousemove', (e) => {
@@ -511,6 +515,6 @@ function mouseLoop() {
   }
   requestAnimationFrame(mouseLoop);
 }
-mouseLoop();
+if (heavyFX) mouseLoop();
 
-masterFrame();
+if (heavyFX) masterFrame();
