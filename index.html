@@ -879,19 +879,57 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://linka.agenciademarketingdigital.com.br/#organization",
+        "name": "Linka",
+        "alternateName": "Agência de Marketing Digital",
+        "description": "Agência boutique de marketing digital especializada em SEO técnico e tráfego pago, com atendimento e execução direta pelos sócios — sem intermediários. Google Premier Partner (top 3% no Brasil), no mercado desde 2013.",
+        "url": "https://linka.agenciademarketingdigital.com.br/",
+        "logo": "https://linka.agenciademarketingdigital.com.br/assets/icons/icon-192.png",
+        "image": "https://linka.agenciademarketingdigital.com.br/og-image.jpg",
+        "foundingDate": "2013",
+        "areaServed": "BR",
+        "award": "Google Premier Partner",
+        "knowsAbout": ["SEO técnico", "Tráfego Pago", "Google Ads", "Meta Ads", "Google Tag Manager", "Web Analytics", "Looker Studio", "Google Apps Script"],
+        "founder": [
+          { "@id": "https://linka.agenciademarketingdigital.com.br/#eric" },
+          { "@id": "https://linka.agenciademarketingdigital.com.br/#marcelo" }
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "name": "Eric Gomes — SEO",
+            "telephone": "+55-11-99950-3930"
+          },
+          {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "name": "Marcelo Caricati — Tráfego Pago",
+            "telephone": "+55-11-98243-2765"
+          }
+        ]
+      },
+      {
         "@type": "Person",
         "@id": "https://linka.agenciademarketingdigital.com.br/#eric",
         "name": "Eric Gomes",
+        "description": "Co-fundador da Linka. Especialista em SEO técnico, tecnologia e dados. Formado em Ciência da Computação (PUC-SP).",
         "jobTitle": "Co-fundador — SEO, Tecnologia & Dados",
         "url": "https://www.linkedin.com/in/ericmottagomes/",
+        "worksFor": { "@id": "https://linka.agenciademarketingdigital.com.br/#organization" },
+        "sameAs": ["https://www.linkedin.com/in/ericmottagomes/"],
         "knowsAbout": ["SEO técnico", "Google Tag Manager", "Google Apps Script", "RD Station", "Looker Studio"]
       },
       {
         "@type": "Person",
         "@id": "https://linka.agenciademarketingdigital.com.br/#marcelo",
         "name": "Marcelo Caricati",
+        "description": "Co-fundador da Linka. Especialista em tráfego pago e performance. MBA em Marketing e certificado Google Ads.",
         "jobTitle": "Co-fundador — Tráfego Pago & Performance",
         "url": "https://www.linkedin.com/in/marcelo-caricati-83ab7018/",
+        "worksFor": { "@id": "https://linka.agenciademarketingdigital.com.br/#organization" },
+        "sameAs": ["https://www.linkedin.com/in/marcelo-caricati-83ab7018/"],
         "knowsAbout": ["Google Ads", "Tráfego Pago", "Looker Studio", "Performance Marketing"]
       }
     ]
