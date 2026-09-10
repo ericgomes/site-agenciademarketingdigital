@@ -51,7 +51,7 @@ Suíte de ferramentas próprias de marketing digital: https://www.agenciademarke
 - [Calculadora de Marketing Digital](https://www.agenciademarketingdigital.com.br/calculadora) — CAC, LTV, ROAS e projeções de canais
 - [Gerador de Plano de Mídia](https://www.agenciademarketingdigital.com.br/gerador-plano-midia) — distribuição de investimento entre canais
 
-Em desenvolvimento: SEO (otimização de conteúdo com IA), Reputação (análise de SERP), Orçamento (otimização de orçamento de Google Ads) e conectores de Meta Ads e LinkedIn Ads para Google Data Studio.
+Em desenvolvimento: SEO (otimização de conteúdo com IA), Reputação (análise de SERP), Orçamento (otimização de orçamento de Google Ads) e conectores de Meta Ads, LinkedIn Ads e SEMrush para Google Data Studio.
 
 ## Diferenciais
 
