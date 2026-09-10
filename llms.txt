@@ -40,7 +40,7 @@ São Google Premier Partners — título concedido a menos de 3% das agências p
 
 ## Ferramentas (Linka Intelligence)
 
-Suíte de ferramentas próprias de marketing digital: https://www.agenciademarketingdigital.com.br/lab.html
+Suíte de ferramentas próprias de marketing digital: https://www.agenciademarketingdigital.com.br/lab
 
 - [Artigos](https://artikfy.agenciademarketingdigital.com.br/) — geração de textos e artigos com IA para blog, redes sociais e SEO
 - [Atribuição](https://attributrik.agenciademarketingdigital.com.br/) — análise de atribuição para entender quais canais geram resultado
@@ -76,7 +76,7 @@ O site está disponível em Português (pt-BR), English (en) e Español (es), co
 
 ## Arquivos
 
-- [Ferramentas](https://www.agenciademarketingdigital.com.br/lab.html)
+- [Ferramentas](https://www.agenciademarketingdigital.com.br/lab)
 - [Blog](https://www.agenciademarketingdigital.com.br/blog)
 - [Sitemap](https://www.agenciademarketingdigital.com.br/sitemap.xml)
 - [Feed do blog (RSS)](https://www.agenciademarketingdigital.com.br/feed.xml)
