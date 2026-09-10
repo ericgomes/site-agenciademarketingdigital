@@ -45,6 +45,7 @@ Suíte de ferramentas próprias de marketing digital: https://www.agenciademarke
 - [Artigos](https://artikfy.agenciademarketingdigital.com.br/) — geração de textos e artigos com IA para blog, redes sociais e SEO
 - [Atribuição](https://attributrik.agenciademarketingdigital.com.br/) — análise de atribuição para entender quais canais geram resultado
 - [Cidades](https://pop-traffic.agenciademarketingdigital.com.br/) — online market share of voice score por cidade, com base em dados demográficos do IBGE
+- [Comparador GSC](https://script.google.com/a/agencialinka.com.br/macros/s/AKfycbwprfXVbXgc_D-HCh4T7c5tA00Y_E7qp3siGDKiRQB0AX_pQsBRXBiCwbQu8xZsXQZt/exec) — compara o desempenho no GSC (Google Search Console) entre períodos: cliques, impressões, CTR e posição média
 - [Live Site Monitor](https://lsm.agenciademarketingdigital.com.br/) — monitoramento ao vivo (RUM) da velocidade de carregamento com usuários reais, via GTM
 - [Tarefas](https://tfm.agenciademarketingdigital.com.br/) — gestão de tarefas, projetos, prazos e entregas
 - [Calculadora de Marketing Digital](https://www.agenciademarketingdigital.com.br/calculadora) — CAC, LTV, ROAS e projeções de canais
