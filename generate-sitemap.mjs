@@ -13,6 +13,9 @@ const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
 // Páginas fixas do site (premium é noindex e fica fora; share é utilitário)
 const pages = [
   { path: '/',                    priority: '1.0', changefreq: 'monthly', lastmod: today },
+  { path: '/sobre',               priority: '0.6', changefreq: 'yearly',  lastmod: today },
+  { path: '/contato',             priority: '0.6', changefreq: 'yearly',  lastmod: today },
+  { path: '/privacidade',         priority: '0.3', changefreq: 'yearly',  lastmod: today },
   { path: '/lab',                 priority: '0.8', changefreq: 'monthly', lastmod: today },
   { path: '/calculadora',         priority: '0.7', changefreq: 'monthly', lastmod: today },
   { path: '/gerador-plano-midia', priority: '0.7', changefreq: 'monthly', lastmod: today },

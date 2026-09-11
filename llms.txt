@@ -89,6 +89,9 @@ O site está disponível em Português (pt-BR), English (en) e Español (es), co
 
 ## Arquivos
 
+- [Sobre](https://www.agenciademarketingdigital.com.br/sobre)
+- [Contato](https://www.agenciademarketingdigital.com.br/contato)
+- [Política de Privacidade](https://www.agenciademarketingdigital.com.br/privacidade)
 - [Ferramentas](https://www.agenciademarketingdigital.com.br/lab)
 - [Blog](https://www.agenciademarketingdigital.com.br/blog)
 - [Sitemap](https://www.agenciademarketingdigital.com.br/sitemap.xml)
