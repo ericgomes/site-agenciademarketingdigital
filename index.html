@@ -370,18 +370,61 @@ nav#navbar.nav-open .nav-toggle .icon-close { display: block; }
 .certs-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
 }
-.cert-badge {
-  display: flex; flex-direction: column; gap: 0.6rem;
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--border); border-radius: 14px;
-  background: var(--surface-2);
-  text-decoration: none; color: var(--text);
-  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+.cert-card { display: flex; flex-direction: column; gap: 0.6rem; }
+.cert-thumb {
+  position: relative; display: block; width: 100%; padding: 0;
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  background: #eaf1fb; cursor: zoom-in; line-height: 0;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.cert-badge:hover { border-color: var(--border-2); transform: translateY(-2px); }
-.cert-name { font-size: 0.9rem; font-weight: 600; line-height: 1.35; }
-.cert-verify { font-size: 0.72rem; font-weight: 600; color: var(--accent-hi); margin-top: auto; }
+.cert-thumb img { display: block; width: 100%; height: auto; }
+.cert-thumb:hover { border-color: var(--border-2); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+.cert-thumb .cert-zoom {
+  position: absolute; top: 0.5rem; right: 0.5rem;
+  width: 26px; height: 26px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.55); color: #fff; font-size: 0.85rem; line-height: 1;
+  opacity: 0; transition: opacity 0.2s;
+}
+.cert-thumb:hover .cert-zoom, .cert-thumb:focus-visible .cert-zoom { opacity: 1; }
+.cert-cap { display: flex; flex-direction: column; gap: 0.25rem; }
+.cert-name { font-size: 0.86rem; font-weight: 600; line-height: 1.35; color: var(--text); }
+.cert-verify { font-size: 0.72rem; font-weight: 600; color: var(--accent-hi); text-decoration: none; }
+.cert-verify:hover { text-decoration: underline; }
 @media (max-width: 760px) { .certs-grid { grid-template-columns: 1fr; } }
+
+/* Lightbox do certificado */
+.cert-lightbox {
+  position: fixed; inset: 0; z-index: 100000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0,0,0,0.85);
+  -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+}
+.cert-lightbox[hidden] { display: none; }
+.cert-lb-figure {
+  margin: 0; max-width: 1000px; width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+}
+.cert-lb-figure img {
+  max-width: 100%; max-height: 80vh; width: auto; height: auto;
+  border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.cert-lb-cap {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 0.35rem 1rem; text-align: center; color: #fff;
+}
+.cert-lb-cap #cert-lb-name { font-size: 0.95rem; font-weight: 600; }
+.cert-lb-cap a { color: #c9b6ff; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
+.cert-lb-cap a:hover { text-decoration: underline; }
+.cert-lb-close {
+  position: fixed; top: 1rem; right: 1rem;
+  width: 44px; height: 44px; border-radius: 10px;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; font-size: 1.3rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.cert-lb-close:hover { background: rgba(255,255,255,0.22); }
 
 .btn-primary {
   display: inline-flex; align-items: center; gap: 0.4rem;
@@ -1343,18 +1386,36 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
           <span data-i18n="certsEye">Certificações · LinkedIn Marketing Academy · Marcelo Caricati</span>
         </p>
         <div class="certs-grid">
-          <a class="cert-badge" href="https://training.marketing.linkedin.com/verify/zaoq22jb6th4" target="_blank" rel="noopener noreferrer">
-            <span class="cert-name" data-i18n="cert1">Estratégia de marketing do LinkedIn</span>
-            <span class="cert-verify"><span data-i18n="certVerify">Verificar credencial</span> <span aria-hidden="true">↗</span></span>
-          </a>
-          <a class="cert-badge" href="https://training.marketing.linkedin.com/verify/jyqxwekeqw5m" target="_blank" rel="noopener noreferrer">
-            <span class="cert-name" data-i18n="cert2">Princípios básicos da publicidade do LinkedIn</span>
-            <span class="cert-verify"><span data-i18n="certVerify">Verificar credencial</span> <span aria-hidden="true">↗</span></span>
-          </a>
-          <a class="cert-badge" href="https://training.marketing.linkedin.com/verify/jj5bs48bxrbx" target="_blank" rel="noopener noreferrer">
-            <span class="cert-name" data-i18n="cert3">Design e conteúdo de anúncios do LinkedIn</span>
-            <span class="cert-verify"><span data-i18n="certVerify">Verificar credencial</span> <span aria-hidden="true">↗</span></span>
-          </a>
+          <figure class="cert-card">
+            <button type="button" class="cert-thumb" data-full="assets/img/certs/cert-estrategia.jpg" aria-label="Ampliar certificado: Estratégia de marketing do LinkedIn">
+              <img src="assets/img/certs/cert-estrategia-thumb.jpg" alt="Certificado LinkedIn Marketing Academy — Estratégia de marketing do LinkedIn (Marcelo Caricati)" width="720" height="556" loading="lazy">
+              <span class="cert-zoom" aria-hidden="true">⤢</span>
+            </button>
+            <figcaption class="cert-cap">
+              <span class="cert-name" data-i18n="cert1">Estratégia de marketing do LinkedIn</span>
+              <a class="cert-verify" href="https://training.marketing.linkedin.com/verify/zaoq22jb6th4" target="_blank" rel="noopener noreferrer"><span data-i18n="certVerify">Verificar credencial</span> <span aria-hidden="true">↗</span></a>
+            </figcaption>
+          </figure>
+          <figure class="cert-card">
+            <button type="button" class="cert-thumb" data-full="assets/img/certs/cert-publicidade.jpg" aria-label="Ampliar certificado: Princípios básicos da publicidade do LinkedIn">
+              <img src="assets/img/certs/cert-publicidade-thumb.jpg" alt="Certificado LinkedIn Marketing Academy — Princípios básicos da publicidade do LinkedIn (Marcelo Caricati)" width="720" height="556" loading="lazy">
+              <span class="cert-zoom" aria-hidden="true">⤢</span>
+            </button>
+            <figcaption class="cert-cap">
+              <span class="cert-name" data-i18n="cert2">Princípios básicos da publicidade do LinkedIn</span>
+              <a class="cert-verify" href="https://training.marketing.linkedin.com/verify/jyqxwekeqw5m" target="_blank" rel="noopener noreferrer"><span data-i18n="certVerify">Verificar credencial</span> <span aria-hidden="true">↗</span></a>
+            </figcaption>
+          </figure>
+          <figure class="cert-card">
+            <button type="button" class="cert-thumb" data-full="assets/img/certs/cert-design.jpg" aria-label="Ampliar certificado: Design e conteúdo de anúncios do LinkedIn">
+              <img src="assets/img/certs/cert-design-thumb.jpg" alt="Certificado LinkedIn Marketing Academy — Design e conteúdo de anúncios do LinkedIn (Marcelo Caricati)" width="720" height="556" loading="lazy">
+              <span class="cert-zoom" aria-hidden="true">⤢</span>
+            </button>
+            <figcaption class="cert-cap">
+              <span class="cert-name" data-i18n="cert3">Design e conteúdo de anúncios do LinkedIn</span>
+              <a class="cert-verify" href="https://training.marketing.linkedin.com/verify/jj5bs48bxrbx" target="_blank" rel="noopener noreferrer"><span data-i18n="certVerify">Verificar credencial</span> <span aria-hidden="true">↗</span></a>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>
@@ -1461,6 +1522,18 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
     </div>
   </footer>
 
-  <script src="assets/js/site.js?v=7b1c20e1" type="module"></script>
+  <!-- Lightbox dos certificados -->
+  <div class="cert-lightbox" id="cert-lightbox" hidden role="dialog" aria-modal="true" aria-label="Certificado LinkedIn de Marcelo Caricati">
+    <button type="button" class="cert-lb-close" id="cert-lb-close" aria-label="Fechar">✕</button>
+    <figure class="cert-lb-figure">
+      <img id="cert-lb-img" src="" alt="">
+      <figcaption class="cert-lb-cap">
+        <span id="cert-lb-name"></span>
+        <a id="cert-lb-verify" href="#" target="_blank" rel="noopener noreferrer">Verificar credencial ↗</a>
+      </figcaption>
+    </figure>
+  </div>
+
+  <script src="assets/js/site.js?v=8c3d41f2" type="module"></script>
 </body>
 </html>

@@ -25,6 +25,43 @@ if (navToggle && nav) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
 }
 
+// ── Lightbox dos certificados (Marcelo) ──────────────────────
+const certLb = document.getElementById('cert-lightbox');
+if (certLb) {
+  const lbImg    = document.getElementById('cert-lb-img');
+  const lbName   = document.getElementById('cert-lb-name');
+  const lbVerify = document.getElementById('cert-lb-verify');
+  const lbClose  = document.getElementById('cert-lb-close');
+
+  const closeCertLb = () => {
+    certLb.hidden = true;
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll('.cert-thumb').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card     = btn.closest('.cert-card');
+      const nameEl   = card && card.querySelector('.cert-name');
+      const verifyEl = card && card.querySelector('.cert-verify');
+      lbImg.src = btn.dataset.full;
+      lbImg.alt = btn.querySelector('img') ? btn.querySelector('img').alt : '';
+      lbName.textContent = nameEl ? nameEl.textContent.trim() : '';
+      if (verifyEl) {
+        lbVerify.href = verifyEl.getAttribute('href');
+        lbVerify.textContent = verifyEl.textContent.trim();
+      }
+      certLb.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    });
+  });
+
+  lbClose.addEventListener('click', closeCertLb);
+  certLb.addEventListener('click', (e) => { if (e.target === certLb) closeCertLb(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !certLb.hidden) closeCertLb(); });
+}
+
 // ── Theme CSS lazy loader ────────────────────────────────────
 const themeCssMap = {
   pixelart: 'assets/themes/pixelart.css',
