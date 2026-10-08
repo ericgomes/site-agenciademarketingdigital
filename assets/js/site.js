@@ -6,6 +6,25 @@ function applyTheme(t) {
   html.setAttribute('data-theme', t);
 }
 
+// ── Menu mobile (hambúrguer) ─────────────────────────────────
+const navToggle = document.getElementById('nav-toggle');
+if (navToggle && nav) {
+  const closeNav = () => {
+    nav.classList.remove('nav-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  };
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = nav.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  nav.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', closeNav));
+  document.addEventListener('click', (e) => {
+    if (nav.classList.contains('nav-open') && !nav.contains(e.target)) closeNav();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+}
+
 // ── Theme CSS lazy loader ────────────────────────────────────
 const themeCssMap = {
   pixelart: 'assets/themes/pixelart.css',
@@ -199,6 +218,13 @@ const translations = {
     contatoDesc:  'Se você busca um parceiro sério — não apenas mais um fornecedor — fale diretamente com quem vai trabalhar no seu projeto.',
     ericRoleShort:    'SEO · Tecnologia · Dados',
     marceloRoleShort: 'Tráfego Pago · Performance',
+
+    // Certificações LinkedIn (Marcelo)
+    certsEye:    'Certificações · LinkedIn Marketing Academy · Marcelo Caricati',
+    cert1:       'Estratégia de marketing do LinkedIn',
+    cert2:       'Princípios básicos da publicidade do LinkedIn',
+    cert3:       'Design e conteúdo de anúncios do LinkedIn',
+    certVerify:  'Verificar credencial',
   },
 
   en: {
@@ -288,6 +314,13 @@ const translations = {
     contatoDesc:  'If you are looking for a serious partner — not just another vendor — talk directly with the people who will work on your project.',
     ericRoleShort:    'SEO · Technology · Data',
     marceloRoleShort: 'Paid Traffic · Performance',
+
+    // LinkedIn certifications (Marcelo)
+    certsEye:    'Certifications · LinkedIn Marketing Academy · Marcelo Caricati',
+    cert1:       'LinkedIn Marketing Strategy',
+    cert2:       'LinkedIn Advertising Fundamentals',
+    cert3:       'LinkedIn Ad Content & Design',
+    certVerify:  'Verify credential',
   },
 
   es: {
@@ -377,6 +410,13 @@ const translations = {
     contatoDesc:  'Si buscas un socio serio — no solo otro proveedor — habla directamente con quienes trabajarán en tu proyecto.',
     ericRoleShort:    'SEO · Tecnología · Datos',
     marceloRoleShort: 'Tráfico Pago · Performance',
+
+    // Certificaciones LinkedIn (Marcelo)
+    certsEye:    'Certificaciones · LinkedIn Marketing Academy · Marcelo Caricati',
+    cert1:       'Estrategia de marketing de LinkedIn',
+    cert2:       'Fundamentos de la publicidad de LinkedIn',
+    cert3:       'Diseño y contenido de anuncios de LinkedIn',
+    certVerify:  'Verificar credencial',
   },
 };
 
