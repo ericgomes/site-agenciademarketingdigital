@@ -265,8 +265,8 @@ const translations = {
 
     // Certificações LinkedIn (Marcelo)
     certsEye:    'LinkedIn Marketing Academy · Marcelo Caricati',
-    selosEye:    'Selos e Certificados',
-    selosTitle:  'Credenciais oficiais',
+    selosEye:    'Credenciais',
+    selosTitle:  'Certificações e Selos',
     selosSub:    'Reconhecimentos e certificações que comprovam nossa especialização — verificáveis nas fontes oficiais.',
     funnelN1:    '22.959',
     funnelL1:    'agências no mundo',
@@ -379,8 +379,8 @@ const translations = {
 
     // LinkedIn certifications (Marcelo)
     certsEye:    'LinkedIn Marketing Academy · Marcelo Caricati',
-    selosEye:    'Badges & Certifications',
-    selosTitle:  'Official credentials',
+    selosEye:    'Credentials',
+    selosTitle:  'Certifications & Badges',
     selosSub:    'Recognitions and certifications that prove our expertise — verifiable at the official sources.',
     funnelN1:    '22,959',
     funnelL1:    'agencies worldwide',
@@ -493,8 +493,8 @@ const translations = {
 
     // Certificaciones LinkedIn (Marcelo)
     certsEye:    'LinkedIn Marketing Academy · Marcelo Caricati',
-    selosEye:    'Sellos y Certificaciones',
-    selosTitle:  'Credenciales oficiales',
+    selosEye:    'Credenciales',
+    selosTitle:  'Certificaciones y Sellos',
     selosSub:    'Reconocimientos y certificaciones que comprueban nuestra especialización — verificables en las fuentes oficiales.',
     funnelN1:    '22.959',
     funnelL1:    'agencias en el mundo',
