@@ -39,17 +39,24 @@ if (certLb) {
     document.body.style.overflow = '';
   };
 
-  document.querySelectorAll('.cert-thumb').forEach(btn => {
+  document.querySelectorAll('.cert-thumb, .proof-thumb, .badge-zoom').forEach(btn => {
     btn.addEventListener('click', () => {
-      const card     = btn.closest('.cert-card');
-      const nameEl   = card && card.querySelector('.cert-name');
-      const verifyEl = card && card.querySelector('.cert-verify');
+      const card      = btn.closest('.cert-card');
+      const fig        = btn.closest('.proof-fig');
+      const nameEl     = card && card.querySelector('.cert-name');
+      const verifyEl   = (card && card.querySelector('.cert-verify')) || (fig && fig.querySelector('.proof-cap a'));
+      const name       = btn.dataset.name || (nameEl ? nameEl.textContent.trim() : '');
+      const verifyHref = btn.dataset.verify || (verifyEl ? verifyEl.getAttribute('href') : '');
+      const verifyText = (verifyEl ? verifyEl.textContent.trim() : '') || 'Verificar ↗';
       lbImg.src = btn.dataset.full;
       lbImg.alt = btn.querySelector('img') ? btn.querySelector('img').alt : '';
-      lbName.textContent = nameEl ? nameEl.textContent.trim() : '';
-      if (verifyEl) {
-        lbVerify.href = verifyEl.getAttribute('href');
-        lbVerify.textContent = verifyEl.textContent.trim();
+      lbName.textContent = name;
+      if (verifyHref) {
+        lbVerify.href = verifyHref;
+        lbVerify.textContent = verifyText;
+        lbVerify.hidden = false;
+      } else {
+        lbVerify.hidden = true;
       }
       certLb.hidden = false;
       document.body.style.overflow = 'hidden';
@@ -209,7 +216,7 @@ const translations = {
     tl3Desc:  'As duas trajetórias se unem: SEO e tecnologia de um lado, tráfego pago do outro.',
     tl4Year:  'Hoje',
     tl4Title: 'Carteira exclusiva, resultados de longo prazo',
-    tl4Desc:  'Mais de 300 clientes atendidos. Parceiros de longa data, foco total em resultado mensurável.',
+    tl4Desc:  'Poucos clientes, por escolha. Parcerias de longa data e dedicação total a cada projeto — com foco em resultado mensurável.',
 
     // Como trabalhamos
     comoEye:   'Como trabalhamos',
@@ -257,11 +264,29 @@ const translations = {
     marceloRoleShort: 'Tráfego Pago · Performance',
 
     // Certificações LinkedIn (Marcelo)
-    certsEye:    'Certificações · LinkedIn Marketing Academy · Marcelo Caricati',
+    certsEye:    'LinkedIn Marketing Academy · Marcelo Caricati',
+    selosEye:    'Selos e Certificados',
+    selosTitle:  'Credenciais oficiais',
+    selosSub:    'Reconhecimentos e certificações que comprovam nossa especialização — verificáveis nas fontes oficiais.',
+    funnelN1:    '22.959',
+    funnelL1:    'agências no mundo',
+    funnelL2:    'no Brasil',
+    funnelL3:    'Google Premier Partner',
+    funnelL4:    'com todas as 5 certificações',
+    badgesMarcelo:'Certificações Google Ads — Marcelo Caricati · clique para ampliar',
+    badgesAgency: 'Selos da agência — Google Premier Partner (2023–2026)',
     cert1:       'Estratégia de marketing do LinkedIn',
     cert2:       'Princípios básicos da publicidade do LinkedIn',
     cert3:       'Design e conteúdo de anúncios do LinkedIn',
     certVerify:  'Verificar credencial',
+
+    // Prova — diretório de parceiros do Google
+    proofClaim:  '<strong>1 entre 62.</strong> A Linka está no grupo das únicas 62 agências do Brasil que são Google Premier Partner e têm todas as 5 certificações.',
+    proofFunnel: '22.959 agências no mundo · 996 no Brasil · 123 Premier · <strong>62 com todas as certificações</strong>',
+    proofCap:    'Diretório oficial de parceiros do Google — Brasil · Premier · todas as certificações.',
+    proofVerify: 'Ver no diretório do Google ↗',
+    badgesCerts:   'As 5 certificações Google Ads',
+    badgesPremier: 'Google Premier Partner — renovado todo ano',
   },
 
   en: {
@@ -305,7 +330,7 @@ const translations = {
     tl3Desc:  'The two paths merge: SEO and technology on one side, paid traffic on the other.',
     tl4Year:  'Today',
     tl4Title: 'Exclusive portfolio, long-term results',
-    tl4Desc:  'Over 300 clients served. Long-standing partners, full focus on measurable results.',
+    tl4Desc:  'Few clients, by choice. Long-standing partnerships and full dedication to each project — focused on measurable results.',
 
     // Como trabalhamos
     comoEye:   'How we work',
@@ -353,11 +378,29 @@ const translations = {
     marceloRoleShort: 'Paid Traffic · Performance',
 
     // LinkedIn certifications (Marcelo)
-    certsEye:    'Certifications · LinkedIn Marketing Academy · Marcelo Caricati',
+    certsEye:    'LinkedIn Marketing Academy · Marcelo Caricati',
+    selosEye:    'Badges & Certifications',
+    selosTitle:  'Official credentials',
+    selosSub:    'Recognitions and certifications that prove our expertise — verifiable at the official sources.',
+    funnelN1:    '22,959',
+    funnelL1:    'agencies worldwide',
+    funnelL2:    'in Brazil',
+    funnelL3:    'Google Premier Partner',
+    funnelL4:    'with all 5 certifications',
+    badgesMarcelo:'Google Ads certifications — Marcelo Caricati · click to enlarge',
+    badgesAgency: 'Agency badges — Google Premier Partner (2023–2026)',
     cert1:       'LinkedIn Marketing Strategy',
     cert2:       'LinkedIn Advertising Fundamentals',
     cert3:       'LinkedIn Ad Content & Design',
     certVerify:  'Verify credential',
+
+    // Proof — Google Partners Directory
+    proofClaim:  '<strong>1 of 62.</strong> Linka is among the only 62 agencies in Brazil that are Google Premier Partners and hold all 5 certifications.',
+    proofFunnel: '22,959 agencies worldwide · 996 in Brazil · 123 Premier · <strong>62 with every certification</strong>',
+    proofCap:    'Official Google Partners Directory — Brazil · Premier · all certifications.',
+    proofVerify: 'View in Google’s directory ↗',
+    badgesCerts:   'All 5 Google Ads certifications',
+    badgesPremier: 'Google Premier Partner — renewed every year',
   },
 
   es: {
@@ -401,7 +444,7 @@ const translations = {
     tl3Desc:  'Los dos caminos se unen: SEO y tecnología por un lado, tráfico pago por el otro.',
     tl4Year:  'Hoy',
     tl4Title: 'Cartera exclusiva, resultados a largo plazo',
-    tl4Desc:  'Más de 300 clientes atendidos. Socios de larga data, enfoque total en resultados medibles.',
+    tl4Desc:  'Pocos clientes, por elección. Alianzas de larga data y dedicación total a cada proyecto — con foco en resultados medibles.',
 
     // Como trabalhamos
     comoEye:   'Cómo trabajamos',
@@ -449,11 +492,29 @@ const translations = {
     marceloRoleShort: 'Tráfico Pago · Performance',
 
     // Certificaciones LinkedIn (Marcelo)
-    certsEye:    'Certificaciones · LinkedIn Marketing Academy · Marcelo Caricati',
+    certsEye:    'LinkedIn Marketing Academy · Marcelo Caricati',
+    selosEye:    'Sellos y Certificaciones',
+    selosTitle:  'Credenciales oficiales',
+    selosSub:    'Reconocimientos y certificaciones que comprueban nuestra especialización — verificables en las fuentes oficiales.',
+    funnelN1:    '22.959',
+    funnelL1:    'agencias en el mundo',
+    funnelL2:    'en Brasil',
+    funnelL3:    'Google Premier Partner',
+    funnelL4:    'con las 5 certificaciones',
+    badgesMarcelo:'Certificaciones de Google Ads — Marcelo Caricati · clic para ampliar',
+    badgesAgency: 'Sellos de la agencia — Google Premier Partner (2023–2026)',
     cert1:       'Estrategia de marketing de LinkedIn',
     cert2:       'Fundamentos de la publicidad de LinkedIn',
     cert3:       'Diseño y contenido de anuncios de LinkedIn',
     certVerify:  'Verificar credencial',
+
+    // Prueba — Directorio de socios de Google
+    proofClaim:  '<strong>1 de 62.</strong> Linka está entre las únicas 62 agencias de Brasil que son Google Premier Partner y tienen las 5 certificaciones.',
+    proofFunnel: '22.959 agencias en el mundo · 996 en Brasil · 123 Premier · <strong>62 con todas las certificaciones</strong>',
+    proofCap:    'Directorio oficial de socios de Google — Brasil · Premier · todas las certificaciones.',
+    proofVerify: 'Ver en el directorio de Google ↗',
+    badgesCerts:   'Las 5 certificaciones de Google Ads',
+    badgesPremier: 'Google Premier Partner — renovado cada año',
   },
 };
 

@@ -346,10 +346,9 @@ nav#navbar.nav-open .nav-toggle .icon-close { display: block; }
   margin-bottom: 0.4rem;
 }
 .gpp-desc {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--muted);
-  line-height: 1.6;
-  max-width: 38ch;
+  line-height: 1.65;
 }
 
 /* Certificações LinkedIn (Marcelo) */
@@ -362,8 +361,7 @@ nav#navbar.nav-open .nav-toggle .icon-close { display: block; }
 }
 .certs-eye {
   display: flex; align-items: center; gap: 0.5rem;
-  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--accent-hi);
+  font-size: 0.85rem; font-weight: 600; color: var(--muted);
   margin-bottom: 1rem;
 }
 .certs-eye svg { width: 18px; height: 18px; flex-shrink: 0; }
@@ -386,7 +384,8 @@ nav#navbar.nav-open .nav-toggle .icon-close { display: block; }
   background: rgba(0,0,0,0.55); color: #fff; font-size: 0.85rem; line-height: 1;
   opacity: 0; transition: opacity 0.2s;
 }
-.cert-thumb:hover .cert-zoom, .cert-thumb:focus-visible .cert-zoom { opacity: 1; }
+.cert-thumb:hover .cert-zoom, .cert-thumb:focus-visible .cert-zoom,
+.proof-thumb:hover .cert-zoom, .proof-thumb:focus-visible .cert-zoom { opacity: 1; }
 .cert-cap { display: flex; flex-direction: column; gap: 0.25rem; }
 .cert-name { font-size: 0.86rem; font-weight: 600; line-height: 1.35; color: var(--text); }
 .cert-verify { font-size: 0.72rem; font-weight: 600; color: var(--accent-hi); text-decoration: none; }
@@ -425,6 +424,105 @@ nav#navbar.nav-open .nav-toggle .icon-close { display: block; }
   display: flex; align-items: center; justify-content: center;
 }
 .cert-lb-close:hover { background: rgba(255,255,255,0.22); }
+
+/* Prova: diretório de parceiros do Google (Linka entre as 62) */
+.proof-section {
+  margin-top: 1.25rem;
+  padding: 1.6rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--card-bg);
+}
+.proof-claim { font-size: 1rem; line-height: 1.65; color: var(--text); margin-bottom: 1.1rem; max-width: 72ch; }
+.proof-claim strong { color: var(--accent-hi); font-weight: 700; }
+.proof-funnel { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.1rem; letter-spacing: 0.01em; }
+.proof-funnel strong { color: var(--accent-hi); font-weight: 700; }
+.proof-fig { margin: 0; display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+.proof-thumb {
+  position: relative; display: block; width: 100%; max-width: 680px; padding: 0;
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  background: #fff; cursor: zoom-in; line-height: 0;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.proof-thumb img { display: block; width: 100%; height: auto; }
+.proof-thumb:hover { border-color: var(--border-2); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+.proof-cap { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.proof-cap a { color: var(--accent-hi); font-weight: 600; text-decoration: none; }
+.proof-cap a:hover { text-decoration: underline; }
+
+/* Selos oficiais do Google (certificações Ads + Premier por ano) */
+.badges-section {
+  margin-top: 1.25rem;
+  padding: 1.6rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--card-bg);
+  display: flex; flex-direction: column; gap: 1.3rem;
+}
+.badge-group-label {
+  font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem;
+}
+.badge-wall { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.badge-item {
+  background: #fff; border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px; padding: 0.45rem; line-height: 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.14);
+}
+.badge-item img { display: block; height: 78px; width: auto; border-radius: 6px; }
+.badge-item.badge-zoom { cursor: zoom-in; padding: 0; border: 1px solid rgba(0,0,0,0.08); transition: transform 0.18s, box-shadow 0.18s; }
+.badge-item.badge-zoom img { padding: 0.45rem; }
+.badge-item.badge-zoom:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.22); }
+.badges-wrap { display: flex; flex-direction: column; gap: 1.8rem; }
+
+/* Subseções de credenciais (Google Ads / LinkedIn) */
+.cred-group { margin-top: 2.2rem; }
+.cred-group + .cred-group { margin-top: 2.4rem; }
+.cred-head {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 1.15rem; font-weight: 800; letter-spacing: -0.01em; color: var(--text);
+  margin-bottom: 0.9rem;
+}
+.cred-head .cred-ico { width: 24px; height: 24px; flex-shrink: 0; display: block; }
+
+/* Uma caixa única agrupando tudo da subseção */
+.cred-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--card-bg);
+  padding: 2.2rem 2.4rem;
+  display: flex; flex-direction: column;
+}
+.cred-card > * + * { margin-top: 2.1rem; padding-top: 2.1rem; border-top: 1px solid var(--border); }
+/* blocos internos perdem a caixa própria (sem invólucro dentro de invólucro) */
+.cred-card .gpp-section,
+.cred-card .proof-section,
+.cred-card .badges-section,
+.cred-card .certs-section {
+  margin: 0; padding: 0; border: 0; background: none; border-radius: 0;
+}
+.cred-card .gpp-section { gap: 1.6rem; }
+
+/* Funil 22.959 → 62 */
+.funnel { margin: 0 auto; padding: 0; max-width: 500px; display: flex; flex-direction: column; align-items: center; }
+.funnel-step {
+  width: var(--w, 100%); min-width: 170px;
+  border-radius: 12px; padding: 0.72rem 1.1rem;
+  background: var(--surface-2); border: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; gap: 0.1rem; text-align: center;
+}
+.funnel-num { font-size: 1.6rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; line-height: 1.05; }
+.funnel-lbl { font-size: 0.8rem; color: var(--muted); line-height: 1.3; }
+.funnel-sep {
+  width: 9px; height: 9px; margin: 0.4rem 0;
+  border-right: 2px solid var(--border-2); border-bottom: 2px solid var(--border-2);
+  transform: rotate(45deg); opacity: 0.65;
+}
+.funnel-step.is-highlight {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hi) 100%);
+  border-color: transparent; box-shadow: 0 10px 26px var(--accent-glow);
+}
+.funnel-step.is-highlight .funnel-num,
+.funnel-step.is-highlight .funnel-lbl { color: #fff; }
 
 .btn-primary {
   display: inline-flex; align-items: center; gap: 0.4rem;
@@ -1298,7 +1396,7 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
           <li>
             <p class="tl-year" data-i18n="tl4Year">Hoje</p>
             <h3 data-i18n="tl4Title">Carteira exclusiva, resultados de longo prazo</h3>
-            <p data-i18n="tl4Desc">Mais de 300 clientes atendidos. Parceiros de longa data, foco total em resultado mensurável.</p>
+            <p data-i18n="tl4Desc">Poucos clientes, por escolha. Parcerias de longa data e dedicação total a cada projeto — com foco em resultado mensurável.</p>
           </li>
         </ol>
       </div>
@@ -1369,22 +1467,93 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
           </ul>
         </article>
       </div>
+    </div>
+  </section>
 
-      <div class="gpp-section reveal">
-        <a href="https://www.google.com/partners/agency?id=8434993335" target="_blank" rel="noopener noreferrer" class="gpp-link">
-          <img src="https://www.gstatic.com/partners/badge/images/2026/PremierBadgeClickable.svg" alt="Google Premier Partner" class="gpp-img" width="152" height="146">
-        </a>
-        <div class="gpp-text">
-          <p class="gpp-headline" data-i18n="gppTitle">Somos Google Premier Partners</p>
-          <p class="gpp-desc" data-i18n="gppDesc">O título Premier é concedido ao seleto grupo de agências no topo do desempenho em Google Ads — menos de 3% das agências parceiras no Brasil.</p>
+  <!-- ===== SELOS E CERTIFICADOS ===== -->
+  <section class="full-bleed" id="selos">
+    <div class="section-wrap">
+      <p class="eyebrow" data-i18n="selosEye">Selos e Certificados</p>
+      <h2 class="section-title" data-i18n="selosTitle">Credenciais oficiais</h2>
+      <p class="section-sub" data-i18n="selosSub">Reconhecimentos e certificações que comprovam nossa especialização — verificáveis nas fontes oficiais.</p>
+
+      <div class="cred-group reveal">
+        <h3 class="cred-head">
+          <svg class="cred-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.52 12.27c0-.82-.07-1.6-.21-2.36H12v4.47h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.88c2.27-2.09 3.57-5.17 3.57-8.74z"/><path fill="#34A853" d="M12 24c3.24 0 5.96-1.08 7.95-2.91l-3.88-3.01c-1.08.72-2.45 1.15-4.07 1.15-3.13 0-5.78-2.11-6.73-4.96H1.26v3.11A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.27 14.27A7.2 7.2 0 0 1 4.89 12c0-.79.14-1.56.38-2.27V6.62H1.26A12 12 0 0 0 0 12c0 1.94.46 3.77 1.26 5.38z"/><path fill="#EA4335" d="M12 4.77c1.76 0 3.35.61 4.6 1.8l3.44-3.44A11.97 11.97 0 0 0 12 0 12 12 0 0 0 1.26 6.62l4.01 3.11C6.22 6.88 8.87 4.77 12 4.77z"/></svg>
+          Google Ads
+        </h3>
+
+        <div class="cred-card">
+        <div class="gpp-section">
+          <a href="https://www.google.com/partners/agency?id=8434993335" target="_blank" rel="noopener noreferrer" class="gpp-link">
+            <img src="https://www.gstatic.com/partners/badge/images/2026/PremierBadgeClickable.svg" alt="Google Premier Partner" class="gpp-img" width="152" height="146">
+          </a>
+          <div class="gpp-text">
+            <p class="gpp-headline" data-i18n="gppTitle">Somos Google Premier Partners</p>
+            <p class="gpp-desc" data-i18n="gppDesc">O título Premier é concedido ao seleto grupo de agências no topo do desempenho em Google Ads — menos de 3% das agências parceiras no Brasil.</p>
+          </div>
+        </div>
+
+        <div class="funnel" role="list" aria-label="Funil: de 22.959 agências no mundo a 62 com todas as certificações">
+          <div class="funnel-step" role="listitem" style="--w:100%"><span class="funnel-num" data-i18n="funnelN1">22.959</span><span class="funnel-lbl" data-i18n="funnelL1">agências no mundo</span></div>
+          <span class="funnel-sep" aria-hidden="true"></span>
+          <div class="funnel-step" role="listitem" style="--w:72%"><span class="funnel-num">996</span><span class="funnel-lbl" data-i18n="funnelL2">no Brasil</span></div>
+          <span class="funnel-sep" aria-hidden="true"></span>
+          <div class="funnel-step" role="listitem" style="--w:50%"><span class="funnel-num">123</span><span class="funnel-lbl" data-i18n="funnelL3">Google Premier Partner</span></div>
+          <span class="funnel-sep" aria-hidden="true"></span>
+          <div class="funnel-step is-highlight" role="listitem" style="--w:36%"><span class="funnel-num">62</span><span class="funnel-lbl" data-i18n="funnelL4">com todas as 5 certificações</span></div>
+        </div>
+
+        <div class="proof-section">
+          <p class="proof-claim" data-i18n-html="proofClaim"><strong>1 entre 62.</strong> A Linka está no grupo das únicas 62 agências do Brasil que são Google Premier Partner e têm todas as 5 certificações.</p>
+          <figure class="proof-fig">
+          <button type="button" class="proof-thumb" data-full="assets/img/partners-directory-linka.png" data-name="Google Partners Directory — Brasil · Premier · todas as certificações (62 agências)" data-verify="https://partnersdirectory.withgoogle.com/intl/pt-BR/?certs=search&amp;certs=display&amp;certs=video&amp;certs=shopping&amp;certs=apps&amp;regions=BR&amp;premier=true" aria-label="Ampliar: diretório de parceiros do Google">
+            <img src="assets/img/partners-directory-linka.png" alt="Diretório de Parceiros do Google filtrado por Brasil, Premier e todas as certificações: 62 agências, com a Agência Linka em destaque entre concorrentes desfocados" width="1203" height="917" loading="lazy">
+            <span class="cert-zoom" aria-hidden="true">⤢</span>
+          </button>
+          <figcaption class="proof-cap">
+            <span data-i18n="proofCap">Diretório oficial de parceiros do Google — Brasil · Premier · todas as certificações.</span>
+            <a href="https://partnersdirectory.withgoogle.com/intl/pt-BR/?certs=search&amp;certs=display&amp;certs=video&amp;certs=shopping&amp;certs=apps&amp;regions=BR&amp;premier=true" target="_blank" rel="noopener noreferrer" data-i18n="proofVerify">Ver no diretório do Google ↗</a>
+          </figcaption>
+        </figure>
+      </div>
+
+        <div class="badges-wrap">
+        <div class="badges-section">
+          <p class="badge-group-label" data-i18n="badgesMarcelo">Certificações Google Ads — Marcelo Caricati · clique para ampliar</p>
+          <div class="badge-wall">
+            <button type="button" class="badge-item badge-zoom" data-full="assets/img/badges/ads-search-lg.jpg" data-name="Google Ads Search — Certified" aria-label="Ampliar selo: Google Ads Search Certified"><img src="assets/img/badges/ads-search.jpg" alt="Google Ads Search — Certified" width="180" height="180" loading="lazy"></button>
+            <button type="button" class="badge-item badge-zoom" data-full="assets/img/badges/ads-display-lg.jpg" data-name="Google Ads Display — Certified" aria-label="Ampliar selo: Google Ads Display Certified"><img src="assets/img/badges/ads-display.jpg" alt="Google Ads Display — Certified" width="180" height="180" loading="lazy"></button>
+            <button type="button" class="badge-item badge-zoom" data-full="assets/img/badges/ads-video-lg.jpg" data-name="Google Ads Video — Certified" aria-label="Ampliar selo: Google Ads Video Certified"><img src="assets/img/badges/ads-video.jpg" alt="Google Ads Video — Certified" width="180" height="180" loading="lazy"></button>
+            <button type="button" class="badge-item badge-zoom" data-full="assets/img/badges/ads-shopping-lg.jpg" data-name="Shopping Ads — Certified" aria-label="Ampliar selo: Shopping Ads Certified"><img src="assets/img/badges/ads-shopping.jpg" alt="Shopping Ads — Certified" width="180" height="180" loading="lazy"></button>
+            <button type="button" class="badge-item badge-zoom" data-full="assets/img/badges/ads-apps-lg.jpg" data-name="Google Ads Apps — Certified" aria-label="Ampliar selo: Google Ads Apps Certified"><img src="assets/img/badges/ads-apps.jpg" alt="Google Ads Apps — Certified" width="180" height="180" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="badges-section">
+          <p class="badge-group-label" data-i18n="badgesAgency">Selos da agência — Google Premier Partner (2023–2026)</p>
+          <div class="badge-wall">
+            <span class="badge-item"><img src="assets/img/badges/premier-2026.jpg" alt="Google Premier Partner 2026" width="180" height="180" loading="lazy"></span>
+            <span class="badge-item"><img src="assets/img/badges/premier-2025.jpg" alt="Google Premier Partner 2025" width="180" height="180" loading="lazy"></span>
+            <span class="badge-item"><img src="assets/img/badges/premier-2024.jpg" alt="Google Premier Partner 2024" width="180" height="180" loading="lazy"></span>
+            <span class="badge-item"><img src="assets/img/badges/premier-2023.jpg" alt="Google Premier Partner 2023" width="180" height="180" loading="lazy"></span>
+          </div>
+        </div>
+        </div>
         </div>
       </div>
 
-      <div class="certs-section reveal">
-        <p class="certs-eye">
-          <svg viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg>
-          <span data-i18n="certsEye">Certificações · LinkedIn Marketing Academy · Marcelo Caricati</span>
-        </p>
+      <div class="cred-group reveal">
+        <h3 class="cred-head">
+          <svg class="cred-ico" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </h3>
+
+        <div class="cred-card">
+        <div class="certs-section">
+          <p class="certs-eye">
+            <svg viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .78 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg>
+            <span data-i18n="certsEye">LinkedIn Marketing Academy · Marcelo Caricati</span>
+          </p>
         <div class="certs-grid">
           <figure class="cert-card">
             <button type="button" class="cert-thumb" data-full="assets/img/certs/cert-estrategia.jpg" aria-label="Ampliar certificado: Estratégia de marketing do LinkedIn">
@@ -1416,6 +1585,8 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
               <a class="cert-verify" href="https://training.marketing.linkedin.com/verify/jj5bs48bxrbx" target="_blank" rel="noopener noreferrer"><span data-i18n="certVerify">Verificar credencial</span> <span aria-hidden="true">↗</span></a>
             </figcaption>
           </figure>
+        </div>
+        </div>
         </div>
       </div>
     </div>
@@ -1534,6 +1705,6 @@ section[id], div[id] { scroll-margin-top: 6.25rem; }
     </figure>
   </div>
 
-  <script src="assets/js/site.js?v=8c3d41f2" type="module"></script>
+  <script src="assets/js/site.js?v=d4ca96e7" type="module"></script>
 </body>
 </html>
